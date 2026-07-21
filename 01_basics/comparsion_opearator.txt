@@ -1,0 +1,878 @@
+# Phase 1 – Topic 5: Comparison Operators
+
+Comparison operators compare **two values** and always return a **Boolean**.
+
+That means the result is always:
+
+```text
+true
+```
+
+or
+
+```text
+false
+```
+
+You'll use comparison operators in:
+
+* `if` statements
+* Loops
+* Login systems
+* Authentication
+* Form validation
+* React conditional rendering
+
+---
+
+# 1. What is a Comparison Operator?
+
+It checks whether two values satisfy a condition.
+
+Example
+
+```js
+console.log(10 > 5);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 2. Why Do We Need It?
+
+Imagine a login system.
+
+```js
+let password = "admin123";
+
+if (password === "admin123") {
+    console.log("Login Successful");
+}
+```
+
+Without comparison operators, JavaScript couldn't decide whether the password is correct.
+
+---
+
+# 3. Types of Comparison Operators
+
+| Operator | Meaning               |
+| -------- | --------------------- |
+| `==`     | Loose Equality        |
+| `===`    | Strict Equality       |
+| `!=`     | Loose Not Equal       |
+| `!==`    | Strict Not Equal      |
+| `>`      | Greater Than          |
+| `<`      | Less Than             |
+| `>=`     | Greater Than or Equal |
+| `<=`     | Less Than or Equal    |
+
+---
+
+# 4. Equal (`==`)
+
+Checks whether values are equal **after type conversion**.
+
+Syntax
+
+```js
+value1 == value2
+```
+
+---
+
+### Example 1
+
+```js
+console.log(10 == 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+### Example 2
+
+```js
+console.log("10" == 10);
+```
+
+Output
+
+```text
+true
+```
+
+Why?
+
+JavaScript converts:
+
+```text
+"10"
+```
+
+into
+
+```text
+10
+```
+
+Then compares.
+
+---
+
+### Example 3
+
+```js
+console.log(true == 1);
+```
+
+Output
+
+```text
+true
+```
+
+Because
+
+```text
+true → 1
+```
+
+---
+
+### Example 4
+
+```js
+console.log(false == 0);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+## Problem with `==`
+
+It performs **automatic type conversion (coercion)**.
+
+This can produce confusing results.
+
+Example
+
+```js
+console.log("" == 0);
+```
+
+Output
+
+```text
+true
+```
+
+Another example
+
+```js
+console.log(null == undefined);
+```
+
+Output
+
+```text
+true
+```
+
+These are reasons why modern JavaScript developers avoid `==`.
+
+---
+
+# 5. Strict Equal (`===`)
+
+Checks:
+
+* Value
+* Data Type
+
+No automatic conversion.
+
+---
+
+### Example 1
+
+```js
+console.log(10 === 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+### Example 2
+
+```js
+console.log("10" === 10);
+```
+
+Output
+
+```text
+false
+```
+
+Why?
+
+```text
+String !== Number
+```
+
+---
+
+### Example 3
+
+```js
+console.log(true === 1);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+### Example 4
+
+```js
+let password = "admin123";
+
+console.log(password === "admin123");
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+## Interview Rule
+
+Always prefer
+
+```js
+===
+```
+
+instead of
+
+```js
+==
+```
+
+unless you have a very specific reason.
+
+---
+
+# 6. Not Equal (`!=`)
+
+Opposite of `==`.
+
+Uses type conversion.
+
+---
+
+Example
+
+```js
+console.log(10 != 5);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Example
+
+```js
+console.log("10" != 10);
+```
+
+Output
+
+```text
+false
+```
+
+Because
+
+```text
+"10"
+```
+
+becomes
+
+```text
+10
+```
+
+---
+
+# 7. Strict Not Equal (`!==`)
+
+Checks value and type.
+
+---
+
+Example
+
+```js
+console.log("10" !== 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Example
+
+```js
+console.log(20 !== 20);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+# 8. Greater Than (`>`)
+
+Example
+
+```js
+console.log(15 > 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Project Example
+
+```js
+let age = 21;
+
+console.log(age > 18);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 9. Less Than (`<`)
+
+```js
+console.log(10 < 5);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+# 10. Greater Than or Equal (`>=`)
+
+Example
+
+```js
+console.log(18 >= 18);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Project Example
+
+```js
+let age = 18;
+
+if (age >= 18) {
+    console.log("Eligible to Vote");
+}
+```
+
+Output
+
+```text
+Eligible to Vote
+```
+
+---
+
+# 11. Less Than or Equal (`<=`)
+
+```js
+console.log(5 <= 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+```js
+console.log(10 <= 10);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 12. String Comparison
+
+Strings are compared alphabetically (Unicode values).
+
+---
+
+Example
+
+```js
+console.log("apple" < "banana");
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Example
+
+```js
+console.log("cat" > "ball");
+```
+
+Output
+
+```text
+true
+```
+
+Because
+
+```text
+c > b
+```
+
+---
+
+Example
+
+```js
+console.log("A" < "a");
+```
+
+Output
+
+```text
+true
+```
+
+Uppercase and lowercase have different Unicode values.
+
+---
+
+# 13. Common Mistakes
+
+## Mistake 1
+
+```js
+console.log("5" == 5);
+```
+
+Output
+
+```text
+true
+```
+
+Many beginners expect `false`.
+
+---
+
+## Mistake 2
+
+```js
+console.log("5" === 5);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+## Mistake 3
+
+```js
+console.log(null == undefined);
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+## Mistake 4
+
+```js
+console.log(null === undefined);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+## Mistake 5
+
+```js
+console.log(NaN === NaN);
+```
+
+Output
+
+```text
+false
+```
+
+This surprises many developers.
+
+To check for `NaN`, use:
+
+```js
+console.log(Number.isNaN(NaN));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 14. Best Practices
+
+✅ Use
+
+```js
+===
+```
+
+instead of
+
+```js
+==
+```
+
+---
+
+✅ Use
+
+```js
+!==
+```
+
+instead of
+
+```js
+!=
+```
+
+---
+
+✅ Compare the correct data types.
+
+Instead of
+
+```js
+"18" === 18
+```
+
+convert first:
+
+```js
+Number("18") === 18
+```
+
+---
+
+# 15. Mini Challenge
+
+Predict the output before running the code.
+
+### Q1
+
+```js
+console.log(10 == "10");
+```
+
+---
+
+### Q2
+
+```js
+console.log(10 === "10");
+```
+
+---
+
+### Q3
+
+```js
+console.log(false == 0);
+```
+
+---
+
+### Q4
+
+```js
+console.log(false === 0);
+```
+
+---
+
+### Q5
+
+```js
+console.log(25 >= 18);
+```
+
+---
+
+### Q6
+
+```js
+console.log("apple" > "banana");
+```
+
+---
+
+### Q7
+
+```js
+console.log(null == undefined);
+```
+
+---
+
+### Q8
+
+```js
+console.log(null === undefined);
+```
+
+---
+
+### Q9
+
+```js
+console.log(NaN === NaN);
+```
+
+---
+
+### Q10
+
+```js
+console.log(Number.isNaN(NaN));
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+true
+```
+
+---
+
+### Q2
+
+```text
+false
+```
+
+---
+
+### Q3
+
+```text
+true
+```
+
+---
+
+### Q4
+
+```text
+false
+```
+
+---
+
+### Q5
+
+```text
+true
+```
+
+---
+
+### Q6
+
+```text
+false
+```
+
+Because `"apple"` comes before `"banana"` alphabetically.
+
+---
+
+### Q7
+
+```text
+true
+```
+
+---
+
+### Q8
+
+```text
+false
+```
+
+---
+
+### Q9
+
+```text
+false
+```
+
+---
+
+### Q10
+
+```text
+true
+```
+
+---
+
+# Quick Revision (30 Seconds)
+
+| Operator | Example       | Result  |
+| -------- | ------------- | ------- |
+| `==`     | `"10" == 10`  | `true`  |
+| `===`    | `"10" === 10` | `false` |
+| `!=`     | `"5" != 5`    | `false` |
+| `!==`    | `"5" !== 5`   | `true`  |
+| `>`      | `10 > 5`      | `true`  |
+| `<`      | `10 < 5`      | `false` |
+| `>=`     | `18 >= 18`    | `true`  |
+| `<=`     | `5 <= 10`     | `true`  |
+
+---
+
+## 🚀 Interview Tips
+
+These are common interview questions:
+
+```js
+console.log([] == false);
+```
+
+```js
+console.log("" == 0);
+```
+
+```js
+console.log(null == undefined);
+```
+
+```js
+console.log(NaN === NaN);
+```
+
+Don't worry about memorizing the first two yet—we'll revisit JavaScript's coercion rules in **Phase 7 (Execution Context & Advanced Concepts)** when you'll have the background to understand *why* they behave that way.
+
+---
+

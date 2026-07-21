@@ -1,0 +1,842 @@
+# Phase 1 – Topic 2: Data Types
+
+Every variable stores **some kind of data**. JavaScript needs to know what type of data it is because different types support different operations.
+
+For example:
+
+* You can add numbers.
+* You can concatenate strings.
+* You can call methods on arrays.
+* You can access properties on objects.
+
+This is why **data types** exist.
+
+---
+
+# 1. What is a Data Type?
+
+A data type tells JavaScript **what kind of value** a variable holds.
+
+Example:
+
+```js
+let age = 21;
+```
+
+Here, `21` is a **Number**.
+
+```js
+let name = "Devanshu";
+```
+
+Here, `"Devanshu"` is a **String**.
+
+---
+
+# 2. Why do we need Data Types?
+
+Imagine JavaScript didn't know the difference.
+
+```js
+10 + 20
+```
+
+Should the answer be:
+
+```
+30
+```
+
+or
+
+```
+1020
+```
+
+It depends on whether they are **Numbers** or **Strings**.
+
+That's why JavaScript tracks the type of every value.
+
+---
+
+# 3. JavaScript Categories
+
+There are **2 major categories**.
+
+```
+Data Types
+│
+├── Primitive
+│
+└── Non-Primitive (Reference)
+```
+
+---
+
+# 4. Primitive Data Types
+
+Primitive values are **simple values**.
+
+There are **7 primitive data types**.
+
+| Data Type | Example       |
+| --------- | ------------- |
+| String    | `"Hello"`     |
+| Number    | `100`         |
+| Boolean   | `true`        |
+| Undefined | `undefined`   |
+| Null      | `null`        |
+| BigInt    | `1234567890n` |
+| Symbol    | `Symbol()`    |
+
+Let's study each.
+
+---
+
+# 5. String
+
+A String is **text**.
+
+Example 1
+
+```js
+let language = "JavaScript";
+
+console.log(language);
+```
+
+Output
+
+```
+JavaScript
+```
+
+---
+
+Example 2
+
+```js
+let city = "Nagpur";
+
+console.log(city);
+```
+
+Output
+
+```
+Nagpur
+```
+
+---
+
+Example 3
+
+```js
+let password = "abc@123";
+
+console.log(password);
+```
+
+Output
+
+```
+abc@123
+```
+
+---
+
+Check its type
+
+```js
+let name = "Devanshu";
+
+console.log(typeof name);
+```
+
+Output
+
+```
+string
+```
+
+`typeof` is an operator that tells you the type of a value.
+
+---
+
+# 6. Number
+
+JavaScript has only one Number type.
+
+No separate `int`, `float`, or `double`.
+
+All of these are Numbers.
+
+```js
+10
+```
+
+```js
+3.14
+```
+
+```js
+-50
+```
+
+---
+
+Example 1
+
+```js
+let age = 21;
+
+console.log(typeof age);
+```
+
+Output
+
+```
+number
+```
+
+---
+
+Example 2
+
+```js
+let price = 999.99;
+
+console.log(typeof price);
+```
+
+Output
+
+```
+number
+```
+
+---
+
+Example 3
+
+```js
+let score = -100;
+
+console.log(typeof score);
+```
+
+Output
+
+```
+number
+```
+
+---
+
+# 7. Boolean
+
+Boolean has only **2 values**.
+
+```
+true
+false
+```
+
+Used heavily in conditions.
+
+Example 1
+
+```js
+let isLoggedIn = true;
+
+console.log(isLoggedIn);
+```
+
+Output
+
+```
+true
+```
+
+---
+
+Example 2
+
+```js
+let isAdmin = false;
+
+console.log(typeof isAdmin);
+```
+
+Output
+
+```
+boolean
+```
+
+---
+
+Project Example
+
+```js
+let hasPaid = true;
+
+if (hasPaid) {
+    console.log("Access Granted");
+}
+```
+
+Output
+
+```
+Access Granted
+```
+
+---
+
+# 8. Undefined
+
+A variable is **undefined** when it is declared but **no value has been assigned**.
+
+Example
+
+```js
+let username;
+
+console.log(username);
+```
+
+Output
+
+```
+undefined
+```
+
+---
+
+Check its type
+
+```js
+let username;
+
+console.log(typeof username);
+```
+
+Output
+
+```
+undefined
+```
+
+---
+
+Think of it like an empty box.
+
+```
+username
+
+┌───────┐
+│       │
+└───────┘
+```
+
+The variable exists.
+
+The value doesn't.
+
+---
+
+# 9. Null
+
+`null` means
+
+> "There is intentionally no value."
+
+Example
+
+```js
+let selectedUser = null;
+
+console.log(selectedUser);
+```
+
+Output
+
+```
+null
+```
+
+---
+
+Example
+
+```js
+let currentUser = null;
+
+console.log(currentUser);
+```
+
+---
+
+Type check
+
+```js
+let currentUser = null;
+
+console.log(typeof currentUser);
+```
+
+Output
+
+```
+object
+```
+
+Wait...
+
+Why object?
+
+This is one of JavaScript's oldest bugs.
+
+`typeof null`
+
+returns
+
+```
+object
+```
+
+It is a historical bug kept for backward compatibility.
+
+Remember this for interviews.
+
+---
+
+Difference
+
+Undefined
+
+```
+Value not assigned yet.
+```
+
+Null
+
+```
+Value intentionally empty.
+```
+
+---
+
+# 10. BigInt
+
+Numbers have a limit.
+
+If you need very large integers, use `BigInt`.
+
+Example
+
+```js
+let population = 123456789123456789123456789n;
+
+console.log(population);
+```
+
+Notice the `n`.
+
+Without it, JavaScript treats the value as a Number.
+
+---
+
+Check type
+
+```js
+let num = 123456789123456789n;
+
+console.log(typeof num);
+```
+
+Output
+
+```
+bigint
+```
+
+---
+
+# 11. Symbol
+
+A Symbol creates a **unique value**.
+
+Even if two Symbols have the same description, they are different.
+
+Example
+
+```js
+const id1 = Symbol("id");
+const id2 = Symbol("id");
+
+console.log(id1 === id2);
+```
+
+Output
+
+```
+false
+```
+
+Symbols are mainly used for creating unique object property keys and avoiding naming collisions in large applications.
+
+---
+
+# 12. Non-Primitive Data Types (Reference Types)
+
+These are more complex structures.
+
+Main ones you'll use:
+
+* Object
+* Array
+* Function
+
+---
+
+## Object
+
+Stores data as key-value pairs.
+
+```js
+const user = {
+    name: "Devanshu",
+    age: 21
+};
+
+console.log(user);
+```
+
+---
+
+Check type
+
+```js
+console.log(typeof user);
+```
+
+Output
+
+```
+object
+```
+
+---
+
+## Array
+
+Stores multiple values.
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+
+console.log(fruits);
+```
+
+---
+
+Type
+
+```js
+console.log(typeof fruits);
+```
+
+Output
+
+```
+object
+```
+
+Arrays are technically objects in JavaScript.
+
+To specifically check for an array, use:
+
+```js
+console.log(Array.isArray(fruits));
+```
+
+Output
+
+```
+true
+```
+
+---
+
+## Function
+
+Functions are also objects in JavaScript.
+
+Example
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+Output
+
+```
+Hello
+```
+
+---
+
+Type
+
+```js
+console.log(typeof greet);
+```
+
+Output
+
+```
+function
+```
+
+Although functions are objects internally, `typeof` returns `"function"` for convenience.
+
+---
+
+# 13. Primitive vs Reference Types
+
+```text
+Primitive
+----------
+String
+Number
+Boolean
+Undefined
+Null
+BigInt
+Symbol
+
+Reference
+----------
+Object
+Array
+Function
+```
+
+A simple way to think about it:
+
+* **Primitive:** Stores the actual value directly.
+* **Reference:** Stores a reference (address) to where the value is kept in memory.
+
+We'll explore this more when we cover Objects.
+
+---
+
+# 14. Common Mistakes
+
+### Mistake 1
+
+```js
+let age = "21";
+```
+
+This is a **String**, not a Number.
+
+---
+
+### Mistake 2
+
+```js
+console.log(typeof null);
+```
+
+Output:
+
+```
+object
+```
+
+It's a well-known JavaScript quirk.
+
+---
+
+### Mistake 3
+
+```js
+let arr = [1, 2, 3];
+
+console.log(typeof arr);
+```
+
+Output:
+
+```
+object
+```
+
+Use:
+
+```js
+Array.isArray(arr);
+```
+
+---
+
+### Mistake 4
+
+```js
+let user;
+
+user === null;
+```
+
+`undefined` and `null` are different values.
+
+---
+
+# 15. Best Practices
+
+* Use `typeof` when you're unsure of a variable's type.
+* Use `Array.isArray()` to check for arrays.
+* Use `null` to intentionally represent "no value."
+* Don't rely on `typeof null` to detect null values.
+
+---
+
+# 16. Mini Challenge
+
+Predict the output before running the code.
+
+### Question 1
+
+```js
+let age = 21;
+
+console.log(typeof age);
+```
+
+---
+
+### Question 2
+
+```js
+let city = "Nagpur";
+
+console.log(typeof city);
+```
+
+---
+
+### Question 3
+
+```js
+let user;
+
+console.log(user);
+console.log(typeof user);
+```
+
+---
+
+### Question 4
+
+```js
+let marks = null;
+
+console.log(typeof marks);
+```
+
+---
+
+### Question 5
+
+```js
+const fruits = ["Apple", "Banana"];
+
+console.log(typeof fruits);
+console.log(Array.isArray(fruits));
+```
+
+---
+
+### Question 6
+
+```js
+function greet() {}
+
+console.log(typeof greet);
+```
+
+---
+
+# Answers
+
+**Q1**
+
+```
+number
+```
+
+---
+
+**Q2**
+
+```
+string
+```
+
+---
+
+**Q3**
+
+```
+undefined
+undefined
+```
+
+---
+
+**Q4**
+
+```
+object
+```
+
+---
+
+**Q5**
+
+```
+object
+true
+```
+
+---
+
+**Q6**
+
+```
+function
+```
+
+---
+
+## Quick Revision (30 Seconds)
+
+| Type      | Example        | `typeof` Result               |
+| --------- | -------------- | ----------------------------- |
+| String    | `"Hello"`      | `"string"`                    |
+| Number    | `21`           | `"number"`                    |
+| Boolean   | `true`         | `"boolean"`                   |
+| Undefined | `let x;`       | `"undefined"`                 |
+| Null      | `null`         | `"object"` *(historical bug)* |
+| BigInt    | `123n`         | `"bigint"`                    |
+| Symbol    | `Symbol()`     | `"symbol"`                    |
+| Object    | `{}`           | `"object"`                    |
+| Array     | `[]`           | `"object"`                    |
+| Function  | `function(){}` | `"function"`                  |
