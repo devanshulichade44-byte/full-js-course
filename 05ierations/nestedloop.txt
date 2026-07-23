@@ -1,0 +1,1222 @@
+# Phase 3 – Topic 7: Nested Loops
+
+Nested loops are one of the most important interview topics. They are used for **patterns, matrices (2D arrays), tables, grids, games, and image processing**.
+
+---
+
+# 1. What is a Nested Loop?
+
+A **nested loop** is simply **a loop inside another loop**.
+
+```text
+Outer Loop
+    ↓
+    Inner Loop
+```
+
+The **inner loop runs completely for every iteration of the outer loop.**
+
+---
+
+# 2. Syntax
+
+```js
+for (initialization; condition; update) {
+
+    for (initialization; condition; update) {
+
+        // Code
+    }
+
+}
+```
+
+---
+
+# 3. Internal Working
+
+Example:
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 2; j++) {
+        console.log(i, j);
+    }
+
+}
+```
+
+Execution:
+
+```
+i = 1
+    j = 1
+    j = 2
+
+i = 2
+    j = 1
+    j = 2
+
+i = 3
+    j = 1
+    j = 2
+```
+
+Output
+
+```
+1 1
+1 2
+2 1
+2 2
+3 1
+3 2
+```
+
+Notice:
+
+For every value of `i`, the variable `j` starts again from `1`.
+
+---
+
+# 4. Example 1 – Multiplication Table
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 3; j++) {
+
+        console.log(`${i} × ${j} = ${i * j}`);
+
+    }
+
+}
+```
+
+Output
+
+```
+1 × 1 = 1
+1 × 2 = 2
+1 × 3 = 3
+
+2 × 1 = 2
+2 × 2 = 4
+2 × 3 = 6
+
+3 × 1 = 3
+3 × 2 = 6
+3 × 3 = 9
+```
+
+---
+
+# 5. Example 2 – Square Star Pattern
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= 5; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+```
+
+---
+
+# 6. Example 3 – Number Pattern
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += j + " ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+```
+
+---
+
+# 7. Example 4 – Right Triangle
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+*
+* *
+* * *
+* * * *
+* * * * *
+```
+
+---
+
+# 8. Example 5 – Reverse Triangle
+
+```js
+for (let i = 5; i >= 1; i--) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+* * * * *
+* * * *
+* * *
+* *
+*
+```
+
+---
+
+# 9. Real-World Example
+
+Suppose you have students and their subjects.
+
+```js
+const students = ["John", "Alice"];
+const subjects = ["Math", "Science"];
+
+for (let i = 0; i < students.length; i++) {
+
+    for (let j = 0; j < subjects.length; j++) {
+
+        console.log(`${students[i]} studies ${subjects[j]}`);
+
+    }
+
+}
+```
+
+Output
+
+```
+John studies Math
+John studies Science
+Alice studies Math
+Alice studies Science
+```
+
+---
+
+# 10. Common Mistakes
+
+## ❌ Using the same variable
+
+Wrong
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let i = 1; i <= 3; i++) {
+
+    }
+
+}
+```
+
+Correct
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 3; j++) {
+
+    }
+
+}
+```
+
+---
+
+## ❌ Forgetting to reset the inner loop
+
+The inner loop should start from its initial value every time the outer loop runs.
+
+---
+
+## ❌ Infinite loop
+
+```js
+for (let i = 1; i <= 5;) {
+
+}
+```
+
+Missing update.
+
+---
+
+# 11. Best Practices
+
+* Use `i` for the outer loop and `j` for the inner loop.
+* Keep nested loops readable.
+* Avoid unnecessary nesting for performance.
+* Build patterns using a temporary string (`row`) and print once per row.
+
+---
+
+# 12. Syntax Practice
+
+Write only the code.
+
+1. Print a **3 × 3** square of stars.
+2. Print numbers from **1–5** on each row.
+3. Print a triangle of stars with **4 rows**.
+4. Print a reverse triangle with **5 rows**.
+5. Print a multiplication table from **1 × 1** to **5 × 5**.
+6. Print this pattern:
+
+```
+1
+12
+123
+1234
+```
+
+---
+
+# 13. Output Questions
+
+### Q1
+
+```js
+for (let i = 1; i <= 2; i++) {
+    for (let j = 1; j <= 2; j++) {
+        console.log(i, j);
+    }
+}
+```
+
+---
+
+### Q2
+
+```js
+for (let i = 1; i <= 2; i++) {
+    let row = "";
+
+    for (let j = 1; j <= 3; j++) {
+        row += "*";
+    }
+
+    console.log(row);
+}
+```
+
+---
+
+### Q3
+
+```js
+for (let i = 1; i <= 3; i++) {
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += j;
+    }
+
+    console.log(row);
+}
+```
+
+---
+
+### Q4
+
+```js
+for (let i = 3; i >= 1; i--) {
+    console.log(i);
+}
+```
+
+---
+
+### Q5
+
+```js
+for (let i = 1; i <= 2; i++) {
+    for (let j = 2; j >= 1; j--) {
+        console.log(i, j);
+    }
+}
+```
+
+---
+
+### Q6
+
+```js
+for (let i = 1; i <= 3; i++) {
+    console.log("*");
+}
+```
+
+---
+
+# 14. Coding Practice
+
+## Easy
+
+1. Print a **5 × 5** star square.
+2. Print a triangle with **6 rows**.
+3. Print a reverse triangle with **6 rows**.
+
+## Medium
+
+4. Print this pattern:
+
+```
+1
+22
+333
+4444
+55555
+```
+
+5. Print this pattern:
+
+```
+A
+AB
+ABC
+ABCD
+ABCDE
+```
+
+## Interview Level
+
+6. Print Floyd's Triangle:
+
+```
+1
+2 3
+4 5 6
+7 8 9 10
+```
+
+---
+
+# 15. Interview Questions
+
+### Q1. What is a nested loop?
+
+**Answer:**
+
+A loop inside another loop.
+
+---
+
+### Q2. How many times does the inner loop execute?
+
+**Answer:**
+
+Completely for every iteration of the outer loop.
+
+Example:
+
+```
+Outer = 3 times
+
+Inner = 4 times
+
+Total = 12 executions
+```
+
+---
+
+### Q3. Where are nested loops used?
+
+**Answer:**
+
+* Pattern printing
+* 2D Arrays
+* Matrices
+* Chess boards
+* Sudoku
+* Games
+* Image processing
+
+---
+
+### Q4. Which variable names are commonly used?
+
+**Answer:**
+
+```js
+i
+j
+k
+```
+
+---
+
+# 16. Answers
+
+## Output Questions
+
+### Q1
+
+```
+1 1
+1 2
+2 1
+2 2
+```
+
+---
+
+### Q2
+
+```
+***
+***
+```
+
+---
+
+### Q3
+
+```
+1
+12
+123
+```
+
+---
+
+### Q4
+
+```
+3
+2
+1
+```
+
+---
+
+### Q5
+
+```
+1 2
+1 1
+2 2
+2 1
+```
+
+---
+
+### Q6
+
+```
+*
+*
+*
+```
+
+---
+
+# Quick Revision
+
+## Nested Loop
+
+```js
+for (let i = 1; i <= rows; i++) {
+
+    for (let j = 1; j <= columns; j++) {
+
+        // Work
+
+    }
+
+}
+```
+
+### Remember
+
+* Outer loop → Rows
+* Inner loop → Columns
+
+**Formula:**
+
+```
+Total Iterations = Outer Loop × Inner Loop
+```
+
+Example:
+
+```
+Outer = 5
+Inner = 5
+
+Total = 25
+```# Phase 3 – Topic 7: Nested Loops
+
+Nested loops are one of the most important interview topics. They are used for **patterns, matrices (2D arrays), tables, grids, games, and image processing**.
+
+---
+
+# 1. What is a Nested Loop?
+
+A **nested loop** is simply **a loop inside another loop**.
+
+```text
+Outer Loop
+    ↓
+    Inner Loop
+```
+
+The **inner loop runs completely for every iteration of the outer loop.**
+
+---
+
+# 2. Syntax
+
+```js
+for (initialization; condition; update) {
+
+    for (initialization; condition; update) {
+
+        // Code
+    }
+
+}
+```
+
+---
+
+# 3. Internal Working
+
+Example:
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 2; j++) {
+        console.log(i, j);
+    }
+
+}
+```
+
+Execution:
+
+```
+i = 1
+    j = 1
+    j = 2
+
+i = 2
+    j = 1
+    j = 2
+
+i = 3
+    j = 1
+    j = 2
+```
+
+Output
+
+```
+1 1
+1 2
+2 1
+2 2
+3 1
+3 2
+```
+
+Notice:
+
+For every value of `i`, the variable `j` starts again from `1`.
+
+---
+
+# 4. Example 1 – Multiplication Table
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 3; j++) {
+
+        console.log(`${i} × ${j} = ${i * j}`);
+
+    }
+
+}
+```
+
+Output
+
+```
+1 × 1 = 1
+1 × 2 = 2
+1 × 3 = 3
+
+2 × 1 = 2
+2 × 2 = 4
+2 × 3 = 6
+
+3 × 1 = 3
+3 × 2 = 6
+3 × 3 = 9
+```
+
+---
+
+# 5. Example 2 – Square Star Pattern
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= 5; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+```
+
+---
+
+# 6. Example 3 – Number Pattern
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += j + " ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+```
+
+---
+
+# 7. Example 4 – Right Triangle
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+*
+* *
+* * *
+* * * *
+* * * * *
+```
+
+---
+
+# 8. Example 5 – Reverse Triangle
+
+```js
+for (let i = 5; i >= 1; i--) {
+
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += "* ";
+    }
+
+    console.log(row);
+
+}
+```
+
+Output
+
+```
+* * * * *
+* * * *
+* * *
+* *
+*
+```
+
+---
+
+# 9. Real-World Example
+
+Suppose you have students and their subjects.
+
+```js
+const students = ["John", "Alice"];
+const subjects = ["Math", "Science"];
+
+for (let i = 0; i < students.length; i++) {
+
+    for (let j = 0; j < subjects.length; j++) {
+
+        console.log(`${students[i]} studies ${subjects[j]}`);
+
+    }
+
+}
+```
+
+Output
+
+```
+John studies Math
+John studies Science
+Alice studies Math
+Alice studies Science
+```
+
+---
+
+# 10. Common Mistakes
+
+## ❌ Using the same variable
+
+Wrong
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let i = 1; i <= 3; i++) {
+
+    }
+
+}
+```
+
+Correct
+
+```js
+for (let i = 1; i <= 3; i++) {
+
+    for (let j = 1; j <= 3; j++) {
+
+    }
+
+}
+```
+
+---
+
+## ❌ Forgetting to reset the inner loop
+
+The inner loop should start from its initial value every time the outer loop runs.
+
+---
+
+## ❌ Infinite loop
+
+```js
+for (let i = 1; i <= 5;) {
+
+}
+```
+
+Missing update.
+
+---
+
+# 11. Best Practices
+
+* Use `i` for the outer loop and `j` for the inner loop.
+* Keep nested loops readable.
+* Avoid unnecessary nesting for performance.
+* Build patterns using a temporary string (`row`) and print once per row.
+
+---
+
+# 12. Syntax Practice
+
+Write only the code.
+
+1. Print a **3 × 3** square of stars.
+2. Print numbers from **1–5** on each row.
+3. Print a triangle of stars with **4 rows**.
+4. Print a reverse triangle with **5 rows**.
+5. Print a multiplication table from **1 × 1** to **5 × 5**.
+6. Print this pattern:
+
+```
+1
+12
+123
+1234
+```
+
+---
+
+# 13. Output Questions
+
+### Q1
+
+```js
+for (let i = 1; i <= 2; i++) {
+    for (let j = 1; j <= 2; j++) {
+        console.log(i, j);
+    }
+}
+```
+
+---
+
+### Q2
+
+```js
+for (let i = 1; i <= 2; i++) {
+    let row = "";
+
+    for (let j = 1; j <= 3; j++) {
+        row += "*";
+    }
+
+    console.log(row);
+}
+```
+
+---
+
+### Q3
+
+```js
+for (let i = 1; i <= 3; i++) {
+    let row = "";
+
+    for (let j = 1; j <= i; j++) {
+        row += j;
+    }
+
+    console.log(row);
+}
+```
+
+---
+
+### Q4
+
+```js
+for (let i = 3; i >= 1; i--) {
+    console.log(i);
+}
+```
+
+---
+
+### Q5
+
+```js
+for (let i = 1; i <= 2; i++) {
+    for (let j = 2; j >= 1; j--) {
+        console.log(i, j);
+    }
+}
+```
+
+---
+
+### Q6
+
+```js
+for (let i = 1; i <= 3; i++) {
+    console.log("*");
+}
+```
+
+---
+
+# 14. Coding Practice
+
+## Easy
+
+1. Print a **5 × 5** star square.
+2. Print a triangle with **6 rows**.
+3. Print a reverse triangle with **6 rows**.
+
+## Medium
+
+4. Print this pattern:
+
+```
+1
+22
+333
+4444
+55555
+```
+
+5. Print this pattern:
+
+```
+A
+AB
+ABC
+ABCD
+ABCDE
+```
+
+## Interview Level
+
+6. Print Floyd's Triangle:
+
+```
+1
+2 3
+4 5 6
+7 8 9 10
+```
+
+---
+
+# 15. Interview Questions
+
+### Q1. What is a nested loop?
+
+**Answer:**
+
+A loop inside another loop.
+
+---
+
+### Q2. How many times does the inner loop execute?
+
+**Answer:**
+
+Completely for every iteration of the outer loop.
+
+Example:
+
+```
+Outer = 3 times
+
+Inner = 4 times
+
+Total = 12 executions
+```
+
+---
+
+### Q3. Where are nested loops used?
+
+**Answer:**
+
+* Pattern printing
+* 2D Arrays
+* Matrices
+* Chess boards
+* Sudoku
+* Games
+* Image processing
+
+---
+
+### Q4. Which variable names are commonly used?
+
+**Answer:**
+
+```js
+i
+j
+k
+```
+
+---
+
+# 16. Answers
+
+## Output Questions
+
+### Q1
+
+```
+1 1
+1 2
+2 1
+2 2
+```
+
+---
+
+### Q2
+
+```
+***
+***
+```
+
+---
+
+### Q3
+
+```
+1
+12
+123
+```
+
+---
+
+### Q4
+
+```
+3
+2
+1
+```
+
+---
+
+### Q5
+
+```
+1 2
+1 1
+2 2
+2 1
+```
+
+---
+
+### Q6
+
+```
+*
+*
+*
+```
+
+---
+
+# Quick Revision
+
+## Nested Loop
+
+```js
+for (let i = 1; i <= rows; i++) {
+
+    for (let j = 1; j <= columns; j++) {
+
+        // Work
+
+    }
+
+}
+```
+
+### Remember
+
+* Outer loop → Rows
+* Inner loop → Columns
+
+**Formula:**
+
+```
+Total Iterations = Outer Loop × Inner Loop
+```
+
+Example:
+
+```
+Outer = 5
+Inner = 5
+
+Total = 25
+```
+
+---
+
+
+
+> **Tip for interviews:** Pattern-printing questions are almost always solved using nested loops. 
+Master the relationship between the outer loop (rows) and inner loop (columns), and most pattern problems become much easier.

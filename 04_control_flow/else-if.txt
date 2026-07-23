@@ -1,0 +1,564 @@
+# Phase 2 – Topic 3: `else if`
+
+In the previous topic, `if...else` allowed JavaScript to choose between **two options**.
+
+But what if there are **more than two possibilities**?
+
+Example:
+
+* Marks ≥ 90 → Grade A
+* Marks ≥ 75 → Grade B
+* Marks ≥ 40 → Grade C
+* Otherwise → Fail
+
+This is where `else if` is used.
+
+---
+
+# 1. What is `else if`?
+
+`else if` lets JavaScript check **multiple conditions one by one**.
+
+As soon as **one condition is true**, JavaScript executes that block and **stops checking the remaining conditions**.
+
+---
+
+# 2. Syntax
+
+```js
+if (condition1) {
+    // Runs if condition1 is true
+} else if (condition2) {
+    // Runs if condition1 is false
+    // AND condition2 is true
+} else if (condition3) {
+    // Runs if above conditions are false
+} else {
+    // Runs if all conditions are false
+}
+```
+
+---
+
+# 3. Flow Diagram
+
+```text
+           Condition 1
+               │
+      True ───▶ Run Block 1
+               │
+            False
+               ▼
+           Condition 2
+               │
+      True ───▶ Run Block 2
+               │
+            False
+               ▼
+           Condition 3
+               │
+      True ───▶ Run Block 3
+               │
+            False
+               ▼
+            else Block
+```
+
+---
+
+# 4. Example 1 – Grades
+
+```js
+let marks = 82;
+
+if (marks >= 90) {
+    console.log("Grade A");
+} else if (marks >= 75) {
+    console.log("Grade B");
+} else if (marks >= 40) {
+    console.log("Grade C");
+} else {
+    console.log("Fail");
+}
+```
+
+Output
+
+```text
+Grade B
+```
+
+### Step-by-step
+
+```
+82 >= 90 ❌
+
+82 >= 75 ✅
+
+Stop checking.
+```
+
+The remaining conditions are ignored.
+
+---
+
+# 5. Example 2 – Temperature
+
+```js
+let temp = 35;
+
+if (temp >= 40) {
+    console.log("Very Hot");
+} else if (temp >= 30) {
+    console.log("Hot");
+} else if (temp >= 20) {
+    console.log("Pleasant");
+} else {
+    console.log("Cold");
+}
+```
+
+Output
+
+```text
+Hot
+```
+
+---
+
+# 6. Example 3 – Salary Bonus
+
+```js
+let experience = 6;
+
+if (experience >= 10) {
+    console.log("30% Bonus");
+} else if (experience >= 5) {
+    console.log("20% Bonus");
+} else if (experience >= 2) {
+    console.log("10% Bonus");
+} else {
+    console.log("No Bonus");
+}
+```
+
+Output
+
+```text
+20% Bonus
+```
+
+---
+
+# 7. Example 4 – Login Role
+
+```js
+let role = "editor";
+
+if (role === "admin") {
+    console.log("Admin Dashboard");
+} else if (role === "editor") {
+    console.log("Editor Dashboard");
+} else if (role === "user") {
+    console.log("User Dashboard");
+} else {
+    console.log("Guest");
+}
+```
+
+Output
+
+```text
+Editor Dashboard
+```
+
+---
+
+# 8. Example 5 – Traffic Signal
+
+```js
+let signal = "yellow";
+
+if (signal === "red") {
+    console.log("Stop");
+} else if (signal === "yellow") {
+    console.log("Wait");
+} else if (signal === "green") {
+    console.log("Go");
+} else {
+    console.log("Invalid Signal");
+}
+```
+
+Output
+
+```text
+Wait
+```
+
+---
+
+# 9. Order Matters
+
+The order of conditions is **very important**.
+
+### ❌ Wrong
+
+```js
+let marks = 95;
+
+if (marks >= 40) {
+    console.log("Pass");
+} else if (marks >= 75) {
+    console.log("Grade B");
+} else if (marks >= 90) {
+    console.log("Grade A");
+}
+```
+
+Output
+
+```text
+Pass
+```
+
+Why?
+
+```
+95 >= 40 ✅
+
+JavaScript stops here.
+```
+
+The better grade is never checked.
+
+---
+
+### ✅ Correct
+
+```js
+let marks = 95;
+
+if (marks >= 90) {
+    console.log("Grade A");
+} else if (marks >= 75) {
+    console.log("Grade B");
+} else if (marks >= 40) {
+    console.log("Pass");
+} else {
+    console.log("Fail");
+}
+```
+
+Output
+
+```text
+Grade A
+```
+
+**Rule:** Put the **most specific** conditions first.
+
+---
+
+# 10. `else if` vs Multiple `if`
+
+### Multiple `if`
+
+```js
+let marks = 95;
+
+if (marks >= 40) {
+    console.log("Pass");
+}
+
+if (marks >= 75) {
+    console.log("Grade B");
+}
+
+if (marks >= 90) {
+    console.log("Grade A");
+}
+```
+
+Output
+
+```text
+Pass
+Grade B
+Grade A
+```
+
+Every `if` is checked independently.
+
+---
+
+### `else if`
+
+```js
+let marks = 95;
+
+if (marks >= 90) {
+    console.log("Grade A");
+} else if (marks >= 75) {
+    console.log("Grade B");
+} else if (marks >= 40) {
+    console.log("Pass");
+}
+```
+
+Output
+
+```text
+Grade A
+```
+
+Only one block executes.
+
+---
+
+# 11. Common Mistakes
+
+## Mistake 1 – Wrong Order
+
+```js
+if (marks >= 40) {
+    console.log("Pass");
+} else if (marks >= 90) {
+    console.log("Grade A");
+}
+```
+
+Always check higher values first.
+
+---
+
+## Mistake 2 – Separate `if` Instead of `else if`
+
+❌
+
+```js
+if (age >= 18) {
+    console.log("Adult");
+}
+
+if (age >= 60) {
+    console.log("Senior Citizen");
+}
+```
+
+This may print **both** messages.
+
+If you want only one result, use `else if`.
+
+---
+
+## Mistake 3 – Forgetting the Final `else`
+
+This is optional, but often useful.
+
+```js
+if (role === "admin") {
+    console.log("Admin");
+} else if (role === "user") {
+    console.log("User");
+} else {
+    console.log("Unknown Role");
+}
+```
+
+---
+
+# 12. Best Practices
+
+✅ Order conditions from **most specific** to **least specific**.
+
+✅ Use `else if` when only **one** block should execute.
+
+✅ Keep conditions readable.
+
+---
+
+# 13. Mini Challenge
+
+Predict the output.
+
+### Q1
+
+```js
+let marks = 91;
+
+if (marks >= 90) {
+    console.log("A");
+} else if (marks >= 75) {
+    console.log("B");
+} else {
+    console.log("C");
+}
+```
+
+---
+
+### Q2
+
+```js
+let age = 65;
+
+if (age >= 60) {
+    console.log("Senior");
+} else if (age >= 18) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+```
+
+---
+
+### Q3
+
+```js
+let score = 50;
+
+if (score >= 80) {
+    console.log("Excellent");
+} else if (score >= 50) {
+    console.log("Good");
+} else {
+    console.log("Try Again");
+}
+```
+
+---
+
+### Q4
+
+```js
+let role = "guest";
+
+if (role === "admin") {
+    console.log("Admin");
+} else if (role === "user") {
+    console.log("User");
+} else {
+    console.log("Guest");
+}
+```
+
+---
+
+### Q5
+
+```js
+let num = 10;
+
+if (num > 20) {
+    console.log("Big");
+} else if (num > 5) {
+    console.log("Medium");
+} else {
+    console.log("Small");
+}
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+A
+```
+
+---
+
+### Q2
+
+```text
+Senior
+```
+
+---
+
+### Q3
+
+```text
+Good
+```
+
+---
+
+### Q4
+
+```text
+Guest
+```
+
+---
+
+### Q5
+
+```text
+Medium
+```
+
+---
+
+# Interview Questions
+
+### 1. What is the difference between `if...else` and `else if`?
+
+* `if...else` handles **two** choices.
+* `else if` handles **multiple** choices.
+
+---
+
+### 2. Does JavaScript check every `else if`?
+
+**No.**
+
+It stops as soon as it finds the **first true condition**.
+
+---
+
+### 3. Why is the order of `else if` conditions important?
+
+Because JavaScript executes the **first matching condition** and skips the rest.
+
+---
+
+# Quick Revision
+
+| Statement | Purpose                              |
+| --------- | ------------------------------------ |
+| `if`      | First condition                      |
+| `else if` | Additional conditions                |
+| `else`    | Default case                         |
+| Execution | Stops after the first true condition |
+
+---
+
+#
+### MERN Interview Tip
+
+A common interview question is:
+
+```js
+let marks = 95;
+
+if (marks >= 40) {
+    console.log("Pass");
+} else if (marks >= 75) {
+    console.log("Grade B");
+} else if (marks >= 90) {
+    console.log("Grade A");
+}
+```
+
+Many candidates answer **"Grade A"**, but the actual output is:
+
+```text
+Pass
+```
+
+because the first condition (`marks >= 40`) is already true, and JavaScript does not evaluate the remaining `else if` conditions. This tests your understanding that **condition order matters**.

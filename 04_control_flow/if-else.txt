@@ -1,0 +1,616 @@
+# Phase 2 – Topic 2: `if...else`
+
+In the previous topic, you learned that `if` executes code **only when the condition is true**.
+
+But what if you want to do **something else when the condition is false?**
+
+That's where `if...else` comes in.
+
+---
+
+# 1. What is `if...else`?
+
+`if...else` lets JavaScript choose **between two blocks of code**.
+
+* If the condition is **true** → execute the `if` block.
+* Otherwise → execute the `else` block.
+
+Only **one** block executes.
+
+---
+
+# 2. Syntax
+
+```js
+if (condition) {
+    // Runs if condition is true
+} else {
+    // Runs if condition is false
+}
+```
+
+---
+
+# 3. Flow Diagram
+
+```text
+           Condition
+               │
+               ▼
+          Is it true?
+          /         \
+       Yes           No
+       │             │
+       ▼             ▼
+   if block      else block
+```
+
+---
+
+# 4. Example 1 – Age Check
+
+```js
+let age = 20;
+
+if (age >= 18) {
+    console.log("You can vote.");
+} else {
+    console.log("You cannot vote.");
+}
+```
+
+Output
+
+```text
+You can vote.
+```
+
+---
+
+Now change the value:
+
+```js
+let age = 15;
+
+if (age >= 18) {
+    console.log("You can vote.");
+} else {
+    console.log("You cannot vote.");
+}
+```
+
+Output
+
+```text
+You cannot vote.
+```
+
+---
+
+# 5. Example 2 – Even or Odd
+
+```js
+let number = 8;
+
+if (number % 2 === 0) {
+    console.log("Even");
+} else {
+    console.log("Odd");
+}
+```
+
+Output
+
+```text
+Even
+```
+
+---
+
+Try another number:
+
+```js
+let number = 7;
+
+if (number % 2 === 0) {
+    console.log("Even");
+} else {
+    console.log("Odd");
+}
+```
+
+Output
+
+```text
+Odd
+```
+
+---
+
+# 6. Example 3 – Login System
+
+```js
+let password = "admin123";
+
+if (password === "admin123") {
+    console.log("Login Successful");
+} else {
+    console.log("Wrong Password");
+}
+```
+
+Output
+
+```text
+Login Successful
+```
+
+---
+
+# 7. Example 4 – Shopping Cart
+
+```js
+let cartItems = 0;
+
+if (cartItems > 0) {
+    console.log("Proceed to Checkout");
+} else {
+    console.log("Your cart is empty");
+}
+```
+
+Output
+
+```text
+Your cart is empty
+```
+
+---
+
+# 8. Example 5 – Marks
+
+```js
+let marks = 55;
+
+if (marks >= 40) {
+    console.log("Pass");
+} else {
+    console.log("Fail");
+}
+```
+
+Output
+
+```text
+Pass
+```
+
+---
+
+# 9. Using Boolean Variables
+
+```js
+let isLoggedIn = true;
+
+if (isLoggedIn) {
+    console.log("Welcome Back");
+} else {
+    console.log("Please Login");
+}
+```
+
+Output
+
+```text
+Welcome Back
+```
+
+---
+
+# 10. Using Strings
+
+```js
+let role = "admin";
+
+if (role === "admin") {
+    console.log("Admin Dashboard");
+} else {
+    console.log("User Dashboard");
+}
+```
+
+Output
+
+```text
+Admin Dashboard
+```
+
+---
+
+# 11. Multiple Conditions with Logical Operators
+
+## AND (`&&`)
+
+Both conditions must be true.
+
+```js
+let age = 22;
+let hasLicense = true;
+
+if (age >= 18 && hasLicense) {
+    console.log("You can drive.");
+} else {
+    console.log("You cannot drive.");
+}
+```
+
+Output
+
+```text
+You can drive.
+```
+
+---
+
+## OR (`||`)
+
+At least one condition must be true.
+
+```js
+let isAdmin = false;
+let isModerator = true;
+
+if (isAdmin || isModerator) {
+    console.log("Access Granted");
+} else {
+    console.log("Access Denied");
+}
+```
+
+Output
+
+```text
+Access Granted
+```
+
+---
+
+## NOT (`!`)
+
+Reverses a boolean.
+
+```js
+let isLoggedIn = false;
+
+if (!isLoggedIn) {
+    console.log("Please Login");
+} else {
+    console.log("Welcome");
+}
+```
+
+Output
+
+```text
+Please Login
+```
+
+---
+
+# 12. Behind the Scenes
+
+When JavaScript sees:
+
+```js
+if (condition) {
+    // code
+} else {
+    // code
+}
+```
+
+It does this internally:
+
+1. Evaluate the condition.
+2. Convert it to a boolean if necessary.
+3. If `true`, execute the `if` block.
+4. Otherwise, execute the `else` block.
+5. Skip the other block.
+
+---
+
+# 13. Common Mistakes
+
+## Mistake 1 – Using `=` Instead of `===`
+
+❌ Wrong
+
+```js
+let age = 18;
+
+if (age = 20) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+```
+
+Output
+
+```text
+Adult
+```
+
+Why?
+
+`age = 20` assigns the value `20`, and `20` is truthy.
+
+✅ Correct
+
+```js
+if (age === 20)
+```
+
+---
+
+## Mistake 2 – Missing Braces
+
+❌
+
+```js
+if (true)
+    console.log("Hello");
+    console.log("World");
+```
+
+Output
+
+```text
+Hello
+World
+```
+
+Many beginners think both lines belong to the `if`.
+
+Actually, only the first line is inside the `if`.
+
+✅ Correct
+
+```js
+if (true) {
+    console.log("Hello");
+    console.log("World");
+}
+```
+
+---
+
+## Mistake 3 – Forgetting `===`
+
+❌
+
+```js
+let role = "Admin";
+
+if (role == "admin") {
+    console.log("Access");
+}
+```
+
+Output
+
+```text
+Nothing
+```
+
+Because `"Admin"` and `"admin"` are different strings.
+
+---
+
+# 14. Best Practices
+
+✅ Use `===` instead of `==`.
+
+```js
+if (password === "admin123") {
+    // ...
+}
+```
+
+---
+
+✅ Always use braces `{}`.
+
+---
+
+✅ Keep conditions simple.
+
+Instead of:
+
+```js
+if ((age >= 18 && hasLicense === true) && isCitizen === true)
+```
+
+Prefer:
+
+```js
+if (age >= 18 && hasLicense && isCitizen)
+```
+
+---
+
+# 15. Mini Challenge
+
+Predict the output before running the code.
+
+### Q1
+
+```js
+let age = 25;
+
+if (age >= 18) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+```
+
+---
+
+### Q2
+
+```js
+let marks = 35;
+
+if (marks >= 40) {
+    console.log("Pass");
+} else {
+    console.log("Fail");
+}
+```
+
+---
+
+### Q3
+
+```js
+let isAdmin = false;
+
+if (isAdmin) {
+    console.log("Admin");
+} else {
+    console.log("User");
+}
+```
+
+---
+
+### Q4
+
+```js
+let number = 15;
+
+if (number % 2 === 0) {
+    console.log("Even");
+} else {
+    console.log("Odd");
+}
+```
+
+---
+
+### Q5
+
+```js
+let age = 20;
+let hasLicense = false;
+
+if (age >= 18 && hasLicense) {
+    console.log("Drive");
+} else {
+    console.log("Don't Drive");
+}
+```
+
+---
+
+### Q6
+
+```js
+let loggedIn = false;
+
+if (!loggedIn) {
+    console.log("Login Required");
+} else {
+    console.log("Welcome");
+}
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+Adult
+```
+
+---
+
+### Q2
+
+```text
+Fail
+```
+
+---
+
+### Q3
+
+```text
+User
+```
+
+---
+
+### Q4
+
+```text
+Odd
+```
+
+---
+
+### Q5
+
+```text
+Don't Drive
+```
+
+---
+
+### Q6
+
+```text
+Login Required
+```
+
+---
+
+# Interview Questions
+
+### 1. What is the difference between `if` and `if...else`?
+
+* `if` executes code only when the condition is true.
+* `if...else` chooses between two blocks—one for `true` and one for `false`.
+
+---
+
+### 2. Can both the `if` block and `else` block execute?
+
+**No.**
+
+Only one of them executes for a single `if...else` statement.
+
+---
+
+### 3. Which logical operators are commonly used with `if...else`?
+
+* `&&` (AND)
+* `||` (OR)
+* `!` (NOT)
+
+---
+
+# Quick Revision
+
+| Statement | Purpose                          |   |                                     |
+| --------- | -------------------------------- | - | ----------------------------------- |
+| `if`      | Run code when condition is true  |   |                                     |
+| `else`    | Run code when condition is false |   |                                     |
+| `&&`      | Both conditions must be true     |   |                                     |
+| `         |                                  | ` | At least one condition must be true |
+| `!`       | Reverse a boolean value          |   |                                     |
+
+---

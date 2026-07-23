@@ -1,0 +1,455 @@
+# Phase 3 – Topic 9: `for...of` Loop
+
+`for...of` is the **modern way to iterate over iterable objects** like arrays and strings. It gives you the **value directly**, so you don't have to use indexes.
+
+---
+
+# 1. Syntax
+
+```js
+for (const value of iterable) {
+    // code
+}
+```
+
+---
+
+# 2. Arrays
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+for (const fruit of fruits) {
+    console.log(fruit);
+}
+```
+
+### Output
+
+```text
+Apple
+Banana
+Mango
+```
+
+Notice:
+
+* `fruit` is the **value**.
+* No need for `fruits[i]`.
+
+---
+
+# 3. Strings
+
+```js
+const name = "Dev";
+
+for (const letter of name) {
+    console.log(letter);
+}
+```
+
+Output
+
+```text
+D
+e
+v
+```
+
+---
+
+# 4. Compare with `for`
+
+### `for`
+
+```js
+const arr = [10,20,30];
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+}
+```
+
+---
+
+### `for...of`
+
+```js
+const arr = [10,20,30];
+
+for (const value of arr) {
+    console.log(value);
+}
+```
+
+Same Output
+
+```text
+10
+20
+30
+```
+
+---
+
+# 5. Common Mistakes
+
+### ❌ Using `in` instead of `of`
+
+Wrong
+
+```js
+for (const value in arr) {
+    console.log(value);
+}
+```
+
+Output
+
+```text
+0
+1
+2
+```
+
+Those are **indexes**, not values.
+
+---
+
+### ❌ Using `for...of` on plain objects
+
+```js
+const user = {
+    name: "John"
+};
+
+for (const value of user) {
+    console.log(value);
+}
+```
+
+❌ Error
+
+Objects are **not iterable**.
+
+---
+
+# 6. Real MERN Example
+
+```js
+const products = [
+    "Laptop",
+    "Phone",
+    "Keyboard"
+];
+
+for (const product of products) {
+    console.log(product);
+}
+```
+
+---
+
+# 7. Interview Questions
+
+### When should you use `for...of`?
+
+* Arrays
+* Strings
+* Maps
+* Sets
+
+Whenever you need **values**.
+
+---
+
+# Quick Revision
+
+```js
+for (const value of array) {
+    console.log(value);
+}
+```
+
+`for...of` = **Values**
+
+---
+
+# Phase 3 – Topic 10: `for...in` Loop
+
+`for...in` is used to iterate over the **keys (property names)** of an object.
+
+---
+
+# 1. Syntax
+
+```js
+for (const key in object) {
+    // code
+}
+```
+
+---
+
+# 2. Object Example
+
+```js
+const user = {
+    name: "Devanshu",
+    age: 21,
+    city: "Pune"
+};
+
+for (const key in user) {
+    console.log(key);
+}
+```
+
+Output
+
+```text
+name
+age
+city
+```
+
+---
+
+# 3. Getting Values
+
+```js
+const user = {
+    name: "Devanshu",
+    age: 21,
+    city: "Pune"
+};
+
+for (const key in user) {
+    console.log(key, user[key]);
+}
+```
+
+Output
+
+```text
+name Devanshu
+age 21
+city Pune
+```
+
+Notice:
+
+```js
+user[key]
+```
+
+not
+
+```js
+user.key
+```
+
+because `key` is a variable containing the property name.
+
+---
+
+# 4. `for...in` on Arrays
+
+```js
+const arr = [10,20,30];
+
+for (const index in arr) {
+    console.log(index);
+}
+```
+
+Output
+
+```text
+0
+1
+2
+```
+
+To get values:
+
+```js
+const arr = [10,20,30];
+
+for (const index in arr) {
+    console.log(arr[index]);
+}
+```
+
+Output
+
+```text
+10
+20
+30
+```
+
+However, for arrays, **prefer `for...of`** because it directly gives values.
+
+---
+
+# 5. Common Mistakes
+
+### ❌ Using dot notation
+
+Wrong
+
+```js
+for (const key in user) {
+    console.log(user.key);
+}
+```
+
+Output
+
+```text
+undefined
+undefined
+undefined
+```
+
+Correct
+
+```js
+for (const key in user) {
+    console.log(user[key]);
+}
+```
+
+---
+
+# 6. Real MERN Example
+
+API Response
+
+```js
+const user = {
+    name: "John",
+    email: "john@example.com",
+    role: "Admin"
+};
+
+for (const key in user) {
+    console.log(`${key}: ${user[key]}`);
+}
+```
+
+Output
+
+```text
+name: John
+email: john@example.com
+role: Admin
+```
+
+---
+
+# 7. Interview Questions
+
+### When should you use `for...in`?
+
+When iterating over **object properties (keys)**.
+
+---
+
+### Can `for...in` iterate arrays?
+
+Yes.
+
+But **`for...of` is recommended** because it returns values directly and is clearer.
+
+---
+
+# `for...of` vs `for...in`
+
+| Feature  | `for...of`                  | `for...in`                    |
+| -------- | --------------------------- | ----------------------------- |
+| Used for | Arrays, Strings, Maps, Sets | Objects                       |
+| Returns  | Values                      | Keys (property names/indexes) |
+| Arrays   | ✅ Recommended               | ⚠️ Works, but not preferred   |
+| Objects  | ❌ Error on plain objects    | ✅ Best choice                 |
+
+---
+
+# Final Example
+
+```js
+const arr = ["HTML", "CSS", "JavaScript"];
+
+console.log("for...of");
+
+for (const value of arr) {
+    console.log(value);
+}
+
+console.log("for...in");
+
+for (const index in arr) {
+    console.log(index, arr[index]);
+}
+```
+
+Output
+
+```text
+for...of
+HTML
+CSS
+JavaScript
+
+for...in
+0 HTML
+1 CSS
+2 JavaScript
+```
+
+---
+
+# Memory Trick
+
+## `for...of`
+
+```text
+of → Value OF the collection
+```
+
+```js
+for (const value of array)
+```
+
+Returns:
+
+```text
+Apple
+Banana
+Mango
+```
+
+---
+
+## `for...in`
+
+```text
+in → Keys IN the object
+```
+
+```js
+for (const key in object)
+```
+
+Returns:
+
+```text
+name
+age
+city
+```
+
+---
+

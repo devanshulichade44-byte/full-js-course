@@ -1,0 +1,596 @@
+# Phase 2 – Control Flow
+
+## What is Control Flow?
+
+Control flow determines **which code runs, when it runs, and under what conditions**.
+
+Without control flow, JavaScript would execute every line from top to bottom without making decisions.
+
+Example:
+
+```js
+console.log("Start");
+console.log("Processing...");
+console.log("End");
+```
+
+Output:
+
+```text
+Start
+Processing...
+End
+```
+
+But real applications need decisions:
+
+* Is the user logged in?
+* Is the password correct?
+* Is the cart empty?
+* Is the age above 18?
+
+This is where control flow comes in.
+
+---
+
+# Topics in Phase 2
+
+1. `if`
+2. `if...else`
+3. `else if`
+4. Nested `if`
+5. `switch`
+6. Truthy & Falsy
+7. Nullish Coalescing (`??`)
+8. Optional Chaining (`?.`)
+9. Ternary Operator (`? :`)
+
+We'll cover **one topic at a time**, just like Phase 1.
+
+---
+
+# Topic 1 – `if` Statement
+
+The `if` statement executes code **only when a condition is true**.
+
+---
+
+# 1. Syntax
+
+```js
+if (condition) {
+    // code runs if condition is true
+}
+```
+
+The condition must evaluate to either:
+
+```text
+true
+```
+
+or
+
+```text
+false
+```
+
+---
+
+# 2. Flow
+
+```text
+Condition
+    │
+    ▼
+Is it true?
+ ├── Yes → Execute code
+ └── No  → Skip code
+```
+
+---
+
+# 3. Example 1 – Age Check
+
+```js
+let age = 20;
+
+if (age >= 18) {
+    console.log("You can vote.");
+}
+```
+
+Output
+
+```text
+You can vote.
+```
+
+Why?
+
+```text
+20 >= 18
+
+true
+```
+
+So the block executes.
+
+---
+
+# 4. Example 2 – False Condition
+
+```js
+let age = 15;
+
+if (age >= 18) {
+    console.log("You can vote.");
+}
+```
+
+Output
+
+```text
+Nothing
+```
+
+Since
+
+```text
+15 >= 18
+
+false
+```
+
+JavaScript skips the block.
+
+---
+
+# 5. Example 3 – Login System
+
+```js
+let isLoggedIn = true;
+
+if (isLoggedIn) {
+    console.log("Welcome back!");
+}
+```
+
+Output
+
+```text
+Welcome back!
+```
+
+Notice:
+
+```js
+if (isLoggedIn)
+```
+
+is equivalent to
+
+```js
+if (isLoggedIn === true)
+```
+
+The shorter version is preferred.
+
+---
+
+# 6. Example 4 – Shopping Cart
+
+```js
+let cartItems = 3;
+
+if (cartItems > 0) {
+    console.log("Proceed to Checkout");
+}
+```
+
+Output
+
+```text
+Proceed to Checkout
+```
+
+---
+
+# 7. Example 5 – Marks
+
+```js
+let marks = 85;
+
+if (marks >= 40) {
+    console.log("Pass");
+}
+```
+
+Output
+
+```text
+Pass
+```
+
+---
+
+# 8. Multiple `if` Statements
+
+Each `if` is checked independently.
+
+```js
+let marks = 95;
+
+if (marks >= 40) {
+    console.log("Pass");
+}
+
+if (marks >= 90) {
+    console.log("Excellent");
+}
+```
+
+Output
+
+```text
+Pass
+Excellent
+```
+
+Both conditions are true.
+
+---
+
+# 9. Comparison Operators in `if`
+
+```js
+let x = 10;
+
+if (x > 5) {
+    console.log("Greater");
+}
+```
+
+---
+
+```js
+let x = 10;
+
+if (x < 5) {
+    console.log("Smaller");
+}
+```
+
+Output
+
+```text
+Nothing
+```
+
+---
+
+# 10. Using Strings
+
+```js
+let role = "admin";
+
+if (role === "admin") {
+    console.log("Admin Panel");
+}
+```
+
+Output
+
+```text
+Admin Panel
+```
+
+Always use:
+
+```js
+===
+```
+
+instead of
+
+```js
+==
+```
+
+---
+
+# 11. Using Boolean Variables
+
+```js
+let hasPaid = false;
+
+if (hasPaid) {
+    console.log("Course Unlocked");
+}
+```
+
+Output
+
+```text
+Nothing
+```
+
+---
+
+```js
+hasPaid = true;
+
+if (hasPaid) {
+    console.log("Course Unlocked");
+}
+```
+
+Output
+
+```text
+Course Unlocked
+```
+
+---
+
+# 12. Common Mistake #1
+
+Using `=` instead of `===`
+
+❌ Wrong
+
+```js
+let age = 20;
+
+if (age = 18) {
+    console.log("Adult");
+}
+```
+
+Output
+
+```text
+Adult
+```
+
+Why?
+
+Because
+
+```js
+age = 18
+```
+
+is an **assignment**, not a comparison.
+
+After execution:
+
+```js
+console.log(age);
+```
+
+Output
+
+```text
+18
+```
+
+This is a common bug.
+
+---
+
+✅ Correct
+
+```js
+if (age === 18)
+```
+
+---
+
+# 13. Common Mistake #2
+
+Using strings instead of booleans
+
+```js
+let isLoggedIn = "true";
+
+if (isLoggedIn) {
+    console.log("Logged In");
+}
+```
+
+Output
+
+```text
+Logged In
+```
+
+Why?
+
+Because `"true"` is a **non-empty string**, not the boolean `true`.
+
+Later in this phase, we'll study why this happens (Truthy & Falsy).
+
+---
+
+# 14. Best Practices
+
+✅ Use braces even for one line.
+
+Instead of
+
+```js
+if (age >= 18)
+    console.log("Adult");
+```
+
+Write
+
+```js
+if (age >= 18) {
+    console.log("Adult");
+}
+```
+
+This prevents bugs when adding more statements later.
+
+---
+
+✅ Use meaningful conditions.
+
+Instead of
+
+```js
+if (x > 0)
+```
+
+Prefer
+
+```js
+if (cartItems > 0)
+```
+
+It's easier to understand.
+
+---
+
+# 15. Mini Challenge
+
+Predict the output before running the code.
+
+### Q1
+
+```js
+let age = 22;
+
+if (age >= 18) {
+    console.log("Adult");
+}
+```
+
+---
+
+### Q2
+
+```js
+let age = 15;
+
+if (age >= 18) {
+    console.log("Adult");
+}
+```
+
+---
+
+### Q3
+
+```js
+let isAdmin = true;
+
+if (isAdmin) {
+    console.log("Access Granted");
+}
+```
+
+---
+
+### Q4
+
+```js
+let marks = 40;
+
+if (marks >= 40) {
+    console.log("Pass");
+}
+```
+
+---
+
+### Q5
+
+```js
+let city = "Pune";
+
+if (city === "Mumbai") {
+    console.log("Welcome");
+}
+```
+
+---
+
+### Q6
+
+```js
+let x = 10;
+
+if (x = 5) {
+    console.log(x);
+}
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+Adult
+```
+
+---
+
+### Q2
+
+```text
+Nothing
+```
+
+---
+
+### Q3
+
+```text
+Access Granted
+```
+
+---
+
+### Q4
+
+```text
+Pass
+```
+
+---
+
+### Q5
+
+```text
+Nothing
+```
+
+---
+
+### Q6
+
+```text
+5
+```
+
+Because `x = 5` assigns the value `5` to `x`, and `5` is a truthy value, so the `if` block runs.
+
+---
+
+# Quick Revision
+
+| Statement        | Meaning                              |
+| ---------------- | ------------------------------------ |
+| `if (condition)` | Runs only if condition is `true`     |
+| `===`            | Preferred for comparisons            |
+| `{}`             | Always use braces                    |
+| `=`              | Assignment (don't use in conditions) |
+| `==`             | Avoid in most cases                  |
+
+---
+

@@ -1,0 +1,653 @@
+# Phase 5 – Objects
+
+## Topic 1: Object Literals (Most Important)
+
+Objects are one of the **core building blocks** of JavaScript. In React, Node.js, Express, MongoDB, and APIs, you'll work with objects every day.
+
+---
+
+# 1. What is an Object?
+
+An **object** is a collection of **key-value pairs** used to store related information.
+
+Think of an object as a real-world person.
+
+```
+Person
+
+Name  → Devanshu
+Age   → 21
+City  → Nagpur
+```
+
+Instead of storing each value separately:
+
+```js
+const name = "Devanshu";
+const age = 21;
+const city = "Nagpur";
+```
+
+We can group them together:
+
+```js
+const user = {
+    name: "Devanshu",
+    age: 21,
+    city: "Nagpur"
+};
+```
+
+This is called an **Object Literal**.
+
+---
+
+# 2. Why Do We Need Objects?
+
+Imagine storing information for 100 students.
+
+Without objects:
+
+```js
+const student1Name = "Rahul";
+const student1Age = 20;
+
+const student2Name = "Aman";
+const student2Age = 21;
+```
+
+This quickly becomes difficult to manage.
+
+With objects:
+
+```js
+const student1 = {
+    name: "Rahul",
+    age: 20
+};
+
+const student2 = {
+    name: "Aman",
+    age: 21
+};
+```
+
+Everything related to one student stays together.
+
+---
+
+# 3. Syntax
+
+```js
+const objectName = {
+    key1: value1,
+    key2: value2,
+    key3: value3
+};
+```
+
+Example
+
+```js
+const car = {
+    brand: "BMW",
+    model: "X5",
+    price: 8500000
+};
+```
+
+---
+
+# 4. Understanding Every Part
+
+```js
+const user = {
+
+    name: "Devanshu",
+
+    age: 21,
+
+    city: "Nagpur"
+
+};
+```
+
+### `user`
+
+Variable holding the object.
+
+---
+
+### `name`
+
+Property (Key)
+
+---
+
+### `"Devanshu"`
+
+Value
+
+---
+
+### `age`
+
+Another property.
+
+---
+
+### `21`
+
+Value
+
+---
+
+### Visual Representation
+
+```
+user
+
+{
+
+    name : "Devanshu"
+
+    age : 21
+
+    city : "Nagpur"
+
+}
+```
+
+Keys
+
+```
+name
+age
+city
+```
+
+Values
+
+```
+Devanshu
+21
+Nagpur
+```
+
+---
+
+# 5. Rules for Keys
+
+### Normal Key
+
+```js
+const person = {
+
+    name: "John"
+
+};
+```
+
+---
+
+### Number Key
+
+```js
+const obj = {
+
+    1: "One"
+
+};
+```
+
+JavaScript stores it as the string `"1"` internally.
+
+---
+
+### Key with Spaces
+
+```js
+const person = {
+
+    "full name": "John Doe"
+
+};
+```
+
+Must use quotes.
+
+---
+
+### Special Characters
+
+```js
+const user = {
+
+    "@gmail": "abc@gmail.com"
+
+};
+```
+
+Use quotes when the key isn't a valid identifier.
+
+---
+
+# 6. Types of Values
+
+Objects can store almost any type.
+
+## Number
+
+```js
+const user = {
+
+    age: 21
+
+};
+```
+
+---
+
+## String
+
+```js
+const user = {
+
+    name: "Devanshu"
+
+};
+```
+
+---
+
+## Boolean
+
+```js
+const user = {
+
+    isLoggedIn: true
+
+};
+```
+
+---
+
+## Array
+
+```js
+const user = {
+
+    skills: ["HTML", "CSS", "JavaScript"]
+
+};
+```
+
+---
+
+## Object
+
+```js
+const user = {
+
+    address: {
+
+        city: "Nagpur",
+
+        state: "Maharashtra"
+
+    }
+
+};
+```
+
+---
+
+## Function
+
+```js
+const user = {
+
+    greet: function () {
+
+        console.log("Hello");
+
+    }
+
+};
+```
+
+We'll study object methods later in this phase.
+
+---
+
+# 7. Real MERN Example
+
+API Response
+
+```js
+const user = {
+
+    id: 101,
+
+    username: "devanshu",
+
+    email: "devanshu@gmail.com",
+
+    isAdmin: false,
+
+    skills: ["React", "Node", "MongoDB"]
+
+};
+```
+
+This is the kind of object you'll receive from a backend API.
+
+---
+
+# 8. Object vs Array
+
+Object
+
+```js
+const user = {
+
+    name: "Devanshu",
+
+    age: 21
+
+};
+```
+
+Stores **key-value pairs**.
+
+---
+
+Array
+
+```js
+const skills = [
+
+    "HTML",
+
+    "CSS",
+
+    "JavaScript"
+
+];
+```
+
+Stores an **ordered list** of values.
+
+---
+
+# 9. Common Mistakes
+
+### Missing Comma
+
+❌ Wrong
+
+```js
+const user = {
+
+    name: "Devanshu"
+
+    age: 21
+
+};
+```
+
+Correct
+
+```js
+const user = {
+
+    name: "Devanshu",
+
+    age: 21
+
+};
+```
+
+---
+
+### Duplicate Keys
+
+```js
+const user = {
+
+    name: "John",
+
+    name: "Alice"
+
+};
+
+console.log(user);
+```
+
+Output
+
+```text
+{
+    name: "Alice"
+}
+```
+
+The last value overwrites the previous one.
+
+---
+
+# 10. Best Practices
+
+✅ Use meaningful key names.
+
+```js
+name
+email
+price
+isAdmin
+createdAt
+```
+
+❌ Avoid:
+
+```js
+a
+b
+x
+data1
+```
+
+---
+
+# 11. Syntax Practice
+
+Write the code only.
+
+1. Create a `student` object with `name` and `age`.
+2. Create a `car` object with `brand`, `model`, and `price`.
+3. Create a `book` object with `title` and `author`.
+4. Create a `phone` object with `brand`, `ram`, and `storage`.
+5. Create a `movie` object with `name`, `rating`, and `year`.
+6. Create an object that stores an array of three skills.
+
+---
+
+# 12. Output Questions
+
+### Q1
+
+```js
+const user = {
+
+    name: "John"
+
+};
+
+console.log(user);
+```
+
+---
+
+### Q2
+
+```js
+const car = {
+
+    brand: "BMW",
+
+    price: 5000000
+
+};
+
+console.log(car.brand);
+```
+
+---
+
+### Q3
+
+```js
+const obj = {
+
+    1: "One"
+
+};
+
+console.log(obj);
+```
+
+---
+
+### Q4
+
+```js
+const student = {
+
+    name: "Rahul",
+
+    age: 20
+
+};
+
+console.log(student.age);
+```
+
+---
+
+### Q5
+
+```js
+const user = {
+
+    skills: ["HTML", "CSS"]
+
+};
+
+console.log(user.skills);
+```
+
+---
+
+# 13. Coding Practice
+
+1. Create a `laptop` object.
+2. Create a `student` object with five properties.
+3. Create a `book` object with an array of authors.
+4. Create an `employee` object with a nested `address` object.
+5. Create a `product` object containing an array and another object.
+6. Create a `restaurant` object with menu items stored in an array.
+
+---
+
+# 14. Interview Questions
+
+### Q1. What is an object in JavaScript?
+
+**Answer:** A collection of key-value pairs used to store related data.
+
+---
+
+### Q2. What is an object literal?
+
+**Answer:** An object created using curly braces `{}`.
+
+---
+
+### Q3. Can an object store different data types?
+
+**Answer:** Yes. It can store strings, numbers, booleans, arrays, objects, functions, and more.
+
+---
+
+### Q4. What is the difference between an array and an object?
+
+**Answer:**
+
+* Array → Ordered collection accessed by indexes.
+* Object → Collection of key-value pairs accessed by keys.
+
+---
+
+### Q5. Can object keys be numbers?
+
+**Answer:** Yes, but JavaScript converts them to strings internally.
+
+---
+
+# 15. Answers
+
+### Q1
+
+```text
+{ name: "John" }
+```
+
+### Q2
+
+```text
+BMW
+```
+
+### Q3
+
+```text
+{ "1": "One" }
+```
+
+### Q4
+
+```text
+20
+```
+
+### Q5
+
+```text
+["HTML", "CSS"]
+```
+
+---
+
+# Quick Revision
+
+### Syntax
+
+```js
+const obj = {
+    key: value
+};
+```
+
+### Key Points
+
+* ✅ Objects store **key-value pairs**.
+* ✅ Created using `{}`.
+* ✅ Values can be of any data type.
+* ✅ Keys should be unique.
+* ✅ Objects are heavily used in APIs, React props, state, and MongoDB documents.
+
+---
+
+# 📍 Phase 5 Progress
+
+* 

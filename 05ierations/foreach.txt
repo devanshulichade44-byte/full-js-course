@@ -1,0 +1,669 @@
+# Phase 4 – Topic 1: `forEach()`
+
+`forEach()` is one of the most frequently used array methods in JavaScript. It is used to **visit every element of an array** and execute a function for each element.
+
+> **Important:** `forEach()` is a **method**, not a loop. Internally, it iterates over the array for you.
+
+---
+
+# 1. What is `forEach()`?
+
+`forEach()` executes a callback function **once for every array element**.
+
+Example:
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach(function(fruit) {
+    console.log(fruit);
+});
+```
+
+Output:
+
+```text
+Apple
+Banana
+Mango
+```
+
+---
+
+# 2. Why Do We Need `forEach()`?
+
+Without `forEach()`:
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}
+```
+
+With `forEach()`:
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach(function(fruit) {
+    console.log(fruit);
+});
+```
+
+Both produce the same output, but `forEach()` is shorter and more readable.
+
+---
+
+# 3. Syntax
+
+```js
+array.forEach(callbackFunction);
+```
+
+or
+
+```js
+array.forEach(function(element) {
+
+});
+```
+
+or
+
+```js
+array.forEach((element) => {
+
+});
+```
+
+---
+
+# 4. Understanding the Syntax
+
+```js
+array.forEach((element, index, array) => {
+
+});
+```
+
+There are **3 parameters**.
+
+| Parameter | Meaning             |
+| --------- | ------------------- |
+| `element` | Current array value |
+| `index`   | Current index       |
+| `array`   | Original array      |
+
+All three are optional.
+
+---
+
+## Example 1 – Element
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach((fruit) => {
+    console.log(fruit);
+});
+```
+
+Output
+
+```text
+Apple
+Banana
+Mango
+```
+
+---
+
+## Example 2 – Element + Index
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach((fruit, index) => {
+    console.log(index, fruit);
+});
+```
+
+Output
+
+```text
+0 Apple
+1 Banana
+2 Mango
+```
+
+---
+
+## Example 3 – All Three Parameters
+
+```js
+const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach((fruit, index, array) => {
+    console.log(fruit, index, array);
+});
+```
+
+Output
+
+```text
+Apple 0 ["Apple","Banana","Mango"]
+Banana 1 ["Apple","Banana","Mango"]
+Mango 2 ["Apple","Banana","Mango"]
+```
+
+---
+
+# 5. Internal Working
+
+Consider:
+
+```js
+const arr = [10,20,30];
+
+arr.forEach((value) => {
+    console.log(value);
+});
+```
+
+Internally, JavaScript behaves approximately like this:
+
+```js
+for (let i = 0; i < arr.length; i++) {
+    const value = arr[i];
+    console.log(value);
+}
+```
+
+The difference is that JavaScript handles the loop internally.
+
+---
+
+# 6. Callback Function
+
+The function passed to `forEach()` is called a **callback function**.
+
+```js
+arr.forEach(function(value) {
+    console.log(value);
+});
+```
+
+or
+
+```js
+arr.forEach((value) => {
+    console.log(value);
+});
+```
+
+JavaScript automatically calls this function for each element.
+
+---
+
+# 7. Examples
+
+## Example 1 – Print Numbers
+
+```js
+const numbers = [10,20,30];
+
+numbers.forEach((num) => {
+    console.log(num);
+});
+```
+
+---
+
+## Example 2 – Square Numbers
+
+```js
+const numbers = [2,3,4];
+
+numbers.forEach((num) => {
+    console.log(num * num);
+});
+```
+
+Output
+
+```text
+4
+9
+16
+```
+
+---
+
+## Example 3 – Sum
+
+```js
+const numbers = [10,20,30];
+
+let sum = 0;
+
+numbers.forEach((num) => {
+    sum += num;
+});
+
+console.log(sum);
+```
+
+Output
+
+```text
+60
+```
+
+---
+
+## Example 4 – Array of Objects
+
+```js
+const users = [
+    {name:"John", age:25},
+    {name:"Alice", age:20},
+    {name:"Bob", age:30}
+];
+
+users.forEach((user) => {
+    console.log(user.name);
+});
+```
+
+Output
+
+```text
+John
+Alice
+Bob
+```
+
+---
+
+## Example 5 – String Array
+
+```js
+const colors = ["Red","Green","Blue"];
+
+colors.forEach((color) => {
+    console.log(color.toUpperCase());
+});
+```
+
+Output
+
+```text
+RED
+GREEN
+BLUE
+```
+
+---
+
+# 8. Common Mistakes
+
+## ❌ Expecting `forEach()` to Return a New Array
+
+```js
+const arr = [1,2,3];
+
+const result = arr.forEach((num) => num * 2);
+
+console.log(result);
+```
+
+Output
+
+```text
+undefined
+```
+
+`forEach()` **does not return a new array**.
+
+Use `map()` for that.
+
+---
+
+## ❌ Using `break`
+
+```js
+arr.forEach((num) => {
+
+    if (num === 3) {
+        break;
+    }
+
+});
+```
+
+❌ Error
+
+You **cannot use `break`** inside `forEach()`.
+
+---
+
+## ❌ Using `continue`
+
+```js
+arr.forEach((num) => {
+
+    if (num === 3) {
+        continue;
+    }
+
+});
+```
+
+❌ Error
+
+`continue` also cannot be used.
+
+---
+
+# 9. Best Practices
+
+✅ Use `forEach()` for:
+
+* Printing
+* Logging
+* Updating variables
+* Side effects
+
+❌ Don't use it when you need:
+
+* A new array (`map`)
+* Filtering (`filter`)
+* Finding an element (`find`)
+
+---
+
+# 10. `for` vs `forEach()`
+
+| `for`                    | `forEach()`                     |
+| ------------------------ | ------------------------------- |
+| Can use `break`          | ❌ No                            |
+| Can use `continue`       | ❌ No                            |
+| Full control             | Less control                    |
+| Uses indexes manually    | Handles iteration automatically |
+| Works on arrays and more | Array method only               |
+
+---
+
+# 11. Syntax Practice
+
+Write only the code.
+
+1. Print all elements of `[1,2,3,4]`.
+2. Print element and index.
+3. Print the square of each number.
+4. Calculate the sum of an array.
+5. Print only user names from an array of user objects.
+6. Convert each string to uppercase and print it.
+
+---
+
+# 12. Output Questions
+
+### Q1
+
+```js
+[1,2,3].forEach((num) => {
+    console.log(num);
+});
+```
+
+---
+
+### Q2
+
+```js
+["A","B"].forEach((item,index) => {
+    console.log(index,item);
+});
+```
+
+---
+
+### Q3
+
+```js
+const arr=[2,4];
+
+arr.forEach((num)=>{
+    console.log(num*2);
+});
+```
+
+---
+
+### Q4
+
+```js
+let sum=0;
+
+[1,2,3].forEach((num)=>{
+    sum+=num;
+});
+
+console.log(sum);
+```
+
+---
+
+### Q5
+
+```js
+["js","python"].forEach((lang)=>{
+    console.log(lang.toUpperCase());
+});
+```
+
+---
+
+### Q6
+
+```js
+const result=[1,2].forEach((num)=>num*2);
+
+console.log(result);
+```
+
+---
+
+# 13. Coding Practice
+
+## Easy
+
+1. Print every element.
+2. Print every element with its index.
+3. Calculate the sum of an array.
+
+## Medium
+
+4. Count even numbers.
+5. Print only names from an array of objects.
+
+## Interview Level
+
+6. Calculate the total price of a shopping cart.
+
+Example:
+
+```js
+const cart = [
+    {item:"Laptop",price:50000},
+    {item:"Mouse",price:1000},
+    {item:"Keyboard",price:2000}
+];
+```
+
+Expected Output
+
+```text
+53000
+```
+
+---
+
+# 14. Real React/MERN Example
+
+API Response
+
+```js
+const users = [
+    {name:"John"},
+    {name:"Alice"},
+    {name:"Bob"}
+];
+
+users.forEach((user)=>{
+    console.log(user.name);
+});
+```
+
+Output
+
+```text
+John
+Alice
+Bob
+```
+
+---
+
+# 15. Interview Questions
+
+### Q1. Does `forEach()` return a new array?
+
+**Answer:** No. It returns `undefined`.
+
+---
+
+### Q2. Can you use `break` inside `forEach()`?
+
+**Answer:** No.
+
+---
+
+### Q3. Can you use `continue` inside `forEach()`?
+
+**Answer:** No.
+
+---
+
+### Q4. When should you use `forEach()`?
+
+**Answer:** When you want to perform an action for every element, such as printing, logging, or updating external variables.
+
+---
+
+### Q5. What parameters does the callback receive?
+
+**Answer:**
+
+```js
+(element, index, array)
+```
+
+---
+
+# 16. Answers
+
+## Output Questions
+
+### Q1
+
+```text
+1
+2
+3
+```
+
+---
+
+### Q2
+
+```text
+0 A
+1 B
+```
+
+---
+
+### Q3
+
+```text
+4
+8
+```
+
+---
+
+### Q4
+
+```text
+6
+```
+
+---
+
+### Q5
+
+```text
+JS
+PYTHON
+```
+
+---
+
+### Q6
+
+```text
+undefined
+```
+
+---
+
+# Quick Revision
+
+### Syntax
+
+```js
+array.forEach((element, index, array) => {
+
+});
+```
+
+### Callback Parameters
+
+```text
+element
+index
+array
+```
+
+### Key Points
+
+* ✅ Iterates over every array element.
+* ✅ Returns `undefined`.
+* ✅ Cannot use `break` or `continue`.
+* ✅ Best for side effects (logging, printing, updating variables).
+* ❌ Not for creating a new array (`map()` is for that).
+
+---
+---
+
+## ⭐ Interview Tip
+
+A common interview question is:
+
+> **Why does `forEach()` return `undefined`?**
+
+Because its purpose is **to perform an action (side effect)** on each element, not to produce or transform data. If you need a transformed array, use `map()`. If you need selected elements, use `filter()`. If you need a single accumulated value, use `reduce()`.

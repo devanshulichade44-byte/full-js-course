@@ -1,0 +1,732 @@
+# Phase 6 – Topic 3: Arrow Functions (`=>`)
+
+Arrow Functions were introduced in **ES6 (ECMAScript 2015)**. They provide a **shorter and cleaner syntax** for writing functions and are heavily used in **React**, **Node.js**, **Express**, **callbacks**, **Promises**, and **array methods** like `map()`, `filter()`, and `forEach()`.
+
+---
+
+# 1. What is an Arrow Function?
+
+An **Arrow Function** is a shorter way of writing a function.
+
+Instead of using the `function` keyword, we use the `=>` (arrow) operator.
+
+---
+
+# 2. Why Do We Need Arrow Functions?
+
+### Regular Function
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+Output
+
+```text
+Hello
+```
+
+---
+
+### Arrow Function
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+
+greet();
+```
+
+Output
+
+```text
+Hello
+```
+
+Both work the same, but the arrow function is shorter.
+
+---
+
+# 3. Syntax
+
+### Basic Syntax
+
+```js
+const functionName = () => {
+
+};
+```
+
+Example
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+
+greet();
+```
+
+---
+
+# 4. Internal Working
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+```
+
+Execution Flow
+
+```text
+Create Variable
+
+↓
+
+Create Arrow Function
+
+↓
+
+Store Function in Variable
+
+↓
+
+Call greet()
+
+↓
+
+Execute Function
+```
+
+---
+
+# 5. Arrow Function with One Parameter
+
+Regular Function
+
+```js
+function square(num) {
+    return num * num;
+}
+
+console.log(square(5));
+```
+
+---
+
+Arrow Function
+
+```js
+const square = (num) => {
+    return num * num;
+};
+
+console.log(square(5));
+```
+
+Output
+
+```text
+25
+```
+
+---
+
+## Parentheses Rule
+
+If there is **only one parameter**, parentheses are optional.
+
+```js
+const square = num => {
+    return num * num;
+};
+```
+
+Both are correct.
+
+---
+
+# 6. Arrow Function with Multiple Parameters
+
+```js
+const add = (a, b) => {
+    return a + b;
+};
+
+console.log(add(10, 20));
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+# 7. Arrow Function with No Parameters
+
+```js
+const welcome = () => {
+    console.log("Welcome");
+};
+
+welcome();
+```
+
+Output
+
+```text
+Welcome
+```
+
+---
+
+# 8. Explicit Return
+
+When using curly braces `{}`, you must write `return`.
+
+```js
+const multiply = (a, b) => {
+    return a * b;
+};
+
+console.log(multiply(4, 5));
+```
+
+Output
+
+```text
+20
+```
+
+---
+
+# 9. Implicit Return
+
+If the function has only **one expression**, you can omit both the braces and the `return` keyword.
+
+```js
+const multiply = (a, b) => a * b;
+
+console.log(multiply(4, 5));
+```
+
+Output
+
+```text
+20
+```
+
+JavaScript automatically returns the result.
+
+---
+
+# 10. Returning an Object
+
+This is a common interview question.
+
+❌ Wrong
+
+```js
+const getUser = () => {
+    name: "Devanshu";
+};
+
+console.log(getUser());
+```
+
+Output
+
+```text
+undefined
+```
+
+Why?
+
+JavaScript thinks `{}` is a function body.
+
+---
+
+✅ Correct
+
+Wrap the object in parentheses.
+
+```js
+const getUser = () => ({
+    name: "Devanshu",
+    age: 21
+});
+
+console.log(getUser());
+```
+
+Output
+
+```text
+{
+    name: "Devanshu",
+    age: 21
+}
+```
+
+---
+
+# 11. Regular Function vs Arrow Function
+
+### Regular Function
+
+```js
+function greet(name) {
+    return "Hello " + name;
+}
+```
+
+---
+
+### Arrow Function
+
+```js
+const greet = (name) => {
+    return "Hello " + name;
+};
+```
+
+---
+
+### Short Arrow Function
+
+```js
+const greet = name => "Hello " + name;
+```
+
+All three produce the same output.
+
+---
+
+# 12. `this` Keyword Difference (Most Important)
+
+## Regular Function
+
+```js
+const user = {
+    name: "Devanshu",
+
+    greet: function () {
+        console.log(this.name);
+    }
+};
+
+user.greet();
+```
+
+Output
+
+```text
+Devanshu
+```
+
+Here, `this` refers to the `user` object.
+
+---
+
+## Arrow Function
+
+```js
+const user = {
+    name: "Devanshu",
+
+    greet: () => {
+        console.log(this.name);
+    }
+};
+
+user.greet();
+```
+
+Output
+
+```text
+undefined
+```
+
+### Why?
+
+Arrow functions **do not have their own `this`**.
+
+They inherit `this` from their surrounding (lexical) scope.
+
+**Important Interview Point**
+
+| Regular Function                  | Arrow Function                                 |
+| --------------------------------- | ---------------------------------------------- |
+| Has its own `this`                | Does not have its own `this`                   |
+| `this` depends on how it's called | `this` is inherited from the surrounding scope |
+
+---
+
+# 13. Real React Example
+
+```jsx
+const handleClick = () => {
+    console.log("Button Clicked");
+};
+
+<button onClick={handleClick}>
+    Click Me
+</button>
+```
+
+React projects primarily use arrow functions.
+
+---
+
+# 14. Array Methods
+
+```js
+const numbers = [1, 2, 3, 4];
+
+numbers.forEach(num => {
+    console.log(num);
+});
+```
+
+Output
+
+```text
+1
+2
+3
+4
+```
+
+---
+
+Using `map()`
+
+```js
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled);
+```
+
+Output
+
+```text
+[2, 4, 6]
+```
+
+---
+
+# 15. Common Mistakes
+
+## ❌ Forgetting `return`
+
+```js
+const add = (a, b) => {
+    a + b;
+};
+
+console.log(add(2, 3));
+```
+
+Output
+
+```text
+undefined
+```
+
+---
+
+✅ Correct
+
+```js
+const add = (a, b) => {
+    return a + b;
+};
+```
+
+or
+
+```js
+const add = (a, b) => a + b;
+```
+
+---
+
+## ❌ Returning Object Incorrectly
+
+```js
+const getUser = () => {
+    name: "Devanshu";
+};
+```
+
+Correct
+
+```js
+const getUser = () => ({
+    name: "Devanshu"
+});
+```
+
+---
+
+## ❌ Using Arrow Function as an Object Method
+
+```js
+const person = {
+    name: "John",
+
+    greet: () => {
+        console.log(this.name);
+    }
+};
+```
+
+Avoid this when you need `this`.
+
+Use a regular function instead.
+
+---
+
+# 16. Best Practices
+
+* ✅ Use arrow functions for callbacks.
+* ✅ Use arrow functions in React components and event handlers.
+* ✅ Use implicit return for simple one-line functions.
+* ✅ Use regular functions when you need `this`.
+
+---
+
+# 17. Syntax Practice
+
+Write only the code.
+
+1. Create an arrow function that prints `"Hello"`.
+2. Create an arrow function that adds two numbers.
+3. Create an arrow function that returns the square of a number.
+4. Create an arrow function with implicit return.
+5. Return an object from an arrow function.
+6. Use an arrow function inside `map()`.
+
+---
+
+# 18. Output Questions
+
+### Q1
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+
+greet();
+```
+
+---
+
+### Q2
+
+```js
+const add = (a, b) => a + b;
+
+console.log(add(5, 10));
+```
+
+---
+
+### Q3
+
+```js
+const square = num => num * num;
+
+console.log(square(6));
+```
+
+---
+
+### Q4
+
+```js
+const getUser = () => ({
+    name: "John"
+});
+
+console.log(getUser().name);
+```
+
+---
+
+### Q5
+
+```js
+const add = (a, b) => {
+    a + b;
+};
+
+console.log(add(2, 3));
+```
+
+---
+
+### Q6
+
+```js
+const obj = {
+    name: "Devanshu",
+
+    greet: () => {
+        console.log(this.name);
+    }
+};
+
+obj.greet();
+```
+
+---
+
+# 19. Coding Practice
+
+1. Create an arrow function that calculates the area of a circle.
+2. Create an arrow function that checks if a number is even.
+3. Create an arrow function that returns the largest of two numbers.
+4. Create an arrow function that returns an object with `name` and `age`.
+5. Use an arrow function with `filter()` to return even numbers.
+6. Use an arrow function with `map()` to square every number in an array.
+
+---
+
+# 20. Interview Questions
+
+### Q1. What is an Arrow Function?
+
+**Answer:** An arrow function is a shorter syntax for writing functions, introduced in ES6, using the `=>` operator.
+
+---
+
+### Q2. What is the difference between a regular function and an arrow function?
+
+| Regular Function                | Arrow Function              |
+| ------------------------------- | --------------------------- |
+| Uses `function` keyword         | Uses `=>`                   |
+| Has its own `this`              | Inherits `this`             |
+| Can be used as an object method | Avoid when `this` is needed |
+
+---
+
+### Q3. What is an implicit return?
+
+**Answer:** When an arrow function automatically returns the value of a single expression.
+
+```js
+const add = (a, b) => a + b;
+```
+
+---
+
+### Q4. Why do we wrap objects in parentheses?
+
+**Answer:** Without parentheses, JavaScript interprets `{}` as a function body. Wrapping the object in `()` tells JavaScript to return an object literal.
+
+---
+
+### Q5. When should you avoid arrow functions?
+
+**Answer:** Avoid them for object methods, constructors, or any situation where you need the function's own `this`.
+
+---
+
+# 21. Answers
+
+### Q1
+
+```text
+Hello
+```
+
+---
+
+### Q2
+
+```text
+15
+```
+
+---
+
+### Q3
+
+```text
+36
+```
+
+---
+
+### Q4
+
+```text
+John
+```
+
+---
+
+### Q5
+
+```text
+undefined
+```
+
+---
+
+### Q6
+
+```text
+undefined
+```
+
+---
+
+# Quick Revision
+
+### Basic Arrow Function
+
+```js
+const greet = () => {};
+```
+
+### One Parameter
+
+```js
+const square = num => num * num;
+```
+
+### Multiple Parameters
+
+```js
+const add = (a, b) => a + b;
+```
+
+### Return Object
+
+```js
+const getUser = () => ({
+    name: "Devanshu"
+});
+```
+
+### `this` Rule
+
+* **Regular Function** → Has its own `this`.
+* **Arrow Function** → Inherits `this` from the surrounding scope.
+
+---
+**Next Topic:** **Parameters vs Arguments**, where you'll learn how data is passed into functions, pass-by-value vs reference, default values, common mistakes, and how JavaScript handles extra or missing arguments.

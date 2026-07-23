@@ -1,0 +1,882 @@
+# Phase 6 – Topic 5: Return Statement
+
+The **`return` statement** is one of the **most important concepts in JavaScript**. It allows a function to **send a value back** to the place where the function was called.
+
+Every JavaScript developer uses `return` daily in **React**, **Node.js**, **Express**, **MongoDB**, and **algorithms**.
+
+---
+
+# 1. What is `return`?
+
+The `return` keyword is used to **end a function and send a value back** to the caller.
+
+Syntax
+
+```js
+function functionName() {
+    return value;
+}
+```
+
+---
+
+# 2. Why Do We Need `return`?
+
+Without `return`
+
+```js
+function add(a, b) {
+    console.log(a + b);
+}
+
+const result = add(10, 20);
+
+console.log(result);
+```
+
+Output
+
+```text
+30
+undefined
+```
+
+Explanation
+
+```text
+add(10,20)
+
+↓
+
+Prints 30
+
+↓
+
+No return value
+
+↓
+
+result = undefined
+```
+
+---
+
+With `return`
+
+```js
+function add(a, b) {
+    return a + b;
+}
+
+const result = add(10, 20);
+
+console.log(result);
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+# 3. Internal Working
+
+```js
+function add(a, b) {
+    return a + b;
+}
+
+const answer = add(10, 20);
+```
+
+Execution Flow
+
+```text
+Call add()
+
+↓
+
+a = 10
+b = 20
+
+↓
+
+10 + 20
+
+↓
+
+return 30
+
+↓
+
+answer = 30
+```
+
+---
+
+# 4. `return` vs `console.log()`
+
+This is one of the most common interview questions.
+
+### `console.log()`
+
+```js
+function add(a, b) {
+    console.log(a + b);
+}
+
+const result = add(5, 5);
+
+console.log(result);
+```
+
+Output
+
+```text
+10
+undefined
+```
+
+`console.log()` only prints the value.
+
+It does **not** return it.
+
+---
+
+### `return`
+
+```js
+function add(a, b) {
+    return a + b;
+}
+
+const result = add(5, 5);
+
+console.log(result);
+```
+
+Output
+
+```text
+10
+```
+
+`return` sends the value back.
+
+---
+
+# 5. Returning Strings
+
+```js
+function greet(name) {
+    return "Hello " + name;
+}
+
+console.log(greet("Devanshu"));
+```
+
+Output
+
+```text
+Hello Devanshu
+```
+
+---
+
+# 6. Returning Boolean
+
+```js
+function isAdult(age) {
+    return age >= 18;
+}
+
+console.log(isAdult(21));
+console.log(isAdult(15));
+```
+
+Output
+
+```text
+true
+false
+```
+
+---
+
+# 7. Returning Objects
+
+```js
+function getUser() {
+
+    return {
+        name: "Devanshu",
+        age: 21
+    };
+
+}
+
+console.log(getUser());
+```
+
+Output
+
+```text
+{
+    name:"Devanshu",
+    age:21
+}
+```
+
+---
+
+# 8. Returning Arrays
+
+```js
+function getNumbers() {
+
+    return [10,20,30];
+
+}
+
+console.log(getNumbers());
+```
+
+Output
+
+```text
+[10,20,30]
+```
+
+---
+
+# 9. Returning Another Function
+
+Functions are first-class objects in JavaScript.
+
+```js
+function outer() {
+
+    return function () {
+
+        console.log("Hello");
+
+    };
+
+}
+
+const demo = outer();
+
+demo();
+```
+
+Output
+
+```text
+Hello
+```
+
+We'll use this concept later for **closures** and **higher-order functions**.
+
+---
+
+# 10. Early Return
+
+A function stops executing as soon as it encounters `return`.
+
+```js
+function checkAge(age) {
+
+    if (age < 18) {
+        return "Not Eligible";
+    }
+
+    return "Eligible";
+
+}
+
+console.log(checkAge(16));
+console.log(checkAge(20));
+```
+
+Output
+
+```text
+Not Eligible
+Eligible
+```
+
+Execution Flow
+
+```text
+Age = 16
+
+↓
+
+Condition true
+
+↓
+
+Return "Not Eligible"
+
+↓
+
+Function Ends
+
+↓
+
+Remaining code skipped
+```
+
+---
+
+# 11. Code After `return`
+
+```js
+function demo() {
+
+    return "Hello";
+
+    console.log("World");
+
+}
+
+console.log(demo());
+```
+
+Output
+
+```text
+Hello
+```
+
+`console.log("World")` never runs.
+
+---
+
+# 12. Returning Multiple Values
+
+JavaScript functions return **only one value**.
+
+Wrong idea
+
+```js
+function demo() {
+
+    return 10;
+
+    return 20;
+
+}
+```
+
+Output
+
+```text
+10
+```
+
+The second `return` is unreachable.
+
+---
+
+Correct approach
+
+Return an object.
+
+```js
+function student() {
+
+    return {
+
+        name: "Devanshu",
+
+        age: 21
+
+    };
+
+}
+
+console.log(student());
+```
+
+Or return an array.
+
+```js
+function values() {
+
+    return [10,20];
+
+}
+```
+
+---
+
+# 13. Returning Nothing
+
+```js
+function hello() {
+
+}
+```
+
+Output
+
+```js
+console.log(hello());
+```
+
+```text
+undefined
+```
+
+JavaScript automatically returns `undefined`.
+
+Equivalent to
+
+```js
+function hello() {
+
+    return undefined;
+
+}
+```
+
+---
+
+# 14. Nested Function Example
+
+```js
+function calculate(a, b) {
+
+    return a + b;
+
+}
+
+const total = calculate(50, 30);
+
+console.log(total * 2);
+```
+
+Output
+
+```text
+160
+```
+
+Because
+
+```text
+calculate(50,30)
+
+↓
+
+80
+
+↓
+
+80 * 2
+
+↓
+
+160
+```
+
+---
+
+# 15. Real React Example
+
+```jsx
+function Button() {
+
+    return <button>Click Me</button>;
+
+}
+```
+
+React components **return JSX**.
+
+---
+
+# 16. Real Express Example
+
+```js
+app.get("/", (req, res) => {
+
+    return res.send("Hello");
+
+});
+```
+
+Returning after `res.send()` prevents accidentally executing more code.
+
+---
+
+# 17. Common Mistakes
+
+## ❌ Using `console.log()` Instead of `return`
+
+```js
+function add(a, b) {
+
+    console.log(a + b);
+
+}
+
+const result = add(2,3);
+
+console.log(result);
+```
+
+Output
+
+```text
+5
+undefined
+```
+
+---
+
+## ✅ Correct
+
+```js
+function add(a, b) {
+
+    return a + b;
+
+}
+```
+
+---
+
+## ❌ Writing Code After `return`
+
+```js
+function demo() {
+
+    return 10;
+
+    console.log(20);
+
+}
+```
+
+The `console.log(20)` never executes.
+
+---
+
+## ❌ Forgetting `return`
+
+```js
+function square(num) {
+
+    num * num;
+
+}
+
+console.log(square(5));
+```
+
+Output
+
+```text
+undefined
+```
+
+Correct
+
+```js
+function square(num) {
+
+    return num * num;
+
+}
+```
+
+---
+
+# 18. Best Practices
+
+* ✅ Use `return` when the result is needed elsewhere.
+* ✅ Keep only one logical exit point unless early returns improve readability.
+* ✅ Return objects when multiple related values are needed.
+* ✅ Don't write unnecessary code after `return`.
+
+---
+
+# 19. Syntax Practice
+
+Write only the code.
+
+1. Return the sum of two numbers.
+2. Return `"Welcome"`.
+3. Return an object containing `name` and `age`.
+4. Return an array of five numbers.
+5. Return `true` if a number is even.
+6. Return another function.
+
+---
+
+# 20. Output Questions
+
+### Q1
+
+```js
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add(5, 10));
+```
+
+---
+
+### Q2
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+console.log(greet());
+```
+
+---
+
+### Q3
+
+```js
+function square(num) {
+    return num * num;
+}
+
+console.log(square(6));
+```
+
+---
+
+### Q4
+
+```js
+function demo() {
+    return "JavaScript";
+    console.log("Hello");
+}
+
+console.log(demo());
+```
+
+---
+
+### Q5
+
+```js
+function even(num) {
+    return num % 2 === 0;
+}
+
+console.log(even(8));
+```
+
+---
+
+### Q6
+
+```js
+function values() {
+    return [1, 2, 3];
+}
+
+console.log(values()[1]);
+```
+
+---
+
+# 21. Coding Practice
+
+1. Create a function that returns your name.
+2. Create a function that returns the square of a number.
+3. Return an object containing your college and CGPA.
+4. Return an array of your favorite programming languages.
+5. Create a calculator function that returns addition, subtraction, multiplication, and division results as an object.
+6. Create a function that returns another function and invoke it.
+
+---
+
+# 22. Interview Questions
+
+### Q1. What does the `return` keyword do?
+
+**Answer:** It ends the function execution and sends a value back to the caller.
+
+---
+
+### Q2. What is the difference between `return` and `console.log()`?
+
+| `return`                    | `console.log()`           |
+| --------------------------- | ------------------------- |
+| Sends a value back          | Prints a value            |
+| Ends the function           | Does not end the function |
+| Can be stored in a variable | Cannot be stored          |
+
+---
+
+### Q3. What happens if a function doesn't have a `return` statement?
+
+**Answer:** It automatically returns `undefined`.
+
+---
+
+### Q4. Can a function return another function?
+
+**Answer:** Yes.
+
+```js
+function outer() {
+    return function () {
+        console.log("Hello");
+    };
+}
+```
+
+---
+
+### Q5. Does JavaScript execute code after `return`?
+
+**Answer:** No. Once `return` is executed, the function immediately stops.
+
+---
+
+# 23. Answers
+
+### Q1
+
+```text
+15
+```
+
+---
+
+### Q2
+
+```text
+Hello
+undefined
+```
+
+---
+
+### Q3
+
+```text
+36
+```
+
+---
+
+### Q4
+
+```text
+JavaScript
+```
+
+---
+
+### Q5
+
+```text
+true
+```
+
+---
+
+### Q6
+
+```text
+2
+```
+
+---
+
+# Quick Revision
+
+### Return a Number
+
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+---
+
+### Return an Object
+
+```js
+function user() {
+    return {
+        name: "Devanshu"
+    };
+}
+```
+
+---
+
+### Return an Array
+
+```js
+function numbers() {
+    return [1, 2, 3];
+}
+```
+
+---
+
+### Early Return
+
+```js
+if (age < 18) {
+    return "Not Eligible";
+}
+```
+
+---
+
+### Function Flow
+
+```text
+Call Function
+
+↓
+
+Execute Code
+
+↓
+
+return
+
+↓
+
+Function Stops
+
+↓
+
+Value Sent Back
+```
+
+---
+
+# 📍 Phase 6 Progress
+
+## Next Topic
+
+**Topic 6 – Default Parameters**, where you'll learn:
+
+* Default parameter syntax
+* Handling missing arguments
+* Default values with expressions
+* Default object and array parameters
+* Interaction with `undefined` and `null`
+* Common mistakes
+* Real-world React and Node.js examples

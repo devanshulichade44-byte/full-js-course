@@ -1,0 +1,255 @@
+# Phase 3 – Topic 5: `break` (Short)
+
+## What is `break`?
+
+`break` immediately **stops the loop** and exits it.
+
+Execution continues with the code after the loop.
+
+---
+
+## Syntax
+
+### `for` Loop
+
+```js
+for (let i = 1; i <= 10; i++) {
+    if (i === 5) {
+        break;
+    }
+    console.log(i);
+}
+
+console.log("Loop Ended");
+```
+
+### Output
+
+```
+1
+2
+3
+4
+Loop Ended
+```
+
+---
+
+### `while` Loop
+
+```js
+let i = 1;
+
+while (i <= 10) {
+    if (i === 6) {
+        break;
+    }
+
+    console.log(i);
+    i++;
+}
+```
+
+Output
+
+```
+1
+2
+3
+4
+5
+```
+
+---
+
+## Real Example
+
+Stop searching once the item is found.
+
+```js
+const users = ["John", "Alice", "Bob"];
+
+for (let i = 0; i < users.length; i++) {
+    if (users[i] === "Alice") {
+        console.log("Found");
+        break;
+    }
+}
+```
+
+---
+
+## Summary
+
+* Stops the **entire loop** immediately.
+* Used when you've found what you're looking for.
+* Saves unnecessary iterations.
+
+---
+
+# Phase 3 – Topic 6: `continue` (Short)
+
+## What is `continue`?
+
+`continue` **skips the current iteration** and moves directly to the next iteration.
+
+The loop **does not stop**.
+
+---
+
+## Syntax
+
+### `for` Loop
+
+```js
+for (let i = 1; i <= 5; i++) {
+
+    if (i === 3) {
+        continue;
+    }
+
+    console.log(i);
+}
+```
+
+### Output
+
+```
+1
+2
+4
+5
+```
+
+---
+
+### `while` Loop
+
+```js
+let i = 0;
+
+while (i < 5) {
+    i++;
+
+    if (i === 3) {
+        continue;
+    }
+
+    console.log(i);
+}
+```
+
+Output
+
+```
+1
+2
+4
+5
+```
+
+> Notice that `i++` is done **before** `continue`; otherwise, the loop could become infinite.
+
+---
+
+## Real Example
+
+Skip inactive users.
+
+```js
+const users = [
+    { name: "John", active: true },
+    { name: "Alice", active: false },
+    { name: "Bob", active: true }
+];
+
+for (let i = 0; i < users.length; i++) {
+
+    if (!users[i].active) {
+        continue;
+    }
+
+    console.log(users[i].name);
+}
+```
+
+Output
+
+```
+John
+Bob
+```
+
+---
+
+## Summary
+
+* Skips only the **current iteration**.
+* The loop continues with the next iteration.
+* Useful for ignoring unwanted data.
+
+---
+
+# `break` vs `continue`
+
+| `break`                    | `continue`                                       |
+| -------------------------- | ------------------------------------------------ |
+| Stops the loop completely  | Skips only the current iteration                 |
+| Exits the loop             | Continues with the next iteration                |
+| Used when work is finished | Used when a specific iteration should be ignored |
+
+---
+
+## Example Together
+
+```js
+for (let i = 1; i <= 10; i++) {
+
+    if (i === 3) {
+        continue;
+    }
+
+    if (i === 7) {
+        break;
+    }
+
+    console.log(i);
+}
+```
+
+### Output
+
+```
+1
+2
+4
+5
+6
+```
+
+### Explanation
+
+* `i = 3` → `continue` skips printing `3`.
+* `i = 7` → `break` stops the loop completely.
+* `8`, `9`, and `10` are never reached.
+
+---
+
+# Quick Revision
+
+* `break` → **Exit the loop immediately.**
+* `continue` → **Skip this iteration and move to the next one.**
+
+Think of them like this:
+
+```
+break
+↓
+🚪 Leave the room completely.
+
+continue
+↓
+⏭️ Skip this task and do the next one.
+```
+
+---

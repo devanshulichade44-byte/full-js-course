@@ -1,0 +1,830 @@
+# Phase 3 – Topic 2: `for` Loop
+
+The **`for` loop** is the most commonly used loop in JavaScript. It is one of the first topics asked in coding interviews because it teaches the fundamentals of iteration.
+
+By the end of this lesson, you'll understand not only the syntax but also **how JavaScript executes a `for` loop internally**.
+
+---
+
+# 1. What is a `for` Loop?
+
+A `for` loop repeats a block of code **as long as a condition remains true**.
+
+It is best used when **you know how many times** the code should execute.
+
+Example:
+
+* Print numbers from **1 to 10**
+* Print your name **5 times**
+* Generate the multiplication table of **7**
+
+---
+
+# 2. Why Do We Need a `for` Loop?
+
+Without a loop:
+
+```js
+console.log(1);
+console.log(2);
+console.log(3);
+console.log(4);
+console.log(5);
+```
+
+With a loop:
+
+```js
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}
+```
+
+Output:
+
+```text
+1
+2
+3
+4
+5
+```
+
+Notice how **one loop replaces five repeated statements**.
+
+---
+
+# 3. Syntax
+
+```js
+for (initialization; condition; update) {
+    // code to execute
+}
+```
+
+There are **3 parts** inside the parentheses.
+
+```js
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}
+```
+
+Let's break it down.
+
+---
+
+## Part 1 – Initialization
+
+```js
+let i = 1;
+```
+
+Runs **only once**.
+
+It creates the loop variable.
+
+---
+
+## Part 2 – Condition
+
+```js
+i <= 5
+```
+
+Before every iteration, JavaScript checks this condition.
+
+* `true` → run the loop body.
+* `false` → stop the loop.
+
+---
+
+## Part 3 – Update
+
+```js
+i++
+```
+
+Runs **after** the loop body finishes.
+
+It prepares the value for the next iteration.
+
+---
+
+# 4. Internal Working (Step-by-Step)
+
+Consider:
+
+```js
+for (let i = 1; i <= 3; i++) {
+    console.log(i);
+}
+```
+
+JavaScript executes it like this:
+
+### Step 1
+
+```js
+let i = 1;
+```
+
+---
+
+### Step 2
+
+```js
+1 <= 3
+```
+
+✅ True
+
+Run:
+
+```js
+console.log(1);
+```
+
+Output:
+
+```text
+1
+```
+
+---
+
+### Step 3
+
+```js
+i++
+```
+
+Now:
+
+```js
+i = 2;
+```
+
+---
+
+### Step 4
+
+Check again:
+
+```js
+2 <= 3
+```
+
+✅ True
+
+Print:
+
+```text
+2
+```
+
+---
+
+### Step 5
+
+```js
+i++
+```
+
+Now:
+
+```text
+3
+```
+
+---
+
+### Step 6
+
+Check:
+
+```js
+3 <= 3
+```
+
+✅ True
+
+Print:
+
+```text
+3
+```
+
+---
+
+### Step 7
+
+```js
+i++
+```
+
+Now:
+
+```text
+4
+```
+
+---
+
+### Step 8
+
+Check:
+
+```js
+4 <= 3
+```
+
+❌ False
+
+Loop stops.
+
+---
+
+## Execution Flow
+
+```text
+Initialization
+
+↓
+
+Condition
+
+↓
+
+True?
+
+↓
+
+Execute Body
+
+↓
+
+Update
+
+↓
+
+Condition
+
+↓
+
+False?
+
+↓
+
+Exit
+```
+
+Memorize this flow—it appears frequently in interviews.
+
+---
+
+# 5. Examples
+
+## Example 1 – Print 1 to 5
+
+```js
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}
+```
+
+Output:
+
+```text
+1
+2
+3
+4
+5
+```
+
+---
+
+## Example 2 – Print 10 to 1
+
+```js
+for (let i = 10; i >= 1; i--) {
+    console.log(i);
+}
+```
+
+Output:
+
+```text
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+---
+
+## Example 3 – Even Numbers
+
+```js
+for (let i = 2; i <= 10; i += 2) {
+    console.log(i);
+}
+```
+
+Output:
+
+```text
+2
+4
+6
+8
+10
+```
+
+---
+
+## Example 4 – Odd Numbers
+
+```js
+for (let i = 1; i <= 10; i += 2) {
+    console.log(i);
+}
+```
+
+Output:
+
+```text
+1
+3
+5
+7
+9
+```
+
+---
+
+## Example 5 – Multiplication Table of 7
+
+```js
+for (let i = 1; i <= 10; i++) {
+    console.log(`7 x ${i} = ${7 * i}`);
+}
+```
+
+Output:
+
+```text
+7 x 1 = 7
+...
+7 x 10 = 70
+```
+
+---
+
+## Example 6 – Sum of Numbers
+
+```js
+let sum = 0;
+
+for (let i = 1; i <= 5; i++) {
+    sum += i;
+}
+
+console.log(sum);
+```
+
+Output:
+
+```text
+15
+```
+
+---
+
+# 6. Common Mistakes
+
+## Mistake 1 – Infinite Loop
+
+❌
+
+```js
+for (let i = 1; i <= 5;) {
+    console.log(i);
+}
+```
+
+`i` never changes.
+
+The condition always stays true.
+
+---
+
+## Mistake 2 – Wrong Condition
+
+```js
+for (let i = 1; i >= 5; i++) {
+    console.log(i);
+}
+```
+
+Output:
+
+Nothing.
+
+Because:
+
+```text
+1 >= 5
+
+False
+```
+
+The loop never starts.
+
+---
+
+## Mistake 3 – Semicolon After `for`
+
+❌
+
+```js
+for (let i = 1; i <= 5; i++);
+{
+    console.log(i);
+}
+```
+
+The semicolon ends the loop immediately.
+
+---
+
+# 7. Best Practices
+
+✅ Use meaningful variable names.
+
+```js
+for (let index = 0; index < 10; index++) {
+}
+```
+
+✅ Keep loop bodies short and readable.
+
+✅ Avoid modifying the loop variable unexpectedly inside the loop.
+
+---
+
+# 8. Syntax Practice
+
+Write the code only.
+
+### Q1
+
+Print numbers from **1 to 10**.
+
+---
+
+### Q2
+
+Print numbers from **20 to 1**.
+
+---
+
+### Q3
+
+Print even numbers from **2 to 20**.
+
+---
+
+### Q4
+
+Print odd numbers from **1 to 15**.
+
+---
+
+### Q5
+
+Write a loop that prints your name **5 times**.
+
+---
+
+### Q6
+
+Print numbers from **100 to 90**.
+
+---
+
+# 9. Output Questions
+
+### Q1
+
+```js
+for (let i = 1; i <= 3; i++) {
+    console.log(i);
+}
+```
+
+---
+
+### Q2
+
+```js
+for (let i = 5; i >= 3; i--) {
+    console.log(i);
+}
+```
+
+---
+
+### Q3
+
+```js
+for (let i = 2; i <= 6; i += 2) {
+    console.log(i);
+}
+```
+
+---
+
+### Q4
+
+```js
+for (let i = 1; i < 5; i++) {
+    console.log(i);
+}
+```
+
+---
+
+### Q5
+
+```js
+for (let i = 10; i > 5; i--) {
+    console.log(i);
+}
+```
+
+---
+
+### Q6
+
+```js
+let sum = 0;
+
+for (let i = 1; i <= 3; i++) {
+    sum += i;
+}
+
+console.log(sum);
+```
+
+---
+
+# 10. Coding Practice
+
+## Easy
+
+1. Print numbers **1–50**.
+2. Print numbers **50–1**.
+3. Print the multiplication table of **9**.
+
+---
+
+## Medium
+
+4. Print all even numbers from **1–100**.
+5. Find the sum of numbers from **1–100**.
+
+---
+
+## Interview Level
+
+6. Find the factorial of **5**.
+
+Example:
+
+```text
+5! = 5 × 4 × 3 × 2 × 1 = 120
+```
+
+---
+
+# 11. Debugging Question
+
+Find the mistake.
+
+```js
+for (let i = 1; i <= 5;) {
+    console.log(i);
+}
+```
+
+**Question:**
+
+Why doesn't this stop?
+
+---
+
+# 12. Real MERN Example
+
+Suppose an API returns:
+
+```js
+const users = [
+    { name: "John" },
+    { name: "Alice" },
+    { name: "Bob" }
+];
+```
+
+Using a `for` loop, print every user's name.
+
+*(Try writing this yourself before learning array-specific loops.)*
+
+---
+
+# 13. Interview Questions
+
+### Q1
+
+When should you use a `for` loop?
+
+**Answer:**
+
+When you know the number of iterations in advance.
+
+---
+
+### Q2
+
+What are the three parts of a `for` loop?
+
+**Answer:**
+
+1. Initialization
+2. Condition
+3. Update
+
+---
+
+### Q3
+
+Which part executes only once?
+
+**Answer:**
+
+Initialization.
+
+---
+
+### Q4
+
+Which part decides whether the loop continues?
+
+**Answer:**
+
+Condition.
+
+---
+
+### Q5
+
+What causes an infinite loop?
+
+**Answer:**
+
+When the condition never becomes `false`, usually because the update step is missing or incorrect.
+
+---
+
+# 14. Answers
+
+## Output Questions
+
+### Q1
+
+```text
+1
+2
+3
+```
+
+---
+
+### Q2
+
+```text
+5
+4
+3
+```
+
+---
+
+### Q3
+
+```text
+2
+4
+6
+```
+
+---
+
+### Q4
+
+```text
+1
+2
+3
+4
+```
+
+---
+
+### Q5
+
+```text
+10
+9
+8
+7
+6
+```
+
+---
+
+### Q6
+
+```text
+6
+```
+
+---
+
+## Debugging Answer
+
+```js
+for (let i = 1; i <= 5;) {
+    console.log(i);
+}
+```
+
+The update expression is missing.
+
+Correct:
+
+```js
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}
+```
+
+---
+
+# Quick Revision
+
+## `for` Loop Structure
+
+```js
+for (initialization; condition; update) {
+    // code
+}
+```
+
+Execution order:
+
+```text
+Initialization
+      ↓
+Condition
+      ↓
+Execute Body
+      ↓
+Update
+      ↓
+Repeat
+```
+
+---
+
+
+
+# ⭐ Extra Practice (Recommended)
+
+Without looking at your notes, write `for` loops to:
+
+1. Print numbers from **1 to 100**.
+2. Print numbers from **100 to 1**.
+3. Print multiples of **5** from **1 to 100**.
+4. Print the multiplication table of **12**.
+5. Calculate the sum of **1 to 50**.
+6. Calculate the factorial of **6**.
+
+If you can solve all six correctly, you'll have a solid grasp of the `for` loop before moving on to `while` loops.

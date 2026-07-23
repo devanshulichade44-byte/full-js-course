@@ -1,0 +1,803 @@
+# Phase 2 – Topic 8: Optional Chaining (`?.`)
+
+Optional Chaining (`?.`) is one of the most useful features in modern JavaScript. It's used heavily in **React**, **Node.js**, **Express**, and when working with **API responses**.
+
+---
+
+# 1. What is Optional Chaining?
+
+Optional chaining lets you safely access properties or methods on an object **without causing an error if a value is `null` or `undefined`.**
+
+Instead of crashing your program, it returns `undefined`.
+
+---
+
+# 2. Why Do We Need It?
+
+Suppose an API returns this:
+
+```js
+let user = {
+    name: "Devanshu"
+};
+```
+
+Now you try:
+
+```js
+console.log(user.address.city);
+```
+
+Output:
+
+```text
+TypeError: Cannot read properties of undefined
+```
+
+Why?
+
+* `user.address` doesn't exist.
+* JavaScript tries to access `.city` on `undefined`.
+
+---
+
+## Solution
+
+```js
+console.log(user.address?.city);
+```
+
+Output:
+
+```text
+undefined
+```
+
+No error.
+
+---
+
+# 3. Syntax
+
+### Access Property
+
+```js
+object?.property
+```
+
+### Access Array Element
+
+```js
+array?.[index]
+```
+
+### Call Function
+
+```js
+object.method?.()
+```
+
+---
+
+# 4. Examples
+
+## Example 1
+
+```js
+let user = {
+    name: "Devanshu"
+};
+
+console.log(user.name?.toUpperCase());
+```
+
+Output
+
+```text
+DEVANSHU
+```
+
+---
+
+## Example 2
+
+```js
+let user = {
+    name: "Devanshu"
+};
+
+console.log(user.address?.city);
+```
+
+Output
+
+```text
+undefined
+```
+
+---
+
+## Example 3
+
+```js
+let user = null;
+
+console.log(user?.name);
+```
+
+Output
+
+```text
+undefined
+```
+
+---
+
+## Example 4 – Arrays
+
+```js
+let numbers = [10, 20, 30];
+
+console.log(numbers?.[1]);
+```
+
+Output
+
+```text
+20
+```
+
+---
+
+## Example 5 – Function Call
+
+```js
+let person = {
+    greet() {
+        console.log("Hello");
+    }
+};
+
+person.greet?.();
+```
+
+Output
+
+```text
+Hello
+```
+
+If `greet` doesn't exist:
+
+```js
+person.sayBye?.();
+```
+
+No error.
+
+---
+
+# 5. Real Project Example
+
+```js
+const response = {
+    user: {
+        profile: {
+            city: "Nagpur"
+        }
+    }
+};
+
+console.log(response.user?.profile?.city);
+```
+
+Output
+
+```text
+Nagpur
+```
+
+If `profile` is missing:
+
+```text
+undefined
+```
+
+---
+
+# 6. Common Mistakes
+
+❌ Wrong
+
+```js
+user?.address.city
+```
+
+If `address` is `undefined`, `.city` still causes an error.
+
+✅ Correct
+
+```js
+user?.address?.city
+```
+
+Use `?.` at every level that might be missing.
+
+---
+
+# 7. Best Practices
+
+* Use `?.` when data may be incomplete (API responses, forms).
+* Don't overuse it when you're sure a property always exists.
+
+---
+
+# 8. Syntax Practice
+
+Write the code.
+
+1. Access `user.name` safely.
+2. Access `user.profile.city` safely.
+3. Access the first array element safely.
+4. Call a method `login()` safely.
+5. Access `company.address.zipCode` safely.
+6. Access `student.course.name` safely.
+
+---
+
+# 9. Output Questions
+
+### Q1
+
+```js
+let user = null;
+
+console.log(user?.name);
+```
+
+---
+
+### Q2
+
+```js
+let obj = {
+    name: "JS"
+};
+
+console.log(obj?.name);
+```
+
+---
+
+### Q3
+
+```js
+let arr = [5, 10];
+
+console.log(arr?.[0]);
+```
+
+---
+
+### Q4
+
+```js
+let user = {};
+
+console.log(user.profile?.city);
+```
+
+---
+
+### Q5
+
+```js
+let person = {};
+
+person.sayHello?.();
+console.log("Done");
+```
+
+---
+
+# 10. Coding Practice
+
+1. Print a user's city safely.
+2. Read API data safely.
+3. Safely call a function if it exists.
+4. Read a nested object.
+5. Read nested arrays.
+
+---
+
+# 11. Interview Questions
+
+### Q1
+
+Why do we use Optional Chaining?
+
+**Answer:**
+
+To avoid runtime errors when accessing properties on `null` or `undefined`.
+
+---
+
+### Q2
+
+Does `?.` return `false`?
+
+No.
+
+It returns:
+
+```text
+undefined
+```
+
+---
+
+### Q3
+
+Can we call functions using `?.`?
+
+Yes.
+
+```js
+obj.method?.();
+```
+
+---
+
+# 12. Answers to Output Questions
+
+### Q1
+
+```text
+undefined
+```
+
+---
+
+### Q2
+
+```text
+JS
+```
+
+---
+
+### Q3
+
+```text
+5
+```
+
+---
+
+### Q4
+
+```text
+undefined
+```
+
+---
+
+### Q5
+
+```text
+Done
+```
+
+---
+
+---
+
+# Phase 2 – Topic 9: Ternary Operator (`? :`)
+
+The Ternary Operator is JavaScript's **short form of `if...else`**.
+
+---
+
+# 1. What is a Ternary Operator?
+
+Instead of writing:
+
+```js
+if (age >= 18) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+```
+
+You can write:
+
+```js
+console.log(age >= 18 ? "Adult" : "Minor");
+```
+
+---
+
+# 2. Syntax
+
+```js
+condition ? valueIfTrue : valueIfFalse;
+```
+
+---
+
+# 3. How It Works
+
+```text
+Condition
+
+│
+
+├── True → Left Side
+
+└── False → Right Side
+```
+
+---
+
+# 4. Examples
+
+## Example 1
+
+```js
+let age = 20;
+
+console.log(age >= 18 ? "Adult" : "Minor");
+```
+
+Output
+
+```text
+Adult
+```
+
+---
+
+## Example 2
+
+```js
+let number = 15;
+
+let result = number % 2 === 0 ? "Even" : "Odd";
+
+console.log(result);
+```
+
+Output
+
+```text
+Odd
+```
+
+---
+
+## Example 3
+
+```js
+let loggedIn = false;
+
+console.log(loggedIn ? "Welcome" : "Please Login");
+```
+
+Output
+
+```text
+Please Login
+```
+
+---
+
+## Example 4
+
+```js
+let marks = 90;
+
+let grade = marks >= 40 ? "Pass" : "Fail";
+
+console.log(grade);
+```
+
+Output
+
+```text
+Pass
+```
+
+---
+
+# 5. Nested Ternary
+
+Possible:
+
+```js
+let marks = 85;
+
+let result =
+    marks >= 90
+        ? "A"
+        : marks >= 75
+        ? "B"
+        : marks >= 40
+        ? "Pass"
+        : "Fail";
+
+console.log(result);
+```
+
+Output
+
+```text
+B
+```
+
+⚠️ Avoid deeply nested ternaries—they reduce readability.
+
+---
+
+# 6. Ternary vs `if...else`
+
+### `if...else`
+
+```js
+if (isAdmin) {
+    console.log("Admin");
+} else {
+    console.log("User");
+}
+```
+
+### Ternary
+
+```js
+console.log(isAdmin ? "Admin" : "User");
+```
+
+Use the ternary operator for **simple decisions**.
+
+---
+
+# 7. Common Mistakes
+
+### Mistake 1
+
+Using it for complex logic.
+
+❌
+
+```js
+condition1
+    ? condition2
+        ? condition3
+            ? "A"
+            : "B"
+        : "C"
+    : "D";
+```
+
+Use `if...else` instead.
+
+---
+
+### Mistake 2
+
+Forgetting the `:` part.
+
+Wrong:
+
+```js
+age >= 18 ? "Adult";
+```
+
+Correct:
+
+```js
+age >= 18 ? "Adult" : "Minor";
+```
+
+---
+
+# 8. Best Practices
+
+* Use ternary for short conditions.
+* Use `if...else` for multiple branches or complex logic.
+
+---
+
+# 9. Syntax Practice
+
+Write the code.
+
+1. Print `"Adult"` or `"Minor"` based on `age`.
+2. Print `"Even"` or `"Odd"`.
+3. Print `"Pass"` or `"Fail"`.
+4. Store `"Online"` or `"Offline"` in a variable.
+5. Print `"Admin"` or `"User"`.
+6. Assign `"Available"` or `"Out of Stock"` to a variable.
+
+---
+
+# 10. Output Questions
+
+### Q1
+
+```js
+let age = 16;
+
+console.log(age >= 18 ? "Adult" : "Minor");
+```
+
+---
+
+### Q2
+
+```js
+let num = 10;
+
+console.log(num % 2 === 0 ? "Even" : "Odd");
+```
+
+---
+
+### Q3
+
+```js
+let login = true;
+
+console.log(login ? "Welcome" : "Login");
+```
+
+---
+
+### Q4
+
+```js
+let score = 30;
+
+let result = score >= 40 ? "Pass" : "Fail";
+
+console.log(result);
+```
+
+---
+
+### Q5
+
+```js
+let value = false;
+
+console.log(value ? "Yes" : "No");
+```
+
+---
+
+# 11. Coding Practice
+
+1. Even/Odd checker.
+2. Pass/Fail checker.
+3. Login message.
+4. Age checker.
+5. Product stock status.
+6. Light theme/Dark theme selector.
+
+---
+
+# 12. Interview Questions
+
+### Q1
+
+What is the ternary operator?
+
+A shorthand version of `if...else`.
+
+---
+
+### Q2
+
+Can it replace every `if...else`?
+
+No.
+
+Use it only for simple conditions.
+
+---
+
+### Q3
+
+How many operands does it have?
+
+Three:
+
+```text
+condition
+?
+trueValue
+:
+falseValue
+```
+
+---
+
+# 13. Answers to Output Questions
+
+### Q1
+
+```text
+Minor
+```
+
+---
+
+### Q2
+
+```text
+Even
+```
+
+---
+
+### Q3
+
+```text
+Welcome
+```
+
+---
+
+### Q4
+
+```text
+Fail
+```
+
+---
+
+### Q5
+
+```text
+No
+```
+
+---
+
+# Quick Revision
+
+## Optional Chaining (`?.`)
+
+* Safe property access.
+* Prevents runtime errors.
+* Returns `undefined` if the value is `null` or `undefined`.
+
+```js
+user?.address?.city
+```
+
+---
+
+## Ternary (`? :`)
+
+```js
+condition ? trueValue : falseValue;
+```
+
+Best for simple two-way decisions.
+
+---
+---
+
+# 🎯 Phase 2 Final Assignment
+
+Build these six programs **without looking at your notes**:
+
+1. Student Grade System (`if...else if`)
+2. ATM Menu (`switch`)
+3. Login Validation (Truthy/Falsy)
+4. User Profile Viewer (`?.` + `??`)
+5. Theme Selector (Ternary)
+6. Shopping Cart Validation (Truthy/Falsy + Ternary)
+
+These projects combine nearly every concept from Phase 2 and are excellent preparation before moving to **Phase 3 (Loops)**.

@@ -1,0 +1,705 @@
+# Phase 2 – Topic 5: `switch` Statement
+
+The `switch` statement is an alternative to long `if...else if` chains when you're comparing **one value against multiple possible values**.
+
+---
+
+# 1. What is a `switch` Statement?
+
+A `switch` evaluates an expression once and compares it with different `case` values.
+
+When a matching `case` is found, its code executes.
+
+---
+
+# 2. Why Do We Need It?
+
+Instead of writing:
+
+```js
+let day = 3;
+
+if (day === 1) {
+    console.log("Monday");
+} else if (day === 2) {
+    console.log("Tuesday");
+} else if (day === 3) {
+    console.log("Wednesday");
+} else {
+    console.log("Invalid");
+}
+```
+
+You can write:
+
+```js
+let day = 3;
+
+switch (day) {
+    case 1:
+        console.log("Monday");
+        break;
+
+    case 2:
+        console.log("Tuesday");
+        break;
+
+    case 3:
+        console.log("Wednesday");
+        break;
+
+    default:
+        console.log("Invalid");
+}
+```
+
+Cleaner and easier to maintain.
+
+---
+
+# 3. Syntax
+
+```js
+switch (expression) {
+
+    case value1:
+        // code
+        break;
+
+    case value2:
+        // code
+        break;
+
+    default:
+        // default code
+}
+```
+
+---
+
+# 4. How `switch` Works
+
+Suppose:
+
+```js
+let day = 2;
+```
+
+JavaScript checks:
+
+```text
+day == 1 ❌
+
+day == 2 ✅
+
+Execute case 2
+
+break
+
+Exit switch
+```
+
+**Important:** `switch` uses **strict equality (`===`)** internally.
+
+---
+
+# 5. Example 1 – Week Days
+
+```js
+let day = 4;
+
+switch (day) {
+    case 1:
+        console.log("Monday");
+        break;
+
+    case 2:
+        console.log("Tuesday");
+        break;
+
+    case 3:
+        console.log("Wednesday");
+        break;
+
+    case 4:
+        console.log("Thursday");
+        break;
+
+    default:
+        console.log("Invalid Day");
+}
+```
+
+Output
+
+```
+Thursday
+```
+
+---
+
+# 6. Example 2 – User Role
+
+```js
+let role = "admin";
+
+switch (role) {
+
+    case "admin":
+        console.log("Admin Dashboard");
+        break;
+
+    case "user":
+        console.log("User Dashboard");
+        break;
+
+    default:
+        console.log("Guest");
+}
+```
+
+Output
+
+```
+Admin Dashboard
+```
+
+---
+
+# 7. Example 3 – Calculator
+
+```js
+let num1 = 20;
+let num2 = 10;
+let operation = "+";
+
+switch (operation) {
+
+    case "+":
+        console.log(num1 + num2);
+        break;
+
+    case "-":
+        console.log(num1 - num2);
+        break;
+
+    case "*":
+        console.log(num1 * num2);
+        break;
+
+    case "/":
+        console.log(num1 / num2);
+        break;
+
+    default:
+        console.log("Invalid Operator");
+}
+```
+
+Output
+
+```
+30
+```
+
+---
+
+# 8. Example 4 – Month
+
+```js
+let month = 7;
+
+switch (month) {
+
+    case 1:
+        console.log("January");
+        break;
+
+    case 7:
+        console.log("July");
+        break;
+
+    case 12:
+        console.log("December");
+        break;
+
+    default:
+        console.log("Unknown Month");
+}
+```
+
+Output
+
+```
+July
+```
+
+---
+
+# 9. The `break` Keyword
+
+`break` stops the execution of the `switch`.
+
+Without it, JavaScript continues executing the next cases.
+
+---
+
+## Example
+
+```js
+let day = 2;
+
+switch (day) {
+
+    case 1:
+        console.log("Monday");
+
+    case 2:
+        console.log("Tuesday");
+
+    case 3:
+        console.log("Wednesday");
+
+    default:
+        console.log("Done");
+}
+```
+
+Output
+
+```
+Tuesday
+Wednesday
+Done
+```
+
+This is called **fall-through**.
+
+---
+
+Correct version
+
+```js
+switch (day) {
+
+    case 1:
+        console.log("Monday");
+        break;
+
+    case 2:
+        console.log("Tuesday");
+        break;
+
+    case 3:
+        console.log("Wednesday");
+        break;
+
+    default:
+        console.log("Done");
+}
+```
+
+Output
+
+```
+Tuesday
+```
+
+---
+
+# 10. The `default` Case
+
+Runs when **no case matches**.
+
+```js
+let color = "pink";
+
+switch (color) {
+
+    case "red":
+        console.log("Red");
+        break;
+
+    case "blue":
+        console.log("Blue");
+        break;
+
+    default:
+        console.log("Color Not Found");
+}
+```
+
+Output
+
+```
+Color Not Found
+```
+
+---
+
+# 11. Multiple Cases Together
+
+```js
+let day = 6;
+
+switch (day) {
+
+    case 6:
+    case 7:
+        console.log("Weekend");
+        break;
+
+    default:
+        console.log("Weekday");
+}
+```
+
+Output
+
+```
+Weekend
+```
+
+---
+
+# 12. Common Mistakes
+
+## Mistake 1
+
+Forgetting `break`
+
+```js
+case 1:
+    console.log("One");
+```
+
+Always write
+
+```js
+case 1:
+    console.log("One");
+    break;
+```
+
+---
+
+## Mistake 2
+
+Using conditions inside `case`
+
+❌ Wrong
+
+```js
+switch (marks) {
+
+    case marks >= 40:
+}
+```
+
+`case` compares values, **not conditions**.
+
+Use `if...else` for ranges.
+
+---
+
+## Mistake 3
+
+Forgetting `default`
+
+Always include a `default` case unless there's a clear reason not to.
+
+---
+
+# 13. Best Practices
+
+✅ Use `switch` when checking one variable against many fixed values.
+
+✅ Use `if...else` for ranges.
+
+Example:
+
+```js
+marks >= 90
+```
+
+Use `if`, not `switch`.
+
+---
+
+# 14. Syntax Practice (Write the Code)
+
+Write the syntax only.
+
+### Q1
+
+Create a `switch` statement that prints `"Monday"` when `day = 1`.
+
+---
+
+### Q2
+
+Create a `switch` for roles:
+
+* `"admin"`
+* `"user"`
+* `"guest"`
+
+---
+
+### Q3
+
+Write a calculator using `+` and `-`.
+
+---
+
+### Q4
+
+Create a `switch` that prints:
+
+* `"Apple"`
+* `"Banana"`
+* `"Orange"`
+
+---
+
+### Q5
+
+Write a `switch` that checks month numbers.
+
+---
+
+### Q6
+
+Create a `switch` with a `default` case that prints `"Invalid Input"`.
+
+---
+
+# 15. Output Questions
+
+### Q1
+
+```js
+let day = 1;
+
+switch (day) {
+    case 1:
+        console.log("Mon");
+        break;
+
+    case 2:
+        console.log("Tue");
+        break;
+}
+```
+
+---
+
+### Q2
+
+```js
+let role = "user";
+
+switch (role) {
+    case "admin":
+        console.log("Admin");
+        break;
+
+    case "user":
+        console.log("User");
+        break;
+
+    default:
+        console.log("Guest");
+}
+```
+
+---
+
+### Q3
+
+```js
+let num = 5;
+
+switch (num) {
+    case 5:
+        console.log("Five");
+
+    case 6:
+        console.log("Six");
+
+    default:
+        console.log("Done");
+}
+```
+
+---
+
+### Q4
+
+```js
+let fruit = "Mango";
+
+switch (fruit) {
+    case "Apple":
+        console.log("A");
+        break;
+
+    default:
+        console.log("Unknown");
+}
+```
+
+---
+
+### Q5
+
+```js
+let day = 7;
+
+switch (day) {
+    case 6:
+    case 7:
+        console.log("Weekend");
+        break;
+
+    default:
+        console.log("Weekday");
+}
+```
+
+---
+
+### Q6
+
+```js
+let value = 10;
+
+switch (value) {
+    default:
+        console.log("Default");
+
+    case 10:
+        console.log("Ten");
+}
+```
+
+---
+
+# 16. Coding Practice
+
+### Easy
+
+1. Print the month name using a month number.
+2. Print the day name using a day number.
+3. Build a calculator using `+`, `-`, `*`, `/`.
+
+### Medium
+
+4. Create a traffic light system (`red`, `yellow`, `green`).
+5. Build a menu-driven ATM.
+6. Print whether today is a weekday or weekend.
+
+---
+
+# 17. Interview Questions
+
+### Q1. When should you use `switch` instead of `if...else`?
+
+**Answer:** When comparing a single variable against many fixed values.
+
+---
+
+### Q2. Why is `break` important?
+
+**Answer:** It prevents fall-through by stopping execution after a matching case.
+
+---
+
+### Q3. Can `switch` replace every `if...else`?
+
+**Answer:** No. `switch` is best for exact values, while `if...else` is better for conditions and ranges.
+
+---
+
+# 18. Answers to Output Questions
+
+### Q1
+
+```
+Mon
+```
+
+---
+
+### Q2
+
+```
+User
+```
+
+---
+
+### Q3
+
+```
+Five
+Six
+Done
+```
+
+(No `break`, so execution falls through.)
+
+---
+
+### Q4
+
+```
+Unknown
+```
+
+---
+
+### Q5
+
+```
+Weekend
+```
+
+---
+
+### Q6
+
+```
+Ten
+```
+
+**Explanation:** Even though `default` appears first, JavaScript jumps directly to the matching `case 10`. The position of `default` does **not** matter.
+
+---
+
+# Quick Revision
+
+| Keyword      | Purpose                           |
+| ------------ | --------------------------------- |
+| `switch`     | Compare one value with many cases |
+| `case`       | A possible matching value         |
+| `break`      | Exit the switch                   |
+| `default`    | Run if nothing matches            |
+| Fall-through | Happens when `break` is missing   |
+
+---
+
+### ⭐ Assignment (Recommended)
+
+Build these 3 programs without looking at the notes:
+
+1. **Simple Calculator** using `switch`
+2. **Day Finder** (1–7 → Monday–Sunday)
+3. **ATM Menu**
+
+   * 1 → Check Balance
+   * 2 → Deposit
+   * 3 → Withdraw
+   * 4 → Exit
+
+These are excellent beginner exercises and are frequently used in JavaScript practice and interviews.

@@ -1,0 +1,789 @@
+# Phase 2 – Topic 6: Truthy & Falsy Values
+
+This is one of the **most important JavaScript topics**. Almost every JavaScript interview asks questions related to Truthy/Falsy values because they explain why many `if` conditions behave the way they do.
+
+---
+
+# 1. What are Truthy and Falsy Values?
+
+In JavaScript, an `if` statement **doesn't require a boolean (`true` or `false`)**.
+
+It accepts **any value**.
+
+JavaScript automatically converts that value into either:
+
+* `true` (Truthy)
+* `false` (Falsy)
+
+Example:
+
+```js
+if ("Hello") {
+    console.log("Runs");
+}
+```
+
+Output
+
+```text
+Runs
+```
+
+Why?
+
+Because `"Hello"` is a **truthy** value.
+
+---
+
+# 2. Behind the Scenes
+
+When JavaScript sees:
+
+```js
+if (value) {
+    // code
+}
+```
+
+It internally does something similar to:
+
+```js
+if (Boolean(value) === true) {
+    // code
+}
+```
+
+Every value is converted into a boolean before making a decision.
+
+---
+
+# 3. The 8 Falsy Values
+
+There are **only 8 falsy values** in JavaScript.
+
+| Value       | Type                     |
+| ----------- | ------------------------ |
+| `false`     | Boolean                  |
+| `0`         | Number                   |
+| `-0`        | Number                   |
+| `0n`        | BigInt                   |
+| `""`        | Empty String             |
+| `null`      | Object (legacy behavior) |
+| `undefined` | Undefined                |
+| `NaN`       | Number                   |
+
+**Everything else is truthy.**
+
+---
+
+# 4. Examples of Falsy Values
+
+## `false`
+
+```js
+if (false) {
+    console.log("Hello");
+}
+
+console.log("End");
+```
+
+Output
+
+```text
+End
+```
+
+---
+
+## `0`
+
+```js
+if (0) {
+    console.log("Hello");
+}
+
+console.log("Skipped");
+```
+
+Output
+
+```text
+Skipped
+```
+
+---
+
+## Empty String
+
+```js
+if ("") {
+    console.log("Hello");
+}
+
+console.log("Empty");
+```
+
+Output
+
+```text
+Empty
+```
+
+---
+
+## `null`
+
+```js
+if (null) {
+    console.log("Hello");
+}
+
+console.log("Done");
+```
+
+Output
+
+```text
+Done
+```
+
+---
+
+## `undefined`
+
+```js
+let user;
+
+if (user) {
+    console.log("Logged In");
+}
+
+console.log("Finished");
+```
+
+Output
+
+```text
+Finished
+```
+
+---
+
+## `NaN`
+
+```js
+if (NaN) {
+    console.log("Hello");
+}
+
+console.log("Done");
+```
+
+Output
+
+```text
+Done
+```
+
+---
+
+# 5. Truthy Values
+
+Everything **except the 8 falsy values** is truthy.
+
+Examples:
+
+```js
+true
+1
+-1
+100
+"JavaScript"
+"0"
+"false"
+[]
+{}
+function(){}
+Infinity
+-100
+```
+
+---
+
+## Example 1
+
+```js
+if ("JavaScript") {
+    console.log("Learning JS");
+}
+```
+
+Output
+
+```text
+Learning JS
+```
+
+---
+
+## Example 2
+
+```js
+if (100) {
+    console.log("Hundred");
+}
+```
+
+Output
+
+```text
+Hundred
+```
+
+---
+
+## Example 3
+
+```js
+if ([]) {
+    console.log("Array");
+}
+```
+
+Output
+
+```text
+Array
+```
+
+**Important:**
+
+An empty array is **truthy**.
+
+---
+
+## Example 4
+
+```js
+if ({}) {
+    console.log("Object");
+}
+```
+
+Output
+
+```text
+Object
+```
+
+An empty object is **also truthy**.
+
+---
+
+# 6. Empty Array vs Empty Object
+
+Many beginners think these are falsy.
+
+❌ Wrong
+
+```js
+if ([]) {
+    console.log("Falsy");
+}
+```
+
+Output
+
+```text
+Falsy
+```
+
+The condition executes because `[]` is truthy.
+
+---
+
+The same for objects:
+
+```js
+if ({}) {
+    console.log("Truthy");
+}
+```
+
+Output
+
+```text
+Truthy
+```
+
+---
+
+# 7. Checking for Empty Arrays
+
+Don't do this:
+
+```js
+if (arr) {
+    console.log("Array has elements");
+}
+```
+
+Because even an empty array is truthy.
+
+Correct:
+
+```js
+let arr = [];
+
+if (arr.length === 0) {
+    console.log("Array is Empty");
+}
+```
+
+---
+
+# 8. Checking for Empty Objects
+
+```js
+const user = {};
+
+if (Object.keys(user).length === 0) {
+    console.log("Object is Empty");
+}
+```
+
+`Object.keys(user)` returns an array of property names.
+
+If there are no properties, the length is `0`.
+
+---
+
+# 9. Real Project Examples
+
+## Login
+
+```js
+let username = "Devanshu";
+
+if (username) {
+    console.log("Welcome");
+} else {
+    console.log("Please Enter Username");
+}
+```
+
+---
+
+## Search Box
+
+```js
+let search = "";
+
+if (search) {
+    console.log("Searching...");
+} else {
+    console.log("Enter Search Text");
+}
+```
+
+---
+
+## Shopping Cart
+
+```js
+let cart = [];
+
+if (cart.length > 0) {
+    console.log("Checkout");
+} else {
+    console.log("Cart Empty");
+}
+```
+
+---
+
+# 10. Common Mistakes
+
+## Mistake 1
+
+```js
+if ("false") {
+    console.log("Runs");
+}
+```
+
+Output
+
+```text
+Runs
+```
+
+Because `"false"` is a **string**, not the boolean `false`.
+
+---
+
+## Mistake 2
+
+```js
+if ("0") {
+    console.log("Runs");
+}
+```
+
+Output
+
+```text
+Runs
+```
+
+Because `"0"` is a non-empty string.
+
+---
+
+## Mistake 3
+
+```js
+if ([]) {
+    console.log("Runs");
+}
+```
+
+Output
+
+```text
+Runs
+```
+
+Empty arrays are truthy.
+
+---
+
+## Mistake 4
+
+```js
+if ({}) {
+    console.log("Runs");
+}
+```
+
+Output
+
+```text
+Runs
+```
+
+Empty objects are truthy.
+
+---
+
+# 11. Best Practices
+
+✅ Check arrays using:
+
+```js
+arr.length === 0
+```
+
+---
+
+✅ Check objects using:
+
+```js
+Object.keys(obj).length === 0
+```
+
+---
+
+✅ Don't rely on string values like `"true"` or `"false"`.
+
+Use actual booleans:
+
+```js
+true
+false
+```
+
+---
+
+# 12. Syntax Practice
+
+Write the code.
+
+### Q1
+
+Write an `if` statement that checks whether `username` is truthy.
+
+---
+
+### Q2
+
+Write an `if...else` that prints `"Cart Empty"` when `cart.length === 0`.
+
+---
+
+### Q3
+
+Write an `if` statement that checks whether an object named `user` is empty.
+
+---
+
+### Q4
+
+Write an `if` statement that checks whether an array `numbers` has elements.
+
+---
+
+### Q5
+
+Write code that prints `"Invalid"` when `email` is an empty string.
+
+---
+
+### Q6
+
+Write an `if` statement that checks whether `score` is **not** `0`.
+
+---
+
+# 13. Output Questions
+
+### Q1
+
+```js
+if ("Hello") {
+    console.log("A");
+}
+```
+
+---
+
+### Q2
+
+```js
+if ("") {
+    console.log("A");
+} else {
+    console.log("B");
+}
+```
+
+---
+
+### Q3
+
+```js
+if ([]) {
+    console.log("Array");
+}
+```
+
+---
+
+### Q4
+
+```js
+if ({}) {
+    console.log("Object");
+}
+```
+
+---
+
+### Q5
+
+```js
+if ("0") {
+    console.log("True");
+} else {
+    console.log("False");
+}
+```
+
+---
+
+### Q6
+
+```js
+if (NaN) {
+    console.log("A");
+} else {
+    console.log("B");
+}
+```
+
+---
+
+# 14. Coding Practice
+
+### Easy
+
+1. Check whether a username is empty.
+2. Check whether an array has elements.
+3. Check whether an object is empty.
+
+### Medium
+
+4. Build a login validation.
+5. Build a shopping cart validation.
+6. Validate a search box before searching.
+
+---
+
+# 15. Interview Questions
+
+### Q1. Name all falsy values in JavaScript.
+
+**Answer:**
+
+```text
+false
+0
+-0
+0n
+""
+null
+undefined
+NaN
+```
+
+---
+
+### Q2. Is `[]` truthy or falsy?
+
+**Answer:**
+
+```text
+Truthy
+```
+
+---
+
+### Q3. Is `{}` truthy or falsy?
+
+**Answer:**
+
+```text
+Truthy
+```
+
+---
+
+### Q4. Why does this run?
+
+```js
+if ("false") {
+    console.log("Hello");
+}
+```
+
+Because `"false"` is a **non-empty string**, and all non-empty strings are truthy.
+
+---
+
+# 16. Answers to Output Questions
+
+### Q1
+
+```text
+A
+```
+
+---
+
+### Q2
+
+```text
+B
+```
+
+---
+
+### Q3
+
+```text
+Array
+```
+
+---
+
+### Q4
+
+```text
+Object
+```
+
+---
+
+### Q5
+
+```text
+True
+```
+
+---
+
+### Q6
+
+```text
+B
+```
+
+---
+
+# Quick Revision
+
+## Falsy Values
+
+```text
+false
+0
+-0
+0n
+""
+null
+undefined
+NaN
+```
+
+Everything else is **truthy**.
+
+---
+
+## Truthy Examples
+
+```js
+"Hello"
+"0"
+"false"
+[]
+{}
+1
+-5
+100
+function(){}
+```
+
+---
+
+
+
+---
+
+# ⭐ Bonus Interview Challenge (Highly Recommended)
+
+Without running the code, predict the output:
+
+```js
+console.log(Boolean("false"));
+console.log(Boolean(" "));
+console.log(Boolean(""));
+console.log(Boolean([]));
+console.log(Boolean({}));
+console.log(Boolean(0));
+console.log(Boolean("0"));
+console.log(Boolean(null));
+```
+
+If you can answer all eight correctly, you'll have a strong understanding of JavaScript's truthy and falsy rules.
+ 

@@ -1,0 +1,1282 @@
+# Phase 4 – Topic 8: `sort()`
+
+`sort()` is used to **arrange the elements of an array in a specific order**.
+
+You can sort:
+
+* ✅ Strings (A → Z, Z → A)
+* ✅ Numbers (Ascending, Descending)
+* ✅ Objects
+* ✅ Dates
+* ✅ Custom data
+
+---
+
+# 1. Syntax
+
+```js
+array.sort();
+```
+
+or
+
+```js
+array.sort((a, b) => {
+    return a - b;
+});
+```
+
+---
+
+# 2. Default Sorting (Strings)
+
+```js
+const fruits = ["Mango", "Apple", "Banana"];
+
+fruits.sort();
+
+console.log(fruits);
+```
+
+Output
+
+```text
+["Apple", "Banana", "Mango"]
+```
+
+JavaScript sorts strings alphabetically by default.
+
+---
+
+# 3. Problem with Numbers
+
+```js
+const numbers = [100, 20, 5, 50];
+
+numbers.sort();
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100, 20, 5, 50]
+```
+
+❌ Wrong!
+
+Why?
+
+Because JavaScript converts numbers to strings:
+
+```text
+100
+20
+5
+50
+```
+
+Then compares:
+
+```text
+"100"
+"20"
+"5"
+"50"
+```
+
+Alphabetically:
+
+```text
+1
+2
+5
+5
+```
+
+So the order becomes:
+
+```text
+100
+20
+5
+50
+```
+
+---
+
+# 4. Ascending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return a-b;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[5,20,50,100]
+```
+
+---
+
+# 5. How `a - b` Works
+
+Suppose
+
+```js
+[20,5]
+```
+
+JavaScript compares
+
+```js
+a = 20
+
+b = 5
+```
+
+Calculates
+
+```text
+20 - 5 = 15
+```
+
+Positive number
+
+↓
+
+Swap positions
+
+---
+
+Suppose
+
+```js
+a = 5
+
+b = 20
+```
+
+Calculates
+
+```text
+5 - 20 = -15
+```
+
+Negative
+
+↓
+
+Keep order
+
+### Rule
+
+```text
+Negative → Keep
+
+Positive → Swap
+
+Zero → No Change
+```
+
+---
+
+# 6. Descending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return b-a;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100,50,20,5]
+```
+
+---
+
+# 7. Sorting Strings
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort();
+
+console.log(names);
+```
+
+Output
+
+```text
+["Alice","Bob","John"]
+```
+
+---
+
+# 8. Reverse Alphabetical
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort().reverse();
+
+console.log(names);
+```
+
+Output
+
+```text
+["John","Bob","Alice"]
+```
+
+---
+
+# 9. Sorting Objects
+
+```js
+const users = [
+
+    {name:"John",age:25},
+    {name:"Alice",age:20},
+    {name:"Bob",age:30}
+
+];
+
+users.sort((a,b)=>{
+
+    return a.age-b.age;
+
+});
+
+console.log(users);
+```
+
+Output
+
+```text
+20
+25
+30
+```
+
+---
+
+# 10. Sort by Price
+
+```js
+const products=[
+
+    {name:"Mouse",price:800},
+    {name:"Laptop",price:50000},
+    {name:"Keyboard",price:2500}
+
+];
+
+products.sort((a,b)=>a.price-b.price);
+
+console.log(products);
+```
+
+---
+
+# 11. Common Mistakes
+
+### Original Array Changes
+
+```js
+const arr=[3,1,2];
+
+arr.sort();
+
+console.log(arr);
+```
+
+Output
+
+```text
+[1,2,3]
+```
+
+`sort()` **modifies the original array**.
+
+If you want to keep the original:
+
+```js
+const sorted = [...arr].sort((a,b)=>a-b);
+```
+
+---
+
+# 12. Interview Questions
+
+### Why does `sort()` fail with numbers?
+
+Because the default sort compares values as **strings (Unicode order)**.
+
+---
+
+### How do you sort numbers correctly?
+
+```js
+numbers.sort((a,b)=>a-b);
+```
+
+---
+
+### Ascending
+
+```js
+a-b
+```
+
+### Descending
+
+```js
+b-a
+```
+
+---
+
+# Quick Revision
+
+| Operation          | Code                           |
+| ------------------ | ------------------------------ |
+| Alphabetical       | `arr.sort()`                   |
+| Ascending Numbers  | `arr.sort((a,b)=>a-b)`         |
+| Descending Numbers | `arr.sort((a,b)=>b-a)`         |
+| Reverse Strings    | `arr.sort().reverse()`         |
+| Object by Age      | `arr.sort((a,b)=>a.age-b.age)` |
+
+---
+
+# 🚀 JavaScript Array Methods Cheat Sheet (One Example Each)
+
+| Method        | Example                                           | One-Line Explanation                                                 |
+| ------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| **forEach()** | `arr.forEach(item => console.log(item));`         | Executes a function for every element; returns `undefined`.          |
+| **map()**     | `const doubled = arr.map(x => x * 2);`            | Creates a new array by transforming every element.                   |
+| **filter()**  | `const even = arr.filter(x => x % 2 === 0);`      | Creates a new array containing only elements that match a condition. |
+| **reduce()**  | `const sum = arr.reduce((acc, x) => acc + x, 0);` | Reduces the array to a single value.                                 |
+| **find()**    | `const user = users.find(u => u.id === 2);`       | Returns the first matching element or `undefined`.                   |
+| **some()**    | `const hasEven = arr.some(x => x % 2 === 0);`     | Returns `true` if at least one element matches the condition.        |
+| **every()**   | `const allEven = arr.every(x => x % 2 === 0);`    | Returns `true` only if all elements match the condition.             |
+| **sort()**    | `arr.sort((a, b) => a - b);`                      | Sorts the array in ascending order (or by a custom rule).            |
+
+---
+
+# 📌 Memory Trick
+
+| Method      | Remember As                           |
+| ----------- | ------------------------------------- |
+| `forEach()` | **Do something** with every element   |
+| `map()`     | **Change** every element              |
+| `filter()`  | **Keep** selected elements            |
+| `reduce()`  | **Combine** everything into one value |
+| `find()`    | **Find first** matching element       |
+| `some()`    | **At least one?**                     |
+| `every()`   | **All?**                              |
+| `sort()`    | **Arrange** elements                  |
+
+---
+
+# 🎯 Which Method Should You Use?
+
+| Goal                         | Method      |
+| ---------------------------- | ----------- |
+| Print every element          | `forEach()` |
+| Double every number          | `map()`     |
+| Get even numbers             | `filter()`  |
+| Calculate total price        | `reduce()`  |
+| Find a user by ID            | `find()`    |
+| Check if any user is admin   | `some()`    |
+| Check if all students passed | `every()`   |
+| Sort products by price       | `sort()`    |
+
+---
+
+## ✅ Phase 4 Complete
+
+You have now covered the core array methods that are used daily in modern JavaScript, React, Node.js, and technical interviews:
+
+* ✅ `forEach()`
+* ✅ `map()`
+* ✅ `filter()`
+* ✅ `reduce()`
+* ✅ `find()`
+* ✅ `some()`
+* ✅ `every()`
+* ✅ `sort()`
+
+The next recommended phase is **Objects & Object Methods**, including:
+
+* `Object.keys()`
+* `Object.values()`
+* `Object.entries()`
+* Destructuring
+* Spread operator
+* Rest operator
+* Object methods and advanced object manipulation
+# Phase 4 – Topic 8: `sort()`
+
+`sort()` is used to **arrange the elements of an array in a specific order**.
+
+You can sort:
+
+* ✅ Strings (A → Z, Z → A)
+* ✅ Numbers (Ascending, Descending)
+* ✅ Objects
+* ✅ Dates
+* ✅ Custom data
+
+---
+
+# 1. Syntax
+
+```js
+array.sort();
+```
+
+or
+
+```js
+array.sort((a, b) => {
+    return a - b;
+});
+```
+
+---
+
+# 2. Default Sorting (Strings)
+
+```js
+const fruits = ["Mango", "Apple", "Banana"];
+
+fruits.sort();
+
+console.log(fruits);
+```
+
+Output
+
+```text
+["Apple", "Banana", "Mango"]
+```
+
+JavaScript sorts strings alphabetically by default.
+
+---
+
+# 3. Problem with Numbers
+
+```js
+const numbers = [100, 20, 5, 50];
+
+numbers.sort();
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100, 20, 5, 50]
+```
+
+❌ Wrong!
+
+Why?
+
+Because JavaScript converts numbers to strings:
+
+```text
+100
+20
+5
+50
+```
+
+Then compares:
+
+```text
+"100"
+"20"
+"5"
+"50"
+```
+
+Alphabetically:
+
+```text
+1
+2
+5
+5
+```
+
+So the order becomes:
+
+```text
+100
+20
+5
+50
+```
+
+---
+
+# 4. Ascending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return a-b;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[5,20,50,100]
+```
+
+---
+
+# 5. How `a - b` Works
+
+Suppose
+
+```js
+[20,5]
+```
+
+JavaScript compares
+
+```js
+a = 20
+
+b = 5
+```
+
+Calculates
+
+```text
+20 - 5 = 15
+```
+
+Positive number
+
+↓
+
+Swap positions
+
+---
+
+Suppose
+
+```js
+a = 5
+
+b = 20
+```
+
+Calculates
+
+```text
+5 - 20 = -15
+```
+
+Negative
+
+↓
+
+Keep order
+
+### Rule
+
+```text
+Negative → Keep
+
+Positive → Swap
+
+Zero → No Change
+```
+
+---
+
+# 6. Descending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return b-a;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100,50,20,5]
+```
+
+---
+
+# 7. Sorting Strings
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort();
+
+console.log(names);
+```
+
+Output
+
+```text
+["Alice","Bob","John"]
+```
+
+---
+
+# 8. Reverse Alphabetical
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort().reverse();
+
+console.log(names);
+```
+
+Output
+
+```text
+["John","Bob","Alice"]
+```
+
+---
+
+# 9. Sorting Objects
+
+```js
+const users = [
+
+    {name:"John",age:25},
+    {name:"Alice",age:20},
+    {name:"Bob",age:30}
+
+];
+
+users.sort((a,b)=>{
+
+    return a.age-b.age;
+
+});
+
+console.log(users);
+```
+
+Output
+
+```text
+20
+25
+30
+```
+
+---
+
+# 10. Sort by Price
+
+```js
+const products=[
+
+    {name:"Mouse",price:800},
+    {name:"Laptop",price:50000},
+    {name:"Keyboard",price:2500}
+
+];
+
+products.sort((a,b)=>a.price-b.price);
+
+console.log(products);
+```
+
+---
+
+# 11. Common Mistakes
+
+### Original Array Changes
+
+```js
+const arr=[3,1,2];
+
+arr.sort();
+
+console.log(arr);
+```
+
+Output
+
+```text
+[1,2,3]
+```
+
+`sort()` **modifies the original array**.
+
+If you want to keep the original:
+
+```js
+const sorted = [...arr].sort((a,b)=>a-b);
+```
+
+---
+
+# 12. Interview Questions
+
+### Why does `sort()` fail with numbers?
+
+Because the default sort compares values as **strings (Unicode order)**.
+
+---
+
+### How do you sort numbers correctly?
+
+```js
+numbers.sort((a,b)=>a-b);
+```
+
+---
+
+### Ascending
+
+```js
+a-b
+```
+
+### Descending
+
+```js
+b-a
+```
+
+---
+
+# Quick Revision
+
+| Operation          | Code                           |
+| ------------------ | ------------------------------ |
+| Alphabetical       | `arr.sort()`                   |
+| Ascending Numbers  | `arr.sort((a,b)=>a-b)`         |
+| Descending Numbers | `arr.sort((a,b)=>b-a)`         |
+| Reverse Strings    | `arr.sort().reverse()`         |
+| Object by Age      | `arr.sort((a,b)=>a.age-b.age)` |
+
+---
+
+# 🚀 JavaScript Array Methods Cheat Sheet (One Example Each)
+
+| Method        | Example                                           | One-Line Explanation                                                 |
+| ------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| **forEach()** | `arr.forEach(item => console.log(item));`         | Executes a function for every element; returns `undefined`.          |
+| **map()**     | `const doubled = arr.map(x => x * 2);`            | Creates a new array by transforming every element.                   |
+| **filter()**  | `const even = arr.filter(x => x % 2 === 0);`      | Creates a new array containing only elements that match a condition. |
+| **reduce()**  | `const sum = arr.reduce((acc, x) => acc + x, 0);` | Reduces the array to a single value.                                 |
+| **find()**    | `const user = users.find(u => u.id === 2);`       | Returns the first matching element or `undefined`.                   |
+| **some()**    | `const hasEven = arr.some(x => x % 2 === 0);`     | Returns `true` if at least one element matches the condition.        |
+| **every()**   | `const allEven = arr.every(x => x % 2 === 0);`    | Returns `true` only if all elements match the condition.             |
+| **sort()**    | `arr.sort((a, b) => a - b);`                      | Sorts the array in ascending order (or by a custom rule).            |
+
+---
+
+# 📌 Memory Trick
+
+| Method      | Remember As                           |
+| ----------- | ------------------------------------- |
+| `forEach()` | **Do something** with every element   |
+| `map()`     | **Change** every element              |
+| `filter()`  | **Keep** selected elements            |
+| `reduce()`  | **Combine** everything into one value |
+| `find()`    | **Find first** matching element       |
+| `some()`    | **At least one?**                     |
+| `every()`   | **All?**                              |
+| `sort()`    | **Arrange** elements                  |
+
+---
+
+# 🎯 Which Method Should You Use?
+
+| Goal                         | Method      |
+| ---------------------------- | ----------- |
+| Print every element          | `forEach()` |
+| Double every number          | `map()`     |
+| Get even numbers             | `filter()`  |
+| Calculate total price        | `reduce()`  |
+| Find a user by ID            | `find()`    |
+| Check if any user is admin   | `some()`    |
+| Check if all students passed | `every()`   |
+| Sort products by price       | `sort()`    |
+
+---
+
+## ✅ Phase 4 Complete
+
+You have now covered the core array methods that are used daily in modern JavaScript, React, Node.js, and technical interviews:
+
+* ✅ `forEach()`
+* ✅ `map()`
+* ✅ `filter()`
+* ✅ `reduce()`
+* ✅ `find()`
+* ✅ `some()`
+* ✅ `every()`
+* ✅ `sort()`
+
+The next recommended phase is **Objects & Object Methods**, including:
+
+* `Object.keys()`
+* `Object.values()`
+* `Object.entries()`
+* Destructuring
+* Spread operator
+* Rest operator
+* Object methods and advanced object manipulation
+# Phase 4 – Topic 8: `sort()`
+
+`sort()` is used to **arrange the elements of an array in a specific order**.
+
+You can sort:
+
+* ✅ Strings (A → Z, Z → A)
+* ✅ Numbers (Ascending, Descending)
+* ✅ Objects
+* ✅ Dates
+* ✅ Custom data
+
+---
+
+# 1. Syntax
+
+```js
+array.sort();
+```
+
+or
+
+```js
+array.sort((a, b) => {
+    return a - b;
+});
+```
+
+---
+
+# 2. Default Sorting (Strings)
+
+```js
+const fruits = ["Mango", "Apple", "Banana"];
+
+fruits.sort();
+
+console.log(fruits);
+```
+
+Output
+
+```text
+["Apple", "Banana", "Mango"]
+```
+
+JavaScript sorts strings alphabetically by default.
+
+---
+
+# 3. Problem with Numbers
+
+```js
+const numbers = [100, 20, 5, 50];
+
+numbers.sort();
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100, 20, 5, 50]
+```
+
+❌ Wrong!
+
+Why?
+
+Because JavaScript converts numbers to strings:
+
+```text
+100
+20
+5
+50
+```
+
+Then compares:
+
+```text
+"100"
+"20"
+"5"
+"50"
+```
+
+Alphabetically:
+
+```text
+1
+2
+5
+5
+```
+
+So the order becomes:
+
+```text
+100
+20
+5
+50
+```
+
+---
+
+# 4. Ascending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return a-b;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[5,20,50,100]
+```
+
+---
+
+# 5. How `a - b` Works
+
+Suppose
+
+```js
+[20,5]
+```
+
+JavaScript compares
+
+```js
+a = 20
+
+b = 5
+```
+
+Calculates
+
+```text
+20 - 5 = 15
+```
+
+Positive number
+
+↓
+
+Swap positions
+
+---
+
+Suppose
+
+```js
+a = 5
+
+b = 20
+```
+
+Calculates
+
+```text
+5 - 20 = -15
+```
+
+Negative
+
+↓
+
+Keep order
+
+### Rule
+
+```text
+Negative → Keep
+
+Positive → Swap
+
+Zero → No Change
+```
+
+---
+
+# 6. Descending Order
+
+```js
+const numbers = [100,20,5,50];
+
+numbers.sort((a,b)=>{
+
+    return b-a;
+
+});
+
+console.log(numbers);
+```
+
+Output
+
+```text
+[100,50,20,5]
+```
+
+---
+
+# 7. Sorting Strings
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort();
+
+console.log(names);
+```
+
+Output
+
+```text
+["Alice","Bob","John"]
+```
+
+---
+
+# 8. Reverse Alphabetical
+
+```js
+const names = ["John","Alice","Bob"];
+
+names.sort().reverse();
+
+console.log(names);
+```
+
+Output
+
+```text
+["John","Bob","Alice"]
+```
+
+---
+
+# 9. Sorting Objects
+
+```js
+const users = [
+
+    {name:"John",age:25},
+    {name:"Alice",age:20},
+    {name:"Bob",age:30}
+
+];
+
+users.sort((a,b)=>{
+
+    return a.age-b.age;
+
+});
+
+console.log(users);
+```
+
+Output
+
+```text
+20
+25
+30
+```
+
+---
+
+# 10. Sort by Price
+
+```js
+const products=[
+
+    {name:"Mouse",price:800},
+    {name:"Laptop",price:50000},
+    {name:"Keyboard",price:2500}
+
+];
+
+products.sort((a,b)=>a.price-b.price);
+
+console.log(products);
+```
+
+---
+
+# 11. Common Mistakes
+
+### Original Array Changes
+
+```js
+const arr=[3,1,2];
+
+arr.sort();
+
+console.log(arr);
+```
+
+Output
+
+```text
+[1,2,3]
+```
+
+`sort()` **modifies the original array**.
+
+If you want to keep the original:
+
+```js
+const sorted = [...arr].sort((a,b)=>a-b);
+```
+
+---
+
+# 12. Interview Questions
+
+### Why does `sort()` fail with numbers?
+
+Because the default sort compares values as **strings (Unicode order)**.
+
+---
+
+### How do you sort numbers correctly?
+
+```js
+numbers.sort((a,b)=>a-b);
+```
+
+---
+
+### Ascending
+
+```js
+a-b
+```
+
+### Descending
+
+```js
+b-a
+```
+
+---
+
+# Quick Revision
+
+| Operation          | Code                           |
+| ------------------ | ------------------------------ |
+| Alphabetical       | `arr.sort()`                   |
+| Ascending Numbers  | `arr.sort((a,b)=>a-b)`         |
+| Descending Numbers | `arr.sort((a,b)=>b-a)`         |
+| Reverse Strings    | `arr.sort().reverse()`         |
+| Object by Age      | `arr.sort((a,b)=>a.age-b.age)` |
+
+---
+
+# 🚀 JavaScript Array Methods Cheat Sheet (One Example Each)
+
+| Method        | Example                                           | One-Line Explanation                                                 |
+| ------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| **forEach()** | `arr.forEach(item => console.log(item));`         | Executes a function for every element; returns `undefined`.          |
+| **map()**     | `const doubled = arr.map(x => x * 2);`            | Creates a new array by transforming every element.                   |
+| **filter()**  | `const even = arr.filter(x => x % 2 === 0);`      | Creates a new array containing only elements that match a condition. |
+| **reduce()**  | `const sum = arr.reduce((acc, x) => acc + x, 0);` | Reduces the array to a single value.                                 |
+| **find()**    | `const user = users.find(u => u.id === 2);`       | Returns the first matching element or `undefined`.                   |
+| **some()**    | `const hasEven = arr.some(x => x % 2 === 0);`     | Returns `true` if at least one element matches the condition.        |
+| **every()**   | `const allEven = arr.every(x => x % 2 === 0);`    | Returns `true` only if all elements match the condition.             |
+| **sort()**    | `arr.sort((a, b) => a - b);`                      | Sorts the array in ascending order (or by a custom rule).            |
+
+---
+
+# 📌 Memory Trick
+
+| Method      | Remember As                           |
+| ----------- | ------------------------------------- |
+| `forEach()` | **Do something** with every element   |
+| `map()`     | **Change** every element              |
+| `filter()`  | **Keep** selected elements            |
+| `reduce()`  | **Combine** everything into one value |
+| `find()`    | **Find first** matching element       |
+| `some()`    | **At least one?**                     |
+| `every()`   | **All?**                              |
+| `sort()`    | **Arrange** elements                  |
+
+---
+
+# 🎯 Which Method Should You Use?
+
+| Goal                         | Method      |
+| ---------------------------- | ----------- |
+| Print every element          | `forEach()` |
+| Double every number          | `map()`     |
+| Get even numbers             | `filter()`  |
+| Calculate total price        | `reduce()`  |
+| Find a user by ID            | `find()`    |
+| Check if any user is admin   | `some()`    |
+| Check if all students passed | `every()`   |
+| Sort products by price       | `sort()`    |
+
+--

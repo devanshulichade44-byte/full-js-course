@@ -1,0 +1,628 @@
+# Phase 6 – Functions
+
+Functions are one of the **most important concepts in JavaScript**. Almost everything in JavaScript—from event handling and APIs to React components and Express routes—depends on functions.
+
+---
+
+# Phase 6 Roadmap
+
+| Topic                                        | Status |
+| -------------------------------------------- | ------ |
+| ⏳ Topic 1 – Function Declaration             |        |
+| ⏳ Topic 2 – Function Expression              |        |
+| ⏳ Topic 3 – Arrow Functions                  |        |
+| ⏳ Topic 4 – Parameters vs Arguments          |        |
+| ⏳ Topic 5 – Return Statement                 |        |
+| ⏳ Topic 6 – Default Parameters               |        |
+| ⏳ Topic 7 – Rest Parameters                  |        |
+| ⏳ Topic 8 – Callback Functions               |        |
+| ⏳ Topic 9 – Higher-Order Functions           |        |
+| ⏳ Topic 10 – IIFE                            |        |
+| ⏳ Topic 11 – Scope (Global, Function, Block) |        |
+
+---
+
+# Phase 6 – Topic 1: Function Declaration
+
+---
+
+# 1. What is a Function?
+
+A **function** is a reusable block of code that performs a specific task.
+
+Instead of writing the same code repeatedly, you write it once inside a function and call it whenever needed.
+
+---
+
+# 2. Why Do We Need Functions?
+
+Without functions:
+
+```js
+console.log("Welcome");
+console.log("Welcome");
+console.log("Welcome");
+console.log("Welcome");
+```
+
+This repeats the same code.
+
+Using a function:
+
+```js
+function welcome() {
+    console.log("Welcome");
+}
+
+welcome();
+welcome();
+welcome();
+welcome();
+```
+
+The code is shorter, easier to maintain, and reusable.
+
+---
+
+# 3. Real-Life Analogy
+
+Think of a **coffee machine**.
+
+You press the "Coffee" button.
+
+```
+Button Press
+
+↓
+
+Machine Executes Steps
+
+↓
+
+Coffee Ready
+```
+
+Similarly,
+
+```js
+login();
+```
+
+means:
+
+```
+Call login()
+
+↓
+
+JavaScript runs the login function
+
+↓
+
+Login completed
+```
+
+---
+
+# 4. Syntax
+
+```js
+function functionName() {
+
+    // code
+
+}
+```
+
+Example
+
+```js
+function greet() {
+    console.log("Hello");
+}
+```
+
+---
+
+# 5. Parts of a Function
+
+```js
+function greet() {
+
+    console.log("Hello");
+
+}
+```
+
+### `function`
+
+Keyword telling JavaScript you're creating a function.
+
+---
+
+### `greet`
+
+Function name.
+
+---
+
+### `()`
+
+Parameter list (currently empty).
+
+---
+
+### `{}`
+
+Function body containing the statements to execute.
+
+---
+
+# 6. Calling (Invoking) a Function
+
+Creating a function does **not** execute it.
+
+```js
+function greet() {
+    console.log("Hello");
+}
+```
+
+Nothing happens until you call it.
+
+```js
+greet();
+```
+
+Output
+
+```text
+Hello
+```
+
+---
+
+# 7. Internal Working
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+Execution Flow
+
+```
+JavaScript reads function
+
+↓
+
+Stores it in memory
+
+↓
+
+Does NOT execute
+
+↓
+
+Finds greet()
+
+↓
+
+Jumps to function body
+
+↓
+
+Runs code
+
+↓
+
+Returns to next line
+```
+
+---
+
+# 8. Calling Multiple Times
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+greet();
+greet();
+```
+
+Output
+
+```text
+Hello
+Hello
+Hello
+```
+
+One function can be reused as many times as needed.
+
+---
+
+# 9. Functions Without Parameters
+
+```js
+function showDate() {
+    console.log("Today is Monday");
+}
+
+showDate();
+```
+
+Output
+
+```text
+Today is Monday
+```
+
+---
+
+# 10. Functions Performing Calculations
+
+```js
+function add() {
+    console.log(10 + 20);
+}
+
+add();
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+# 11. Function Naming Rules
+
+### Good
+
+```js
+function login() {}
+function calculateTotal() {}
+function printName() {}
+function getUserData() {}
+```
+
+---
+
+### Bad
+
+```js
+function a() {}
+function x() {}
+function data() {}
+```
+
+Choose names that describe what the function does.
+
+---
+
+# 12. Function Naming Convention
+
+Use **camelCase**.
+
+```js
+calculateArea()
+printMarks()
+fetchUserData()
+sendEmail()
+```
+
+---
+
+# 13. Common Mistakes
+
+## ❌ Forgetting Parentheses
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet;
+```
+
+Output
+
+Nothing happens because the function is **referenced**, not called.
+
+Correct
+
+```js
+greet();
+```
+
+---
+
+## ❌ Calling Before Creating? (Special Case)
+
+```js
+greet();
+
+function greet() {
+    console.log("Hello");
+}
+```
+
+Output
+
+```text
+Hello
+```
+
+This works because **function declarations are hoisted**.
+
+We'll study hoisting in Phase 7.
+
+---
+
+## ❌ Expecting a Function to Run Automatically
+
+```js
+function greet() {
+    console.log("Hello");
+}
+```
+
+Output
+
+Nothing.
+
+You must call it.
+
+```js
+greet();
+```
+
+---
+
+# 14. Best Practices
+
+* ✅ Give functions meaningful names.
+* ✅ One function should do one job.
+* ✅ Keep functions short and readable.
+* ✅ Reuse functions instead of duplicating code.
+
+---
+
+# 15. Syntax Practice
+
+Write only the code.
+
+1. Create a function named `sayHello`.
+2. Create a function named `printName`.
+3. Create a function that prints `"JavaScript"`.
+4. Call a function three times.
+5. Create a function named `showMessage`.
+6. Create a function named `start`.
+
+---
+
+# 16. Output Questions
+
+### Q1
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+---
+
+### Q2
+
+```js
+function test() {
+    console.log("JavaScript");
+}
+
+test();
+test();
+```
+
+---
+
+### Q3
+
+```js
+function add() {
+    console.log(10 + 5);
+}
+
+add();
+```
+
+---
+
+### Q4
+
+```js
+function hello() {
+    console.log("Hi");
+}
+
+hello;
+```
+
+---
+
+### Q5
+
+```js
+run();
+
+function run() {
+    console.log("Running");
+}
+```
+
+---
+
+### Q6
+
+```js
+function demo() {}
+
+demo();
+
+console.log("Done");
+```
+
+---
+
+# 17. Coding Practice
+
+1. Create a function that prints your name.
+2. Create a function that prints your college name.
+3. Create a function that prints numbers from 1 to 5.
+4. Create a function that prints `"Welcome"` five times.
+5. Create a function that calculates `50 + 100`.
+6. Create three different functions and call them one after another.
+
+---
+
+# 18. Interview Questions
+
+### Q1. What is a function?
+
+**Answer:** A reusable block of code that performs a specific task.
+
+---
+
+### Q2. What is a function declaration?
+
+**Answer:** A function created using the `function` keyword.
+
+```js
+function greet() {}
+```
+
+---
+
+### Q3. What is the difference between declaring and calling a function?
+
+* **Declaring:** Defining the function.
+* **Calling:** Executing the function.
+
+---
+
+### Q4. Can a function be called multiple times?
+
+**Answer:** Yes. A function can be reused as many times as needed.
+
+---
+
+### Q5. Are function declarations hoisted?
+
+**Answer:** Yes. Function declarations are hoisted, so they can be called before their definition.
+
+---
+
+# 19. Answers
+
+### Q1
+
+```text
+Hello
+```
+
+---
+
+### Q2
+
+```text
+JavaScript
+JavaScript
+```
+
+---
+
+### Q3
+
+```text
+15
+```
+
+---
+
+### Q4
+
+```text
+No output
+```
+
+---
+
+### Q5
+
+```text
+Running
+```
+
+---
+
+### Q6
+
+```text
+Done
+```
+
+---
+
+# Quick Revision
+
+### Declare
+
+```js
+function greet() {
+
+}
+```
+
+### Call
+
+```js
+greet();
+```
+
+### Function Flow
+
+```
+Declare
+
+↓
+
+Stored in Memory
+
+↓
+
+Call
+
+↓
+
+Execute
+
+↓
+
+Return to Next Line
+```
+
+---
+
+
+**Next Topic:** **Function Expression**, where you'll learn the difference between function declarations and function expressions, anonymous functions, named function expressions, hoisting behavior, and when to use each.

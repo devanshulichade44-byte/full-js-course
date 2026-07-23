@@ -1,0 +1,634 @@
+# Phase 6 – Topic 2: Function Expression
+
+In the previous topic, you learned **Function Declarations**.
+
+Now we'll learn **Function Expressions**, which are widely used in **React**, **callbacks**, **event listeners**, **Promises**, and **Node.js**.
+
+---
+
+# 1. What is a Function Expression?
+
+A **Function Expression** is a function that is **stored inside a variable**.
+
+Instead of giving the function directly to JavaScript, you first create the function and assign it to a variable.
+
+---
+
+# 2. Syntax
+
+```js
+const variableName = function () {
+
+    // code
+
+};
+```
+
+Example
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+
+greet();
+```
+
+Output
+
+```text
+Hello
+```
+
+---
+
+# 3. Internal Working
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+```
+
+JavaScript executes it like this:
+
+```text
+Create variable greet
+
+↓
+
+Create function
+
+↓
+
+Store function inside greet
+
+↓
+
+Call greet()
+
+↓
+
+Execute function
+```
+
+Unlike a function declaration, the function is treated like a value assigned to a variable.
+
+---
+
+# 4. Function Declaration vs Function Expression
+
+### Function Declaration
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+---
+
+### Function Expression
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+
+greet();
+```
+
+Both produce:
+
+```text
+Hello
+```
+
+The difference is **how they are created and hoisted**.
+
+---
+
+# 5. Anonymous Function Expression
+
+Most function expressions are **anonymous**, meaning they don't have a function name.
+
+```js
+const add = function () {
+    console.log(10 + 20);
+};
+
+add();
+```
+
+Output
+
+```text
+30
+```
+
+Here,
+
+```text
+Variable Name → add
+
+Function Name → None (Anonymous)
+```
+
+---
+
+# 6. Named Function Expression
+
+A function expression can also have its own name.
+
+```js
+const greet = function sayHello() {
+    console.log("Hello");
+};
+
+greet();
+```
+
+Output
+
+```text
+Hello
+```
+
+Notice:
+
+```text
+Variable
+
+↓
+
+greet
+
+Function Name
+
+↓
+
+sayHello
+```
+
+The variable `greet` is used to call the function.
+
+---
+
+# 7. Can We Call the Internal Name?
+
+```js
+const greet = function sayHello() {
+    console.log("Hello");
+};
+
+sayHello();
+```
+
+Output
+
+```text
+ReferenceError
+```
+
+The internal name (`sayHello`) is available only **inside the function itself**, not outside.
+
+---
+
+# 8. Hoisting Difference
+
+### Function Declaration
+
+```js
+greet();
+
+function greet() {
+    console.log("Hello");
+}
+```
+
+Output
+
+```text
+Hello
+```
+
+Works because declarations are hoisted.
+
+---
+
+### Function Expression
+
+```js
+greet();
+
+const greet = function () {
+    console.log("Hello");
+};
+```
+
+Output
+
+```text
+ReferenceError:
+Cannot access 'greet' before initialization
+```
+
+Because only the variable is hoisted, not its assigned value.
+
+---
+
+# 9. Why?
+
+JavaScript executes:
+
+```js
+const greet;
+```
+
+Then later:
+
+```js
+greet = function () {};
+```
+
+So when JavaScript reaches:
+
+```js
+greet();
+```
+
+the function hasn't been assigned yet.
+
+---
+
+# 10. Function Expression with Parameters
+
+```js
+const add = function (a, b) {
+    console.log(a + b);
+};
+
+add(10, 20);
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+# 11. Returning Values
+
+```js
+const multiply = function (a, b) {
+    return a * b;
+};
+
+console.log(multiply(5, 4));
+```
+
+Output
+
+```text
+20
+```
+
+---
+
+# 12. Real JavaScript Example
+
+Event Listener
+
+```js
+button.addEventListener("click", function () {
+    console.log("Button clicked");
+});
+```
+
+The callback passed to `addEventListener` is an anonymous function expression.
+
+---
+
+# 13. Real React Example
+
+```jsx
+const handleClick = function () {
+    console.log("Clicked");
+};
+
+<button onClick={handleClick}>
+    Click
+</button>
+```
+
+Although React developers usually prefer arrow functions today, function expressions are still valid.
+
+---
+
+# 14. Common Mistakes
+
+## ❌ Calling Before Assignment
+
+```js
+sayHello();
+
+const sayHello = function () {
+    console.log("Hello");
+};
+```
+
+Output
+
+```text
+ReferenceError
+```
+
+---
+
+## ❌ Forgetting the Semicolon
+
+```js
+const greet = function () {
+    console.log("Hello");
+}
+```
+
+While JavaScript often inserts semicolons automatically, it's considered good practice to write:
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+```
+
+---
+
+## ❌ Confusing Declaration with Expression
+
+Declaration
+
+```js
+function greet() {}
+```
+
+Expression
+
+```js
+const greet = function () {};
+```
+
+---
+
+# 15. Best Practices
+
+* ✅ Use `const` for function expressions.
+* ✅ Prefer anonymous function expressions unless you specifically need a named one.
+* ✅ Don't call a function expression before it is assigned.
+* ✅ Use meaningful variable names.
+
+---
+
+# 16. Syntax Practice
+
+Write only the code.
+
+1. Create a function expression named `hello`.
+2. Create a function expression that prints your name.
+3. Create a function expression that adds two numbers.
+4. Create a function expression that returns the square of a number.
+5. Create a named function expression.
+6. Call all the functions.
+
+---
+
+# 17. Output Questions
+
+### Q1
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+
+greet();
+```
+
+---
+
+### Q2
+
+```js
+const add = function () {
+    console.log(10 + 20);
+};
+
+add();
+```
+
+---
+
+### Q3
+
+```js
+const multiply = function (a, b) {
+    return a * b;
+};
+
+console.log(multiply(4, 5));
+```
+
+---
+
+### Q4
+
+```js
+hello();
+
+const hello = function () {
+    console.log("Hi");
+};
+```
+
+---
+
+### Q5
+
+```js
+const greet = function sayHello() {
+    console.log("Hello");
+};
+
+greet();
+```
+
+---
+
+### Q6
+
+```js
+const greet = function sayHello() {
+    console.log("Hello");
+};
+
+sayHello();
+```
+
+---
+
+# 18. Coding Practice
+
+1. Create a function expression that prints your college name.
+2. Create a function expression to calculate the area of a rectangle.
+3. Create a function expression that checks whether a number is even.
+4. Create a function expression that returns the largest of two numbers.
+5. Create a named function expression.
+6. Pass a function expression as a callback to `setTimeout()`.
+
+---
+
+# 19. Interview Questions
+
+### Q1. What is a function expression?
+
+**Answer:** A function assigned to a variable.
+
+```js
+const greet = function () {};
+```
+
+---
+
+### Q2. What is the difference between a function declaration and a function expression?
+
+| Function Declaration             | Function Expression                        |
+| -------------------------------- | ------------------------------------------ |
+| Declared with `function`         | Assigned to a variable                     |
+| Fully hoisted                    | Variable is hoisted, function value is not |
+| Can be called before declaration | Cannot be called before assignment         |
+
+---
+
+### Q3. What is an anonymous function?
+
+**Answer:** A function without a name.
+
+```js
+const greet = function () {};
+```
+
+---
+
+### Q4. What is a named function expression?
+
+**Answer:**
+
+```js
+const greet = function sayHello() {};
+```
+
+The function has an internal name (`sayHello`) but is called using the variable (`greet`).
+
+---
+
+### Q5. Why are function expressions common in callbacks?
+
+**Answer:** They can be created and passed directly where needed, making them ideal for event handlers, timers, and asynchronous code.
+
+---
+
+# 20. Answers
+
+### Q1
+
+```text
+Hello
+```
+
+---
+
+### Q2
+
+```text
+30
+```
+
+---
+
+### Q3
+
+```text
+20
+```
+
+---
+
+### Q4
+
+```text
+ReferenceError
+```
+
+---
+
+### Q5
+
+```text
+Hello
+```
+
+---
+
+### Q6
+
+```text
+ReferenceError
+```
+
+---
+
+# Quick Revision
+
+### Function Declaration
+
+```js
+function greet() {}
+```
+
+* Hoisted
+* Can be called before declaration
+
+---
+
+### Function Expression
+
+```js
+const greet = function () {};
+```
+
+* Stored in a variable
+* Not callable before assignment
+
+---
+
+### Anonymous Function
+
+```js
+const greet = function () {};
+```
+
+---
+
+### Named Function Expression
+
+```js
+const greet = function sayHello() {};
+```
+
+---
+
+
+**Next Topic:** **Arrow Functions (`=>`)**, where you'll learn arrow function syntax, implicit vs explicit return, lexical `this`, differences from regular functions, and the patterns used most often in React and modern JavaScript.

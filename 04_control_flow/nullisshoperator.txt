@@ -1,0 +1,688 @@
+# Phase 2 – Topic 7: Nullish Coalescing Operator (`??`)
+
+The **Nullish Coalescing Operator (`??`)** was introduced in ES2020 and is widely used in **React, Node.js, Express, Next.js, and modern JavaScript applications**.
+
+---
+
+# 1. What is the Nullish Coalescing Operator?
+
+The `??` operator returns the **right-hand value only if the left-hand value is `null` or `undefined`.**
+
+Otherwise, it returns the left-hand value.
+
+### Syntax
+
+```js
+leftValue ?? rightValue
+```
+
+Think of it as:
+
+> "If the left value is `null` or `undefined`, use the right value instead."
+
+---
+
+# 2. Why Do We Need It?
+
+Suppose you're getting a username from a database.
+
+```js
+let username = null;
+```
+
+You want to display `"Guest"` if no username exists.
+
+Without `??`:
+
+```js
+let username = null;
+
+if (username === null || username === undefined) {
+    username = "Guest";
+}
+
+console.log(username);
+```
+
+With `??`:
+
+```js
+let username = null;
+
+console.log(username ?? "Guest");
+```
+
+Output
+
+```text
+Guest
+```
+
+Much shorter and cleaner.
+
+---
+
+# 3. Internal Working
+
+JavaScript evaluates:
+
+```js
+a ?? b
+```
+
+Like this:
+
+```js
+if (a === null || a === undefined) {
+    return b;
+} else {
+    return a;
+}
+```
+
+Only **`null`** and **`undefined`** trigger the fallback.
+
+---
+
+# 4. Basic Examples
+
+## Example 1
+
+```js
+let name = null;
+
+console.log(name ?? "Guest");
+```
+
+Output
+
+```text
+Guest
+```
+
+---
+
+## Example 2
+
+```js
+let name = undefined;
+
+console.log(name ?? "Guest");
+```
+
+Output
+
+```text
+Guest
+```
+
+---
+
+## Example 3
+
+```js
+let name = "Devanshu";
+
+console.log(name ?? "Guest");
+```
+
+Output
+
+```text
+Devanshu
+```
+
+---
+
+# 5. Important Difference
+
+`??` does **NOT** treat these as missing values:
+
+```js
+0
+false
+""
+NaN
+```
+
+Example
+
+```js
+let score = 0;
+
+console.log(score ?? 100);
+```
+
+Output
+
+```text
+0
+```
+
+Because `0` is **not** `null` or `undefined`.
+
+---
+
+Another example
+
+```js
+let isLoggedIn = false;
+
+console.log(isLoggedIn ?? true);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+Another example
+
+```js
+let message = "";
+
+console.log(message ?? "Hello");
+```
+
+Output
+
+```text
+(empty string)
+```
+
+---
+
+# 6. `??` vs OR (`||`)
+
+This is one of the most common interview questions.
+
+## OR Operator
+
+```js
+let score = 0;
+
+console.log(score || 100);
+```
+
+Output
+
+```text
+100
+```
+
+Why?
+
+Because `0` is falsy.
+
+---
+
+## Nullish Operator
+
+```js
+let score = 0;
+
+console.log(score ?? 100);
+```
+
+Output
+
+```text
+0
+```
+
+Because `0` is **not nullish**.
+
+---
+
+### Another Example
+
+```js
+let name = "";
+
+console.log(name || "Guest");
+```
+
+Output
+
+```text
+Guest
+```
+
+---
+
+```js
+let name = "";
+
+console.log(name ?? "Guest");
+```
+
+Output
+
+```text
+```
+
+(Empty string)
+
+---
+
+## Comparison Table
+
+| Value | `value || "Default"` | `value ?? "Default"` |
+|--------|----------------------|----------------------|
+| `null` | Default | Default |
+| `undefined` | Default | Default |
+| `0` | Default | `0` |
+| `false` | Default | `false` |
+| `""` | Default | `""` |
+| `"Hello"` | Hello | Hello |
+
+---
+
+# 7. Real Project Examples
+
+## Username
+
+```js
+let username = null;
+
+let displayName = username ?? "Guest";
+
+console.log(displayName);
+```
+
+---
+
+## Price
+
+```js
+let price = 0;
+
+console.log(price ?? 100);
+```
+
+Output
+
+```text
+0
+```
+
+---
+
+## API Data
+
+```js
+let user = {
+    name: undefined
+};
+
+console.log(user.name ?? "Anonymous");
+```
+
+Output
+
+```text
+Anonymous
+```
+
+---
+
+# 8. Chaining `??`
+
+```js
+let username = null;
+let nickname = undefined;
+
+console.log(username ?? nickname ?? "Guest");
+```
+
+Output
+
+```text
+Guest
+```
+
+JavaScript checks left to right.
+
+---
+
+# 9. Common Mistakes
+
+## Mistake 1
+
+Thinking `0` becomes the default.
+
+```js
+let value = 0;
+
+console.log(value ?? 50);
+```
+
+Output
+
+```text
+0
+```
+
+---
+
+## Mistake 2
+
+Thinking `false` becomes the default.
+
+```js
+let value = false;
+
+console.log(value ?? true);
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+## Mistake 3
+
+Using `||` when you only want to handle `null` and `undefined`.
+
+```js
+let quantity = 0;
+
+console.log(quantity || 1);
+```
+
+Output
+
+```text
+1
+```
+
+Better
+
+```js
+console.log(quantity ?? 1);
+```
+
+Output
+
+```text
+0
+```
+
+---
+
+# 10. Best Practices
+
+✅ Use `??` when default values should only replace `null` or `undefined`.
+
+✅ Use `||` when **all falsy values** should be replaced.
+
+✅ `??` is common when working with API responses, database values, and optional form fields.
+
+---
+
+# 11. Syntax Practice
+
+Write the code.
+
+### Q1
+
+Assign `"Guest"` if `username` is `null`.
+
+---
+
+### Q2
+
+Print `100` only if `score` is `undefined`.
+
+---
+
+### Q3
+
+Assign `"Anonymous"` if `userName` is `undefined`.
+
+---
+
+### Q4
+
+Chain three values using `??`.
+
+---
+
+### Q5
+
+Print `"No Email"` if `email` is `null`.
+
+---
+
+### Q6
+
+Store the result of `age ?? 18` in a variable called `finalAge`.
+
+---
+
+# 12. Output Questions
+
+### Q1
+
+```js
+let name = null;
+
+console.log(name ?? "Guest");
+```
+
+---
+
+### Q2
+
+```js
+let value = 0;
+
+console.log(value ?? 10);
+```
+
+---
+
+### Q3
+
+```js
+let value = "";
+
+console.log(value ?? "Hello");
+```
+
+---
+
+### Q4
+
+```js
+let value = undefined;
+
+console.log(value ?? false);
+```
+
+---
+
+### Q5
+
+```js
+let a = null;
+let b = undefined;
+
+console.log(a ?? b ?? 50);
+```
+
+---
+
+### Q6
+
+```js
+let value = false;
+
+console.log(value ?? true);
+```
+
+---
+
+# 13. Coding Practice
+
+### Easy
+
+1. Show `"Guest"` if `username` is `null`.
+2. Show `"Anonymous"` if `name` is `undefined`.
+3. Set a default age of `18`.
+
+### Medium
+
+4. Create a user profile object with default values.
+5. Handle missing API response data.
+6. Build a product object where missing fields get default values.
+
+---
+
+# 14. Interview Questions
+
+### Q1. What is the difference between `||` and `??`?
+
+**Answer:**
+
+* `||` replaces **all falsy values**.
+* `??` replaces only `null` and `undefined`.
+
+---
+
+### Q2. Does `??` replace `0`?
+
+**Answer:**
+
+No.
+
+```js
+0 ?? 10
+```
+
+returns
+
+```text
+0
+```
+
+---
+
+### Q3. Does `??` replace an empty string?
+
+No.
+
+```js
+"" ?? "Hello"
+```
+
+returns the empty string.
+
+---
+
+# 15. Answers to Output Questions
+
+### Q1
+
+```text
+Guest
+```
+
+---
+
+### Q2
+
+```text
+0
+```
+
+---
+
+### Q3
+
+```text
+```
+
+(An empty string is printed.)
+
+---
+
+### Q4
+
+```text
+false
+```
+
+---
+
+### Q5
+
+```text
+50
+```
+
+---
+
+### Q6
+
+```text
+false
+```
+
+---
+
+# 16. Quick Revision
+
+## `??` Rule
+
+```js
+value ?? defaultValue
+```
+
+Returns:
+
+* `defaultValue` → only if `value` is `null` or `undefined`
+* otherwise → `value`
+
+---
+
+## Remember
+
+```text
+null        ✅ Default
+undefined   ✅ Default
+0           ❌ Keep
+false       ❌ Keep
+""          ❌ Keep
+NaN         ❌ Keep
+```
+
+---
+
+---
+
+# ⭐ Bonus Challenge (Interview Level)
+
+Predict the output **without running the code**:
+
+```js
+console.log(null ?? "A");
+console.log(undefined ?? "B");
+console.log(0 ?? "C");
+console.log(false ?? "D");
+console.log("" ?? "E");
+
+console.log(null || "A");
+console.log(undefined || "B");
+console.log(0 || "C");
+console.log(false || "D");
+console.log("" || "E");
+```
+
+If you can explain **why each line produces its output**, you'll have mastered one of the most commonly tested JavaScript concepts in interviews.
