@@ -1,0 +1,879 @@
+# Phase 1 – Topic 8: Numbers & Math
+
+JavaScript has only **one numeric type** for regular numbers:
+
+```js
+let age = 21;
+let price = 199.99;
+let temperature = -5;
+```
+
+All of these are of type:
+
+```js
+console.log(typeof age);
+```
+
+Output
+
+```text
+number
+```
+
+---
+
+# 1. Number Object
+
+You can create numbers directly:
+
+```js
+let score = 100;
+```
+
+Or (rarely used):
+
+```js
+let score = new Number(100);
+```
+
+Prefer the first approach.
+
+---
+
+# 2. Number Methods
+
+## `toString()`
+
+Converts a number into a string.
+
+```js
+let score = 100;
+
+console.log(score.toString());
+console.log(typeof score.toString());
+```
+
+Output
+
+```text
+100
+string
+```
+
+---
+
+## `toFixed()`
+
+Rounds to a fixed number of decimal places.
+
+```js
+let price = 99.4567;
+
+console.log(price.toFixed(2));
+```
+
+Output
+
+```text
+99.46
+```
+
+Very common for displaying currency.
+
+---
+
+## `toPrecision()`
+
+Controls the total number of significant digits.
+
+```js
+let num = 123.456;
+
+console.log(num.toPrecision(4));
+```
+
+Output
+
+```text
+123.5
+```
+
+---
+
+## `toLocaleString()`
+
+Formats numbers for different regions.
+
+```js
+let amount = 1000000;
+
+console.log(amount.toLocaleString());
+```
+
+Output (depends on your locale)
+
+```text
+1,000,000
+```
+
+Indian format:
+
+```js
+console.log(amount.toLocaleString("en-IN"));
+```
+
+Output
+
+```text
+10,00,000
+```
+
+Useful in Indian financial applications.
+
+---
+
+# 3. Math Object
+
+The `Math` object provides mathematical functions.
+
+---
+
+## `Math.abs()`
+
+Returns the absolute value.
+
+```js
+console.log(Math.abs(-15));
+```
+
+Output
+
+```text
+15
+```
+
+---
+
+## `Math.round()`
+
+Rounds to the nearest integer.
+
+```js
+console.log(Math.round(4.6));
+console.log(Math.round(4.3));
+```
+
+Output
+
+```text
+5
+4
+```
+
+---
+
+## `Math.ceil()`
+
+Always rounds **up**.
+
+```js
+console.log(Math.ceil(4.1));
+```
+
+Output
+
+```text
+5
+```
+
+---
+
+## `Math.floor()`
+
+Always rounds **down**.
+
+```js
+console.log(Math.floor(4.9));
+```
+
+Output
+
+```text
+4
+```
+
+---
+
+## `Math.min()`
+
+```js
+console.log(Math.min(5, 2, 9, 1));
+```
+
+Output
+
+```text
+1
+```
+
+---
+
+## `Math.max()`
+
+```js
+console.log(Math.max(5, 2, 9, 1));
+```
+
+Output
+
+```text
+9
+```
+
+---
+
+## `Math.sqrt()`
+
+Square root.
+
+```js
+console.log(Math.sqrt(81));
+```
+
+Output
+
+```text
+9
+```
+
+---
+
+## `Math.pow()`
+
+Power.
+
+```js
+console.log(Math.pow(2, 5));
+```
+
+Output
+
+```text
+32
+```
+
+Equivalent to:
+
+```js
+console.log(2 ** 5);
+```
+
+---
+
+## `Math.random()`
+
+Returns a random decimal between **0 (inclusive)** and **1 (exclusive)**.
+
+```js
+console.log(Math.random());
+```
+
+Possible output
+
+```text
+0.583924
+```
+
+Every run is different.
+
+---
+
+# 4. Random Numbers
+
+## Dice (1–6)
+
+```js
+console.log(Math.floor(Math.random() * 6) + 1);
+```
+
+Possible outputs
+
+```text
+1
+4
+6
+2
+```
+
+---
+
+## Between 1 and 100
+
+```js
+console.log(Math.floor(Math.random() * 100) + 1);
+```
+
+---
+
+## Between Min and Max
+
+Formula:
+
+```js
+Math.floor(Math.random() * (max - min + 1)) + min;
+```
+
+Example:
+
+```js
+let min = 50;
+let max = 100;
+
+console.log(Math.floor(Math.random() * (max - min + 1)) + min);
+```
+
+---
+
+# 5. Real Project Example
+
+Generate OTP
+
+```js
+const otp = Math.floor(1000 + Math.random() * 9000);
+
+console.log(otp);
+```
+
+Output (random)
+
+```text
+4832
+```
+
+---
+
+# 6. Common Mistakes
+
+❌
+
+```js
+Math.random() * 10;
+```
+
+Output
+
+```text
+0.345
+5.239
+7.812
+```
+
+These are decimals.
+
+If you want integers:
+
+```js
+Math.floor(Math.random() * 10);
+```
+
+---
+
+# 7. Mini Challenge
+
+Predict the output.
+
+```js
+console.log(Math.ceil(4.2));
+```
+
+---
+
+```js
+console.log(Math.floor(8.9));
+```
+
+---
+
+```js
+console.log(Math.max(10, 50, 2));
+```
+
+---
+
+```js
+console.log((123.456).toFixed(1));
+```
+
+---
+
+### Answers
+
+```text
+5
+```
+
+```text
+8
+```
+
+```text
+50
+```
+
+```text
+123.5
+```
+
+---
+
+# Quick Revision
+
+| Method          | Purpose            |
+| --------------- | ------------------ |
+| `toFixed()`     | Decimal places     |
+| `toPrecision()` | Significant digits |
+| `Math.round()`  | Nearest integer    |
+| `Math.ceil()`   | Round up           |
+| `Math.floor()`  | Round down         |
+| `Math.min()`    | Smallest value     |
+| `Math.max()`    | Largest value      |
+| `Math.random()` | Random decimal     |
+| `Math.sqrt()`   | Square root        |
+| `Math.pow()`    | Power              |
+
+---
+
+# Phase 1 – Topic 9: Date Object
+
+The `Date` object lets JavaScript work with:
+
+* Current date
+* Current time
+* Birthdays
+* Timers
+* Calendars
+* Timestamps
+
+Every real application uses dates.
+
+---
+
+# 1. Current Date
+
+```js
+const today = new Date();
+
+console.log(today);
+```
+
+Example Output
+
+```text
+2026-07-18T08:15:30.123Z
+```
+
+Your output will differ.
+
+---
+
+# 2. Readable Date
+
+## `toDateString()`
+
+```js
+const today = new Date();
+
+console.log(today.toDateString());
+```
+
+Output
+
+```text
+Sat Jul 18 2026
+```
+
+---
+
+## `toLocaleDateString()`
+
+```js
+console.log(today.toLocaleDateString());
+```
+
+Example
+
+```text
+18/07/2026
+```
+
+Depends on your locale.
+
+---
+
+## `toLocaleTimeString()`
+
+```js
+console.log(today.toLocaleTimeString());
+```
+
+Example
+
+```text
+1:45:20 PM
+```
+
+---
+
+## `toLocaleString()`
+
+```js
+console.log(today.toLocaleString());
+```
+
+Example
+
+```text
+18/07/2026, 1:45:20 PM
+```
+
+---
+
+# 3. Create Custom Date
+
+```js
+const birthday = new Date("2005-04-19");
+
+console.log(birthday.toDateString());
+```
+
+Output
+
+```text
+Tue Apr 19 2005
+```
+
+---
+
+Another way
+
+```js
+const birthday = new Date(2005, 3, 19);
+```
+
+Remember:
+
+Months are **0-indexed**.
+
+```text
+January = 0
+February = 1
+March = 2
+April = 3
+```
+
+---
+
+# 4. Get Individual Values
+
+```js
+const today = new Date();
+```
+
+---
+
+## Year
+
+```js
+console.log(today.getFullYear());
+```
+
+---
+
+## Month
+
+```js
+console.log(today.getMonth());
+```
+
+Output
+
+```text
+0–11
+```
+
+Add `1` if you want human-readable months.
+
+---
+
+## Day of Month
+
+```js
+console.log(today.getDate());
+```
+
+---
+
+## Day of Week
+
+```js
+console.log(today.getDay());
+```
+
+Output
+
+```text
+0 = Sunday
+1 = Monday
+...
+6 = Saturday
+```
+
+---
+
+## Hours
+
+```js
+console.log(today.getHours());
+```
+
+---
+
+## Minutes
+
+```js
+console.log(today.getMinutes());
+```
+
+---
+
+## Seconds
+
+```js
+console.log(today.getSeconds());
+```
+
+---
+
+# 5. Timestamps
+
+Milliseconds since **1 January 1970**.
+
+```js
+console.log(Date.now());
+```
+
+Example
+
+```text
+1784376321000
+```
+
+Used for:
+
+* Authentication
+* Expiration
+* Sorting
+* Measuring execution time
+
+---
+
+# 6. Difference Between Dates
+
+```js
+const start = Date.now();
+
+// Some work...
+
+const end = Date.now();
+
+console.log(end - start);
+```
+
+Output
+
+```text
+15
+```
+
+(milliseconds)
+
+---
+
+# 7. Project Example
+
+Age Calculator
+
+```js
+const birthYear = 2005;
+
+const currentYear = new Date().getFullYear();
+
+console.log(currentYear - birthYear);
+```
+
+Output (in 2026)
+
+```text
+21
+```
+
+---
+
+Greeting Based on Time
+
+```js
+const hour = new Date().getHours();
+
+if (hour < 12) {
+    console.log("Good Morning");
+} else if (hour < 18) {
+    console.log("Good Afternoon");
+} else {
+    console.log("Good Evening");
+}
+```
+
+---
+
+# 8. Common Mistakes
+
+### Mistake 1
+
+```js
+new Date(2026, 7, 18);
+```
+
+Many expect July.
+
+Actually:
+
+```text
+August
+```
+
+Because months start from `0`.
+
+Correct:
+
+```js
+new Date(2026, 6, 18);
+```
+
+for July.
+
+---
+
+### Mistake 2
+
+```js
+today.getMonth();
+```
+
+Returns:
+
+```text
+0–11
+```
+
+Not `1–12`.
+
+---
+
+# 9. Mini Challenge
+
+Predict the output.
+
+### Q1
+
+```js
+console.log(new Date().getFullYear());
+```
+
+---
+
+### Q2
+
+```js
+console.log(new Date().getMonth());
+```
+
+---
+
+### Q3
+
+```js
+console.log(new Date().getDay());
+```
+
+---
+
+### Q4
+
+```js
+console.log(Date.now() > 0);
+```
+
+---
+
+### Answers
+
+**Q1**
+
+Current year.
+
+For today:
+
+```text
+2026
+```
+
+---
+
+**Q2**
+
+Current month index.
+
+For July:
+
+```text
+6
+```
+
+---
+
+**Q3**
+
+Current weekday index.
+
+For Saturday:
+
+```text
+6
+```
+
+---
+
+**Q4**
+
+```text
+true
+```
+
+---
+
+# Most Used Date Methods
+
+| Method                 | Purpose           |
+| ---------------------- | ----------------- |
+| `new Date()`           | Current date/time |
+| `Date.now()`           | Timestamp         |
+| `getFullYear()`        | Current year      |
+| `getMonth()`           | Month (0–11)      |
+| `getDate()`            | Day of month      |
+| `getDay()`             | Day of week       |
+| `getHours()`           | Hour              |
+| `getMinutes()`         | Minutes           |
+| `toLocaleDateString()` | Local date        |
+| `toLocaleTimeString()` | Local time        |
+
+---

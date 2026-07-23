@@ -1,0 +1,618 @@
+# Phase 1 – Topic 7: Template Literals
+
+Before ES6 (2015), building strings with variables was messy. Template literals solved that problem by making strings easier to read and write.
+
+---
+
+# 1. What is a Template Literal?
+
+A template literal is a string enclosed in **backticks (` `)** instead of single (`'`) or double (`"`) quotes.
+
+```js
+`Hello World`
+```
+
+The biggest advantage is that you can **embed variables and expressions** directly inside the string.
+
+---
+
+# 2. Why Do We Need It?
+
+Suppose you have:
+
+```js
+let name = "Devanshu";
+let age = 21;
+```
+
+### Old Way (String Concatenation)
+
+```js
+console.log("My name is " + name + " and I am " + age + " years old.");
+```
+
+Output
+
+```text
+My name is Devanshu and I am 21 years old.
+```
+
+This works, but as the sentence grows, it becomes difficult to read.
+
+---
+
+### Modern Way (Template Literal)
+
+```js
+console.log(`My name is ${name} and I am ${age} years old.`);
+```
+
+Output
+
+```text
+My name is Devanshu and I am 21 years old.
+```
+
+Much cleaner.
+
+---
+
+# 3. Syntax
+
+```js
+`Text ${expression}`
+```
+
+The `${}` syntax is called **interpolation**.
+
+Everything inside `${}` is treated as JavaScript code.
+
+---
+
+# 4. Example 1 – Variables
+
+```js
+let firstName = "Devanshu";
+
+console.log(`Hello ${firstName}`);
+```
+
+Output
+
+```text
+Hello Devanshu
+```
+
+---
+
+# 5. Example 2 – Multiple Variables
+
+```js
+let name = "Devanshu";
+let city = "Nagpur";
+
+console.log(`${name} lives in ${city}.`);
+```
+
+Output
+
+```text
+Devanshu lives in Nagpur.
+```
+
+---
+
+# 6. Example 3 – Expressions
+
+You can perform calculations inside `${}`.
+
+```js
+let a = 10;
+let b = 20;
+
+console.log(`Sum = ${a + b}`);
+```
+
+Output
+
+```text
+Sum = 30
+```
+
+Another example
+
+```js
+console.log(`10 × 5 = ${10 * 5}`);
+```
+
+Output
+
+```text
+10 × 5 = 50
+```
+
+---
+
+# 7. Example 4 – Function Calls
+
+```js
+function greet(name) {
+    return `Hello ${name}`;
+}
+
+console.log(`${greet("Devanshu")}`);
+```
+
+Output
+
+```text
+Hello Devanshu
+```
+
+Anything that returns a value can go inside `${}`.
+
+---
+
+# 8. Multi-line Strings
+
+Before template literals:
+
+```js
+let message = "Hello\nWelcome\nJavaScript";
+```
+
+With template literals:
+
+```js
+let message = `
+Hello
+Welcome
+JavaScript
+`;
+
+console.log(message);
+```
+
+Output
+
+```text
+Hello
+Welcome
+JavaScript
+```
+
+Much easier to read.
+
+---
+
+# 9. Project Example – User Profile
+
+```js
+let name = "Devanshu";
+let age = 21;
+let city = "Nagpur";
+
+let profile = `
+Name : ${name}
+Age  : ${age}
+City : ${city}
+`;
+
+console.log(profile);
+```
+
+Output
+
+```text
+Name : Devanshu
+Age  : 21
+City : Nagpur
+```
+
+---
+
+# 10. Project Example – Invoice
+
+```js
+let product = "Laptop";
+let price = 65000;
+let quantity = 2;
+
+console.log(`
+Product  : ${product}
+Price    : ₹${price}
+Quantity : ${quantity}
+Total    : ₹${price * quantity}
+`);
+```
+
+Output
+
+```text
+Product  : Laptop
+Price    : ₹65000
+Quantity : 2
+Total    : ₹130000
+```
+
+This is very common in Node.js and backend development.
+
+---
+
+# 11. Nested Objects
+
+Template literals work with object properties.
+
+```js
+const user = {
+    name: "Devanshu",
+    age: 21
+};
+
+console.log(`${user.name} is ${user.age} years old.`);
+```
+
+Output
+
+```text
+Devanshu is 21 years old.
+```
+
+---
+
+# 12. Array Example
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+
+console.log(`First Fruit: ${fruits[0]}`);
+```
+
+Output
+
+```text
+First Fruit: Apple
+```
+
+---
+
+# 13. Method Calls
+
+You can call methods inside `${}`.
+
+```js
+let language = "javascript";
+
+console.log(`${language.toUpperCase()}`);
+```
+
+Output
+
+```text
+JAVASCRIPT
+```
+
+---
+
+Another example
+
+```js
+let name = "   Devanshu   ";
+
+console.log(`${name.trim()}`);
+```
+
+Output
+
+```text
+Devanshu
+```
+
+---
+
+# 14. Conditional Expressions
+
+```js
+let age = 20;
+
+console.log(`${age >= 18 ? "Adult" : "Minor"}`);
+```
+
+Output
+
+```text
+Adult
+```
+
+Don't worry about the `? :` operator yet—we'll study it in Phase 2.
+
+---
+
+# 15. Common Mistakes
+
+## Mistake 1
+
+Using single quotes instead of backticks.
+
+❌ Wrong
+
+```js
+let name = "Devanshu";
+
+console.log('${name}');
+```
+
+Output
+
+```text
+${name}
+```
+
+Nothing is replaced.
+
+---
+
+✅ Correct
+
+```js
+console.log(`${name}`);
+```
+
+Output
+
+```text
+Devanshu
+```
+
+---
+
+## Mistake 2
+
+Forgetting `${}`
+
+❌ Wrong
+
+```js
+console.log(`Hello name`);
+```
+
+Output
+
+```text
+Hello name
+```
+
+---
+
+✅ Correct
+
+```js
+console.log(`Hello ${name}`);
+```
+
+---
+
+## Mistake 3
+
+Using `+` inside template literals unnecessarily.
+
+Instead of:
+
+```js
+console.log(`Hello ` + name);
+```
+
+Write:
+
+```js
+console.log(`Hello ${name}`);
+```
+
+Cleaner and more readable.
+
+---
+
+# 16. Best Practices
+
+✅ Prefer template literals over string concatenation.
+
+Instead of:
+
+```js
+let fullName = firstName + " " + lastName;
+```
+
+Use:
+
+```js
+let fullName = `${firstName} ${lastName}`;
+```
+
+---
+
+✅ Use template literals for:
+
+* HTML generation
+* Logging
+* API messages
+* SQL query strings (carefully, with parameterization in real apps)
+* Email templates
+* React JSX expressions
+
+---
+
+# 17. Mini Challenge
+
+Predict the output.
+
+### Q1
+
+```js
+let name = "Devanshu";
+
+console.log(`Hello ${name}`);
+```
+
+---
+
+### Q2
+
+```js
+let a = 10;
+let b = 15;
+
+console.log(`${a + b}`);
+```
+
+---
+
+### Q3
+
+```js
+let city = "Nagpur";
+
+console.log(`Welcome to ${city.toUpperCase()}`);
+```
+
+---
+
+### Q4
+
+```js
+const user = {
+    name: "Rex"
+};
+
+console.log(`User: ${user.name}`);
+```
+
+---
+
+### Q5
+
+```js
+const nums = [10, 20, 30];
+
+console.log(`Second Number: ${nums[1]}`);
+```
+
+---
+
+### Q6
+
+```js
+console.log(`5 * 8 = ${5 * 8}`);
+```
+
+---
+
+### Q7
+
+```js
+let language = "JavaScript";
+
+console.log(`
+Learning
+${language}
+is fun!
+`);
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+Hello Devanshu
+```
+
+---
+
+### Q2
+
+```text
+25
+```
+
+---
+
+### Q3
+
+```text
+Welcome to NAGPUR
+```
+
+---
+
+### Q4
+
+```text
+User: Rex
+```
+
+---
+
+### Q5
+
+```text
+Second Number: 20
+```
+
+---
+
+### Q6
+
+```text
+5 * 8 = 40
+```
+
+---
+
+### Q7
+
+```text
+Learning
+JavaScript
+is fun!
+```
+
+---
+
+# Quick Revision (30 Seconds)
+
+| Feature     | Example                        |
+| ----------- | ------------------------------ |
+| Variable    | `` `Hello ${name}` ``          |
+| Expression  | `` `${10 + 5}` ``              |
+| Method Call | `` `${name.toUpperCase()}` ``  |
+| Object      | `` `${user.name}` ``           |
+| Array       | `` `${arr[0]}` ``              |
+| Function    | `` `${greet()}` ``             |
+| Multi-line  | Backticks preserve line breaks |
+
+---
+
+# Interview Questions
+
+### Q1. Difference between single quotes, double quotes, and backticks?
+
+* `' '` and `" "` create normal strings.
+* `` ` ` `` creates a template literal, which supports:
+
+  * Interpolation (`${}`)
+  * Multi-line strings
+  * Embedded expressions
+
+---
+
+### Q2. Why are template literals preferred?
+
+Because they are:
+
+* More readable
+* Easier to maintain
+* Better for dynamic content
+* Less error-prone than repeated string concatenation
+

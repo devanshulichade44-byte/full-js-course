@@ -1,0 +1,851 @@
+# Phase 1 – Topic 3: Type Conversion
+
+Type conversion is one of the most important JavaScript topics because **JavaScript is dynamically typed**. Values often come in as one type (e.g., from a form or an API) and need to be converted to another.
+
+For example:
+
+* Form inputs return **strings**, even when the user types numbers.
+* APIs may send `"true"` instead of `true`.
+* You may need to convert a number into a string for display.
+
+---
+
+# 1. What is Type Conversion?
+
+Type conversion means **changing one data type into another**.
+
+Example:
+
+```js
+"21"  →  21
+```
+
+or
+
+```js
+100  →  "100"
+```
+
+---
+
+# 2. Why Do We Need It?
+
+Imagine a user enters their age in a form.
+
+```js
+let age = "21";
+```
+
+Now you want to add 5 years.
+
+```js
+console.log(age + 5);
+```
+
+Output:
+
+```text
+215
+```
+
+Why?
+
+Because `"21"` is a **string**.
+
+Convert it first:
+
+```js
+let age = Number("21");
+
+console.log(age + 5);
+```
+
+Output:
+
+```text
+26
+```
+
+---
+
+# 3. Two Types of Conversion
+
+## A) Explicit Conversion
+
+You convert the value yourself.
+
+```js
+Number()
+String()
+Boolean()
+```
+
+---
+
+## B) Implicit Conversion (Type Coercion)
+
+JavaScript converts automatically.
+
+Example:
+
+```js
+console.log("5" + 2);
+```
+
+Output
+
+```text
+52
+```
+
+JavaScript converted `2` into a string.
+
+---
+
+# 4. Convert to Number
+
+Syntax
+
+```js
+Number(value)
+```
+
+---
+
+### Example 1
+
+```js
+let age = "21";
+
+console.log(Number(age));
+```
+
+Output
+
+```text
+21
+```
+
+Type
+
+```js
+console.log(typeof Number(age));
+```
+
+Output
+
+```text
+number
+```
+
+---
+
+### Example 2
+
+```js
+let price = "199.99";
+
+console.log(Number(price));
+```
+
+Output
+
+```text
+199.99
+```
+
+---
+
+### Example 3
+
+```js
+console.log(Number(true));
+console.log(Number(false));
+```
+
+Output
+
+```text
+1
+0
+```
+
+---
+
+### Example 4
+
+```js
+console.log(Number(null));
+```
+
+Output
+
+```text
+0
+```
+
+---
+
+### Example 5
+
+```js
+console.log(Number(undefined));
+```
+
+Output
+
+```text
+NaN
+```
+
+---
+
+### Example 6
+
+```js
+console.log(Number("Hello"));
+```
+
+Output
+
+```text
+NaN
+```
+
+`NaN` means **Not a Number**.
+
+It indicates that JavaScript couldn't convert the value into a valid number.
+
+---
+
+# 5. Check for NaN
+
+Example
+
+```js
+let value = Number("Hello");
+
+console.log(Number.isNaN(value));
+```
+
+Output
+
+```text
+true
+```
+
+This is the safest way to check if a conversion failed.
+
+---
+
+# 6. Convert to String
+
+Syntax
+
+```js
+String(value)
+```
+
+---
+
+### Example 1
+
+```js
+let age = 21;
+
+console.log(String(age));
+```
+
+Output
+
+```text
+"21"
+```
+
+Type
+
+```js
+console.log(typeof String(age));
+```
+
+Output
+
+```text
+string
+```
+
+---
+
+### Example 2
+
+```js
+console.log(String(true));
+```
+
+Output
+
+```text
+"true"
+```
+
+---
+
+### Example 3
+
+```js
+console.log(String(null));
+```
+
+Output
+
+```text
+"null"
+```
+
+---
+
+### Example 4
+
+```js
+console.log(String(undefined));
+```
+
+Output
+
+```text
+"undefined"
+```
+
+---
+
+# 7. Convert to Boolean
+
+Syntax
+
+```js
+Boolean(value)
+```
+
+This is used very often in conditions.
+
+---
+
+### Example 1
+
+```js
+console.log(Boolean(1));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+### Example 2
+
+```js
+console.log(Boolean(0));
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+### Example 3
+
+```js
+console.log(Boolean(""));
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+### Example 4
+
+```js
+console.log(Boolean("JavaScript"));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+### Example 5
+
+```js
+console.log(Boolean(null));
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+### Example 6
+
+```js
+console.log(Boolean(undefined));
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+### Example 7
+
+```js
+console.log(Boolean([]));
+```
+
+Output
+
+```text
+true
+```
+
+Many beginners expect `false`, but **an empty array is truthy**.
+
+---
+
+### Example 8
+
+```js
+console.log(Boolean({}));
+```
+
+Output
+
+```text
+true
+```
+
+An empty object is also truthy.
+
+---
+
+# 8. Truthy vs Falsy Values
+
+## Falsy Values (Only These)
+
+```js
+false
+0
+-0
+0n
+""
+null
+undefined
+NaN
+```
+
+Everything else is **truthy**.
+
+Examples:
+
+```js
+Boolean("Hello")     // true
+Boolean(100)         // true
+Boolean([])          // true
+Boolean({})          // true
+Boolean(-1)          // true
+```
+
+---
+
+# 9. Implicit Type Conversion (Coercion)
+
+JavaScript sometimes converts values automatically.
+
+---
+
+### Example 1
+
+```js
+console.log("5" + 2);
+```
+
+Output
+
+```text
+52
+```
+
+Reason:
+
+`2` becomes `"2"`.
+
+---
+
+### Example 2
+
+```js
+console.log("5" - 2);
+```
+
+Output
+
+```text
+3
+```
+
+Reason:
+
+`"5"` becomes `5`.
+
+---
+
+### Example 3
+
+```js
+console.log("5" * 2);
+```
+
+Output
+
+```text
+10
+```
+
+---
+
+### Example 4
+
+```js
+console.log("10" / 2);
+```
+
+Output
+
+```text
+5
+```
+
+---
+
+### Example 5
+
+```js
+console.log(true + 1);
+```
+
+Output
+
+```text
+2
+```
+
+Because
+
+```text
+true → 1
+```
+
+---
+
+### Example 6
+
+```js
+console.log(false + 5);
+```
+
+Output
+
+```text
+5
+```
+
+Because
+
+```text
+false → 0
+```
+
+---
+
+# 10. Common Mistakes
+
+### Mistake 1
+
+```js
+let age = "21";
+
+console.log(age + 1);
+```
+
+Output
+
+```text
+211
+```
+
+Not
+
+```text
+22
+```
+
+---
+
+### Mistake 2
+
+```js
+Number("Hello");
+```
+
+Output
+
+```text
+NaN
+```
+
+---
+
+### Mistake 3
+
+```js
+Boolean("false");
+```
+
+Output
+
+```text
+true
+```
+
+Why?
+
+Because `"false"` is a **non-empty string**.
+
+---
+
+### Mistake 4
+
+```js
+Boolean("0");
+```
+
+Output
+
+```text
+true
+```
+
+Again, any non-empty string is truthy.
+
+---
+
+# 11. Best Practices
+
+✅ Convert input values before calculations.
+
+```js
+let age = Number(prompt("Enter age"));
+```
+
+---
+
+✅ Use `Number.isNaN()` to validate conversions.
+
+```js
+let value = Number("abc");
+
+if (Number.isNaN(value)) {
+    console.log("Invalid number");
+}
+```
+
+---
+
+✅ Avoid relying on automatic type coercion.
+
+Instead of:
+
+```js
+"5" * 2
+```
+
+Prefer:
+
+```js
+Number("5") * 2
+```
+
+It's clearer and easier to maintain.
+
+---
+
+# 12. Mini Challenge
+
+Predict the output **before running the code**.
+
+### Q1
+
+```js
+console.log(Number("100"));
+```
+
+---
+
+### Q2
+
+```js
+console.log(Number("Hello"));
+```
+
+---
+
+### Q3
+
+```js
+console.log(Boolean(""));
+```
+
+---
+
+### Q4
+
+```js
+console.log(Boolean("0"));
+```
+
+---
+
+### Q5
+
+```js
+console.log(String(500));
+```
+
+---
+
+### Q6
+
+```js
+console.log("10" + 5);
+```
+
+---
+
+### Q7
+
+```js
+console.log("10" - 5);
+```
+
+---
+
+### Q8
+
+```js
+console.log(Boolean([]));
+```
+
+---
+
+# Answers
+
+**Q1**
+
+```text
+100
+```
+
+---
+
+**Q2**
+
+```text
+NaN
+```
+
+---
+
+**Q3**
+
+```text
+false
+```
+
+---
+
+**Q4**
+
+```text
+true
+```
+
+---
+
+**Q5**
+
+```text
+"500"
+```
+
+---
+
+**Q6**
+
+```text
+105
+```
+
+---
+
+**Q7**
+
+```text
+5
+```
+
+---
+
+**Q8**
+
+```text
+true
+```
+
+---
+
+## Quick Revision (60 Seconds)
+
+| Conversion          | Example     | Result  |
+| ------------------- | ----------- | ------- |
+| `Number("21")`      | `"21"`      | `21`    |
+| `String(21)`        | `21`        | `"21"`  |
+| `Boolean(1)`        | `1`         | `true`  |
+| `Boolean(0)`        | `0`         | `false` |
+| `Boolean("")`       | `""`        | `false` |
+| `Boolean("Hi")`     | `"Hi"`      | `true`  |
+| `Number(true)`      | `true`      | `1`     |
+| `Number(false)`     | `false`     | `0`     |
+| `Number(null)`      | `null`      | `0`     |
+| `Number(undefined)` | `undefined` | `NaN`   |
+
+
+
+

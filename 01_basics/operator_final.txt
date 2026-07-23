@@ -1,0 +1,896 @@
+# Phase 1 – Topic 4: Operators
+
+Operators are symbols that tell JavaScript **what operation to perform**.
+
+Examples:
+
+```js
+5 + 3
+```
+
+`+` is an operator.
+
+```js
+age >= 18
+```
+
+`>=` is an operator.
+
+Without operators, JavaScript couldn't perform calculations, comparisons, or assignments.
+
+---
+
+# 1. Types of Operators
+
+We'll cover the operators you use most in real projects.
+
+```
+Operators
+│
+├── Arithmetic
+├── Assignment
+├── Comparison (Topic 5)
+├── Logical (Phase 2)
+├── Unary
+├── Increment / Decrement
+├── Ternary (Phase 2)
+└── Type Operators
+```
+
+Since **Comparison** has its own topic, we'll skip the details here.
+
+---
+
+# 2. Arithmetic Operators
+
+Used for mathematical calculations.
+
+| Operator | Meaning             |
+| -------- | ------------------- |
+| `+`      | Addition            |
+| `-`      | Subtraction         |
+| `*`      | Multiplication      |
+| `/`      | Division            |
+| `%`      | Modulus (Remainder) |
+| `**`     | Exponent (Power)    |
+
+---
+
+## Addition (`+`)
+
+Example 1
+
+```js
+let a = 10;
+let b = 5;
+
+console.log(a + b);
+```
+
+Output
+
+```
+15
+```
+
+---
+
+Example 2
+
+```js
+console.log(100 + 250);
+```
+
+Output
+
+```
+350
+```
+
+---
+
+Example 3
+
+```js
+let price = 500;
+let tax = 90;
+
+console.log(price + tax);
+```
+
+Output
+
+```
+590
+```
+
+---
+
+## Subtraction (`-`)
+
+```js
+let marks = 100;
+
+console.log(marks - 30);
+```
+
+Output
+
+```
+70
+```
+
+---
+
+## Multiplication (`*`)
+
+```js
+let quantity = 4;
+let price = 150;
+
+console.log(quantity * price);
+```
+
+Output
+
+```
+600
+```
+
+---
+
+## Division (`/`)
+
+```js
+console.log(20 / 4);
+```
+
+Output
+
+```
+5
+```
+
+---
+
+```js
+console.log(7 / 2);
+```
+
+Output
+
+```
+3.5
+```
+
+JavaScript doesn't automatically round the result.
+
+---
+
+## Modulus (`%`)
+
+Returns the **remainder** after division.
+
+```js
+console.log(10 % 3);
+```
+
+Output
+
+```
+1
+```
+
+Because
+
+```
+10 ÷ 3 = 3 remainder 1
+```
+
+---
+
+Another example
+
+```js
+console.log(20 % 5);
+```
+
+Output
+
+```
+0
+```
+
+---
+
+### Real Project Example
+
+Check if a number is even.
+
+```js
+let number = 18;
+
+console.log(number % 2);
+```
+
+Output
+
+```
+0
+```
+
+Since remainder is `0`, it's even.
+
+---
+
+## Exponent (`**`)
+
+```js
+console.log(2 ** 3);
+```
+
+Output
+
+```
+8
+```
+
+Means
+
+```
+2 × 2 × 2
+```
+
+---
+
+Another example
+
+```js
+console.log(5 ** 2);
+```
+
+Output
+
+```
+25
+```
+
+---
+
+# 3. Assignment Operators
+
+Used to assign values.
+
+---
+
+Basic Assignment
+
+```js
+let age = 21;
+```
+
+Here,
+
+```
+=
+```
+
+is the assignment operator.
+
+---
+
+## +=
+
+```js
+let score = 50;
+
+score += 10;
+
+console.log(score);
+```
+
+Output
+
+```
+60
+```
+
+Equivalent to
+
+```js
+score = score + 10;
+```
+
+---
+
+## -=
+
+```js
+let score = 50;
+
+score -= 20;
+
+console.log(score);
+```
+
+Output
+
+```
+30
+```
+
+---
+
+## *=
+
+```js
+let price = 100;
+
+price *= 2;
+
+console.log(price);
+```
+
+Output
+
+```
+200
+```
+
+---
+
+## /=
+
+```js
+let total = 100;
+
+total /= 5;
+
+console.log(total);
+```
+
+Output
+
+```
+20
+```
+
+---
+
+## %=
+
+```js
+let number = 17;
+
+number %= 5;
+
+console.log(number);
+```
+
+Output
+
+```
+2
+```
+
+---
+
+# 4. Unary Operators
+
+Unary means **one operand**.
+
+---
+
+Positive
+
+```js
+let x = 5;
+
+console.log(+x);
+```
+
+Output
+
+```
+5
+```
+
+Usually not very useful.
+
+---
+
+Negative
+
+```js
+let x = 5;
+
+console.log(-x);
+```
+
+Output
+
+```
+-5
+```
+
+---
+
+# 5. Increment Operator (`++`)
+
+Adds **1**.
+
+---
+
+Example
+
+```js
+let count = 5;
+
+count++;
+
+console.log(count);
+```
+
+Output
+
+```
+6
+```
+
+---
+
+Project Example
+
+```js
+let cartItems = 0;
+
+cartItems++;
+
+cartItems++;
+
+console.log(cartItems);
+```
+
+Output
+
+```
+2
+```
+
+---
+
+# 6. Decrement Operator (`--`)
+
+Subtracts **1**.
+
+```js
+let lives = 3;
+
+lives--;
+
+console.log(lives);
+```
+
+Output
+
+```
+2
+```
+
+---
+
+# 7. Prefix vs Postfix
+
+This is an interview favorite.
+
+---
+
+## Postfix (`x++`)
+
+```js
+let x = 5;
+
+console.log(x++);
+console.log(x);
+```
+
+Output
+
+```
+5
+6
+```
+
+Why?
+
+```
+Step 1 → Print 5
+Step 2 → Increase to 6
+```
+
+---
+
+## Prefix (`++x`)
+
+```js
+let x = 5;
+
+console.log(++x);
+console.log(x);
+```
+
+Output
+
+```
+6
+6
+```
+
+Why?
+
+```
+Step 1 → Increase to 6
+Step 2 → Print 6
+```
+
+---
+
+### Easy Trick
+
+```
+x++
+Use first
+Increase later
+
+++x
+Increase first
+Use later
+```
+
+---
+
+# 8. String Concatenation
+
+The `+` operator also joins strings.
+
+```js
+let firstName = "Devanshu";
+let lastName = "Lichade";
+
+console.log(firstName + " " + lastName);
+```
+
+Output
+
+```
+Devanshu Lichade
+```
+
+---
+
+Another example
+
+```js
+console.log("Hello " + "World");
+```
+
+Output
+
+```
+Hello World
+```
+
+---
+
+# 9. Operator Precedence
+
+JavaScript follows normal mathematical rules.
+
+Example
+
+```js
+console.log(2 + 3 * 4);
+```
+
+Output
+
+```
+14
+```
+
+Not
+
+```
+20
+```
+
+Because multiplication happens first.
+
+```
+3 × 4 = 12
+
+2 + 12 = 14
+```
+
+---
+
+Using parentheses
+
+```js
+console.log((2 + 3) * 4);
+```
+
+Output
+
+```
+20
+```
+
+---
+
+# 10. Common Mistakes
+
+### Mistake 1
+
+```js
+let x = "5";
+
+console.log(x + 5);
+```
+
+Output
+
+```
+55
+```
+
+Not
+
+```
+10
+```
+
+---
+
+### Mistake 2
+
+```js
+let x = 5;
+
+x = x++;
+
+console.log(x);
+```
+
+Output
+
+```
+5
+```
+
+This confuses many beginners. Avoid writing code like this. Use `x++` on its own line.
+
+---
+
+### Mistake 3
+
+```js
+console.log(10 % 2);
+```
+
+Output
+
+```
+0
+```
+
+Many people think `%` gives a percentage. It **doesn't**.
+
+It gives the **remainder**.
+
+---
+
+# 11. Best Practices
+
+✅ Use compound assignment operators.
+
+Instead of
+
+```js
+score = score + 10;
+```
+
+Use
+
+```js
+score += 10;
+```
+
+---
+
+✅ Use `%` to check even or odd.
+
+```js
+if (number % 2 === 0) {
+    console.log("Even");
+}
+```
+
+---
+
+✅ Avoid complicated expressions with `++` and `--`.
+
+Instead of
+
+```js
+let y = x++;
+```
+
+Prefer
+
+```js
+x++;
+let y = x;
+```
+
+It's much easier to read.
+
+---
+
+# 12. Mini Challenge
+
+Predict the output **before running the code**.
+
+### Q1
+
+```js
+let x = 10;
+
+x += 5;
+
+console.log(x);
+```
+
+---
+
+### Q2
+
+```js
+console.log(15 % 4);
+```
+
+---
+
+### Q3
+
+```js
+console.log(2 ** 4);
+```
+
+---
+
+### Q4
+
+```js
+let count = 5;
+
+console.log(count++);
+console.log(count);
+```
+
+---
+
+### Q5
+
+```js
+let count = 5;
+
+console.log(++count);
+console.log(count);
+```
+
+---
+
+### Q6
+
+```js
+console.log(20 / 5 + 2 * 3);
+```
+
+---
+
+### Q7
+
+```js
+let first = "Java";
+let second = "Script";
+
+console.log(first + second);
+```
+
+---
+
+# Answers
+
+### Q1
+
+```
+15
+```
+
+---
+
+### Q2
+
+```
+3
+```
+
+---
+
+### Q3
+
+```
+16
+```
+
+---
+
+### Q4
+
+```
+5
+6
+```
+
+---
+
+### Q5
+
+```
+6
+6
+```
+
+---
+
+### Q6
+
+```
+10
+```
+
+Explanation:
+
+```
+20 / 5 = 4
+2 * 3 = 6
+
+4 + 6 = 10
+```
+
+---
+
+### Q7
+
+```
+JavaScript
+```
+
+---
+
+# Quick Revision (30 Seconds)
+
+| Operator | Example  | Result         |
+| -------- | -------- | -------------- |
+| `+`      | `5 + 2`  | `7`            |
+| `-`      | `5 - 2`  | `3`            |
+| `*`      | `5 * 2`  | `10`           |
+| `/`      | `5 / 2`  | `2.5`          |
+| `%`      | `5 % 2`  | `1`            |
+| `**`     | `2 ** 3` | `8`            |
+| `+=`     | `x += 2` | `x = x + 2`    |
+| `++`     | `x++`    | Increment by 1 |
+| `--`     | `x--`    | Decrement by 1 |
+
+---

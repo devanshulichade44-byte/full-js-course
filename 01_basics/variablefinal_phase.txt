@@ -1,0 +1,571 @@
+# Phase 1 – Fundamentals
+
+## Topic 1: Variables (`var`, `let`, and `const`)
+
+This is one of the most important topics in JavaScript because **everything starts with storing data**. Whether it's a username, API response, shopping cart, score, or DOM element, it is stored in a variable.
+
+---
+
+# 1. What is a Variable?
+
+A variable is simply a **named container** that stores data.
+
+Think of it as a labeled box.
+
+```
+Name Box  ---> "Devanshu"
+Age Box   ---> 21
+Score Box ---> 98
+```
+
+Instead of remembering values directly, JavaScript lets us give them names.
+
+---
+
+# 2. Why do we need Variables?
+
+Imagine writing this:
+
+```js
+console.log("Devanshu");
+console.log("Devanshu");
+console.log("Devanshu");
+```
+
+What if the name changes?
+
+You'd have to change it everywhere.
+
+Instead:
+
+```js
+let name = "Devanshu";
+
+console.log(name);
+console.log(name);
+console.log(name);
+```
+
+Now change only one line.
+
+---
+
+# 3. Ways to Declare Variables
+
+JavaScript has three keywords.
+
+```js
+var
+let
+const
+```
+
+Example:
+
+```js
+var city = "Nagpur";
+let age = 21;
+const country = "India";
+```
+
+Each behaves differently.
+
+---
+
+# 4. `let`
+
+`let` is the **modern** way to create variables.
+
+Use it when the value **can change later**.
+
+### Syntax
+
+```js
+let variableName = value;
+```
+
+Example 1
+
+```js
+let age = 21;
+
+console.log(age);
+```
+
+Output
+
+```
+21
+```
+
+---
+
+Example 2
+
+```js
+let score = 50;
+
+score = 70;
+
+console.log(score);
+```
+
+Output
+
+```
+70
+```
+
+Notice:
+
+We changed the value.
+
+```
+50 → 70
+```
+
+This is called **reassignment**.
+
+---
+
+Example 3
+
+```js
+let city = "Mumbai";
+
+city = "Pune";
+
+console.log(city);
+```
+
+Output
+
+```
+Pune
+```
+
+---
+
+Example 4 (Project)
+
+```js
+let cartItems = 0;
+
+cartItems++;
+
+cartItems++;
+
+console.log(cartItems);
+```
+
+Output
+
+```
+2
+```
+
+Imagine every click on **Add to Cart**.
+
+The variable keeps updating.
+
+---
+
+# Important Rule
+
+❌ Cannot declare the same variable twice in the same scope.
+
+```js
+let age = 20;
+
+let age = 30;
+```
+
+Error
+
+```
+Identifier 'age' has already been declared
+```
+
+But this is allowed.
+
+```js
+let age = 20;
+
+age = 25;
+```
+
+---
+
+# 5. `const`
+
+Use `const` when the value should **never be reassigned**.
+
+Syntax
+
+```js
+const PI = 3.14159;
+```
+
+---
+
+Example 1
+
+```js
+const country = "India";
+
+console.log(country);
+```
+
+Output
+
+```
+India
+```
+
+---
+
+Example 2
+
+```js
+const birthYear = 2005;
+
+console.log(birthYear);
+```
+
+Output
+
+```
+2005
+```
+
+---
+
+Example 3
+
+```js
+const userName = "Devanshu";
+
+userName = "Rex";
+```
+
+Output
+
+```
+TypeError: Assignment to constant variable.
+```
+
+Why?
+
+Because `const` variables **cannot be reassigned**.
+
+---
+
+### Common confusion
+
+This surprises many beginners:
+
+```js
+const user = {
+    name: "Devanshu"
+};
+
+user.name = "Rex";
+
+console.log(user);
+```
+
+Output
+
+```js
+{
+    name: "Rex"
+}
+```
+
+"But I thought `const` can't change?"
+
+Here's the key:
+
+* `const` prevents **reassignment of the variable**.
+* It does **not** make the object immutable.
+
+You're changing a **property** of the object, not replacing the object itself.
+
+This is allowed:
+
+```js
+const user = {
+    name: "Devanshu"
+};
+
+user.name = "Rex";
+```
+
+This is **not** allowed:
+
+```js
+const user = {
+    name: "Devanshu"
+};
+
+user = {};
+```
+
+---
+
+# 6. `var`
+
+`var` is the **old** way of declaring variables.
+
+It still works but is rarely used in modern JavaScript because of confusing behavior related to scope and hoisting (which we'll study in Phase 7).
+
+Example
+
+```js
+var language = "JavaScript";
+
+console.log(language);
+```
+
+Output
+
+```
+JavaScript
+```
+
+Reassignment works:
+
+```js
+var score = 10;
+
+score = 20;
+
+console.log(score);
+```
+
+Output
+
+```
+20
+```
+
+Redeclaration also works:
+
+```js
+var age = 20;
+
+var age = 30;
+
+console.log(age);
+```
+
+Output
+
+```
+30
+```
+
+This behavior can cause bugs, which is why `let` and `const` were introduced.
+
+---
+
+# 7. Comparison Table
+
+| Feature                      | `var`       | `let`         | `const`                       |
+| ---------------------------- | ----------- | ------------- | ----------------------------- |
+| Can reassign?                | ✅ Yes       | ✅ Yes         | ❌ No                          |
+| Can redeclare in same scope? | ✅ Yes       | ❌ No          | ❌ No                          |
+| Modern choice?               | ❌ Rarely    | ✅ Yes         | ✅ Yes                         |
+| Use when                     | Legacy code | Value changes | Value shouldn't be reassigned |
+
+---
+
+# 8. Variable Naming Rules
+
+✅ Valid
+
+```js
+let age = 20;
+
+let firstName = "Devanshu";
+
+let _price = 500;
+
+let $amount = 200;
+
+let user123 = "Alex";
+```
+
+❌ Invalid
+
+```js
+let 1age = 20;
+
+let first-name = "Alex";
+
+let let = 20;
+```
+
+Why?
+
+* Cannot start with a number.
+* Hyphens (`-`) are interpreted as subtraction.
+* Reserved keywords (`let`, `const`, `if`, `for`, etc.) cannot be used as variable names.
+
+---
+
+# 9. Naming Conventions
+
+Use **camelCase**.
+
+```js
+let firstName;
+let totalPrice;
+let isLoggedIn;
+let userEmail;
+```
+
+Constants that truly never change are often written in uppercase:
+
+```js
+const PI = 3.14159;
+const MAX_USERS = 100;
+```
+
+---
+
+# 10. Common Mistakes
+
+### Mistake 1
+
+```js
+const age = 20;
+
+age = 25;
+```
+
+❌ Error
+
+---
+
+### Mistake 2
+
+```js
+let score = 10;
+
+let score = 20;
+```
+
+❌ Error
+
+---
+
+### Mistake 3
+
+```js
+var name = "A";
+
+var name = "B";
+```
+
+✅ Works, but avoid it.
+
+---
+
+# 11. Best Practices
+
+* Use `const` by default.
+* Use `let` only when the value needs to change.
+* Avoid `var` in new code.
+* Give variables meaningful names.
+
+Good:
+
+```js
+let totalPrice = 1500;
+```
+
+Bad:
+
+```js
+let x = 1500;
+```
+
+---
+
+# 12. Mini Challenge
+
+Predict the output **before running the code**.
+
+### Question 1
+
+```js
+let age = 20;
+
+age = 25;
+
+console.log(age);
+```
+
+---
+
+### Question 2
+
+```js
+const country = "India";
+
+console.log(country);
+```
+
+---
+
+### Question 3
+
+```js
+const marks = 90;
+
+marks = 95;
+
+console.log(marks);
+```
+
+---
+
+### Question 4
+
+```js
+var city = "Nagpur";
+
+var city = "Pune";
+
+console.log(city);
+```
+
+---
+
+# Answers
+
+**Q1**
+
+```
+25
+```
+
+**Q2**
+
+```
+India
+```
+
+**Q3**
+
+```
+TypeError: Assignment to constant variable.
+```
+
+**Q4**
+
+```
+Pune
+```
+

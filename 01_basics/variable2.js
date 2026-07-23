@@ -572,7 +572,10 @@ score++;
 
 
 
+const fruits = ["Apple", "Banana"];
 
+console.log(typeof fruits);
+console.log(Array.isArray(fruits));
 
 
 

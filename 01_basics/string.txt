@@ -1,0 +1,893 @@
+# Phase 1 – Topic 6: Strings
+
+Strings are one of the most used data types in JavaScript.
+
+You'll use them for:
+
+* User names
+* Passwords
+* Email addresses
+* URLs
+* API responses
+* Messages
+* HTML content
+* JSON data
+
+If you're building MERN applications, you'll work with strings **every day**.
+
+---
+
+# 1. What is a String?
+
+A **String** is a sequence of characters enclosed in quotes.
+
+You can use:
+
+```js
+"Double Quotes"
+```
+
+```js
+'Single Quotes'
+```
+
+```js
+`Backticks`
+```
+
+(The third one, **backticks**, is used for template literals. We'll study that in Topic 7.)
+
+---
+
+## Example 1
+
+```js
+let name = "Devanshu";
+
+console.log(name);
+```
+
+Output
+
+```text
+Devanshu
+```
+
+---
+
+## Example 2
+
+```js
+let city = 'Nagpur';
+
+console.log(city);
+```
+
+Output
+
+```text
+Nagpur
+```
+
+---
+
+# 2. Creating Strings
+
+### Method 1 (Most Common)
+
+```js
+let language = "JavaScript";
+```
+
+---
+
+### Method 2 (String Object)
+
+```js
+let language = new String("JavaScript");
+
+console.log(language);
+```
+
+Output
+
+```text
+[String: 'JavaScript']
+```
+
+### Should you use `new String()`?
+
+❌ No.
+
+Use:
+
+```js
+let language = "JavaScript";
+```
+
+It's simpler, faster, and what you'll see in almost all codebases.
+
+---
+
+# 3. Accessing Characters
+
+Every character has an **index**.
+
+```
+J  a  v  a  S  c  r  i  p  t
+0  1  2  3  4  5  6  7  8  9
+```
+
+---
+
+### Example 1
+
+```js
+let lang = "JavaScript";
+
+console.log(lang[0]);
+```
+
+Output
+
+```text
+J
+```
+
+---
+
+### Example 2
+
+```js
+console.log(lang[4]);
+```
+
+Output
+
+```text
+S
+```
+
+---
+
+### Example 3
+
+```js
+console.log(lang[9]);
+```
+
+Output
+
+```text
+t
+```
+
+---
+
+### Example 4
+
+```js
+console.log(lang[20]);
+```
+
+Output
+
+```text
+undefined
+```
+
+---
+
+# 4. String Length
+
+Returns the total number of characters.
+
+```js
+let lang = "JavaScript";
+
+console.log(lang.length);
+```
+
+Output
+
+```text
+10
+```
+
+---
+
+Project Example
+
+```js
+let password = "abc12345";
+
+if (password.length >= 8) {
+    console.log("Valid Password");
+}
+```
+
+---
+
+# 5. Convert Case
+
+## `toUpperCase()`
+
+```js
+let name = "devanshu";
+
+console.log(name.toUpperCase());
+```
+
+Output
+
+```text
+DEVANSHU
+```
+
+---
+
+## `toLowerCase()`
+
+```js
+let city = "NAGPUR";
+
+console.log(city.toLowerCase());
+```
+
+Output
+
+```text
+nagpur
+```
+
+---
+
+# 6. Trim Spaces
+
+Suppose a user enters:
+
+```text
+"   Devanshu   "
+```
+
+Extra spaces can cause login or validation issues.
+
+Use:
+
+```js
+let username = "   Devanshu   ";
+
+console.log(username.trim());
+```
+
+Output
+
+```text
+Devanshu
+```
+
+---
+
+# 7. Find a Character
+
+## `charAt()`
+
+```js
+let name = "JavaScript";
+
+console.log(name.charAt(4));
+```
+
+Output
+
+```text
+S
+```
+
+---
+
+### Difference
+
+```js
+name[4]
+```
+
+and
+
+```js
+name.charAt(4)
+```
+
+Both return the same result.
+
+Most developers prefer bracket notation.
+
+---
+
+# 8. Find Character Position
+
+## `indexOf()`
+
+Returns the first matching index.
+
+```js
+let name = "JavaScript";
+
+console.log(name.indexOf("S"));
+```
+
+Output
+
+```text
+4
+```
+
+---
+
+If not found:
+
+```js
+console.log(name.indexOf("Z"));
+```
+
+Output
+
+```text
+-1
+```
+
+---
+
+Project Example
+
+```js
+let email = "abc@gmail.com";
+
+console.log(email.indexOf("@"));
+```
+
+Output
+
+```text
+3
+```
+
+---
+
+# 9. Check if Text Exists
+
+## `includes()`
+
+```js
+let sentence = "I love JavaScript";
+
+console.log(sentence.includes("Java"));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+Another example
+
+```js
+console.log(sentence.includes("Python"));
+```
+
+Output
+
+```text
+false
+```
+
+---
+
+Project Example
+
+```js
+let email = "abc@gmail.com";
+
+console.log(email.includes("@"));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 10. Starts With
+
+```js
+let url = "https://google.com";
+
+console.log(url.startsWith("https"));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 11. Ends With
+
+```js
+let file = "resume.pdf";
+
+console.log(file.endsWith(".pdf"));
+```
+
+Output
+
+```text
+true
+```
+
+---
+
+# 12. Replace Text
+
+```js
+let sentence = "I love Java";
+
+console.log(sentence.replace("Java", "JavaScript"));
+```
+
+Output
+
+```text
+I love JavaScript
+```
+
+---
+
+Project Example
+
+```js
+let url = "http://example.com";
+
+console.log(url.replace("http", "https"));
+```
+
+Output
+
+```text
+https://example.com
+```
+
+---
+
+# 13. Slice
+
+Extracts part of a string.
+
+```js
+let lang = "JavaScript";
+
+console.log(lang.slice(0, 4));
+```
+
+Output
+
+```text
+Java
+```
+
+Remember:
+
+* Start index is included.
+* End index is excluded.
+
+---
+
+Another example
+
+```js
+console.log(lang.slice(4));
+```
+
+Output
+
+```text
+Script
+```
+
+---
+
+Negative index
+
+```js
+console.log(lang.slice(-6));
+```
+
+Output
+
+```text
+Script
+```
+
+Very useful for extracting endings.
+
+---
+
+# 14. Split
+
+Converts a string into an array.
+
+```js
+let fruits = "Apple,Banana,Orange";
+
+console.log(fruits.split(","));
+```
+
+Output
+
+```js
+["Apple", "Banana", "Orange"]
+```
+
+---
+
+Another example
+
+```js
+let name = "Devanshu Lichade";
+
+console.log(name.split(" "));
+```
+
+Output
+
+```js
+["Devanshu", "Lichade"]
+```
+
+---
+
+# 15. Concatenate Strings
+
+### Method 1
+
+```js
+let first = "Java";
+let second = "Script";
+
+console.log(first + second);
+```
+
+Output
+
+```text
+JavaScript
+```
+
+---
+
+### Method 2
+
+```js
+console.log(first.concat(second));
+```
+
+Output
+
+```text
+JavaScript
+```
+
+Most developers use `+` or template literals instead of `concat()`.
+
+---
+
+# 16. Repeat
+
+```js
+console.log("Hi ".repeat(3));
+```
+
+Output
+
+```text
+Hi Hi Hi
+```
+
+---
+
+# 17. Common Mistakes
+
+### Mistake 1
+
+```js
+let name = "Devanshu";
+
+name.toUpperCase();
+
+console.log(name);
+```
+
+Output
+
+```text
+Devanshu
+```
+
+Why?
+
+Strings are **immutable**.
+
+Methods like `toUpperCase()` return a **new string**.
+
+Correct:
+
+```js
+name = name.toUpperCase();
+```
+
+---
+
+### Mistake 2
+
+```js
+console.log("Java".length());
+```
+
+❌ Error
+
+Correct:
+
+```js
+console.log("Java".length);
+```
+
+`length` is a **property**, not a function.
+
+---
+
+### Mistake 3
+
+```js
+console.log("Java".indexOf("P"));
+```
+
+Output
+
+```text
+-1
+```
+
+Many beginners expect `0` or `undefined`.
+
+`-1` means **not found**.
+
+---
+
+# 18. Best Practices
+
+✅ Use `trim()` on user input.
+
+```js
+username = username.trim();
+```
+
+---
+
+✅ Use `includes()` instead of complicated searches.
+
+```js
+email.includes("@")
+```
+
+---
+
+✅ Use `slice()` for extracting text.
+
+---
+
+✅ Prefer bracket notation.
+
+```js
+name[0]
+```
+
+instead of
+
+```js
+name.charAt(0)
+```
+
+---
+
+# 19. Mini Challenge
+
+Predict the output.
+
+### Q1
+
+```js
+let name = "JavaScript";
+
+console.log(name.length);
+```
+
+---
+
+### Q2
+
+```js
+console.log("javascript".toUpperCase());
+```
+
+---
+
+### Q3
+
+```js
+console.log("   Hello   ".trim());
+```
+
+---
+
+### Q4
+
+```js
+console.log("JavaScript".slice(4));
+```
+
+---
+
+### Q5
+
+```js
+console.log("Hello World".includes("World"));
+```
+
+---
+
+### Q6
+
+```js
+console.log("resume.pdf".endsWith(".pdf"));
+```
+
+---
+
+### Q7
+
+```js
+console.log("Apple,Banana".split(","));
+```
+
+---
+
+### Q8
+
+```js
+console.log("JavaScript".indexOf("S"));
+```
+
+---
+
+### Q9
+
+```js
+console.log("Hello".replace("H", "Y"));
+```
+
+---
+
+### Q10
+
+```js
+console.log("Hi".repeat(3));
+```
+
+---
+
+# Answers
+
+### Q1
+
+```text
+10
+```
+
+---
+
+### Q2
+
+```text
+JAVASCRIPT
+```
+
+---
+
+### Q3
+
+```text
+Hello
+```
+
+---
+
+### Q4
+
+```text
+Script
+```
+
+---
+
+### Q5
+
+```text
+true
+```
+
+---
+
+### Q6
+
+```text
+true
+```
+
+---
+
+### Q7
+
+```js
+["Apple", "Banana"]
+```
+
+---
+
+### Q8
+
+```text
+4
+```
+
+---
+
+### Q9
+
+```text
+Yello
+```
+
+---
+
+### Q10
+
+```text
+HiHiHi
+```
+
+---
+
+# ⭐ Most Used String Methods (Real Projects)
+
+| Method           | Purpose                  |
+| ---------------- | ------------------------ |
+| `.length`        | Count characters         |
+| `.trim()`        | Remove extra spaces      |
+| `.toUpperCase()` | Uppercase text           |
+| `.toLowerCase()` | Lowercase text           |
+| `.includes()`    | Check if text exists     |
+| `.indexOf()`     | Find position            |
+| `.replace()`     | Replace text             |
+| `.slice()`       | Extract part of a string |
+| `.split()`       | Convert string to array  |
+| `.startsWith()`  | Check prefix             |
+| `.endsWith()`    | Check suffix             |
+
+---
